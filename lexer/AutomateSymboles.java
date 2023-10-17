@@ -8,7 +8,7 @@ public class AutomateSymboles{
         System.out.println("chaine :");
         String input = clavier.nextLine();
         clavier.close();
-        if (estReconnu(input)){ 
+        if (estSymbole(input)){ 
             System.out.println("L'input est reconnu");
         }
         else{
@@ -16,37 +16,31 @@ public class AutomateSymboles{
         }
     }
 
-    public static boolean estReconnu(String input){
-        for (int i=0; i<input.length();i++){
-            char caractere = input.charAt(i);
-            if (estSymbAvecEgal(caractere)){
-                if (estSymbEgal(input.charAt(i+1))){
-                i++;
-            }
-            }
-            if (!estSymbAvecEgal(caractere) && !estSymb(caractere)){
-                return false;
+    public static boolean estSymbole(String input){
+        if (input.length()==1){
+            if (estSymb(input.charAt(0)) || estSymbAvecEgal(input.charAt(0))){
+                return true;
             }
         }
-        return true;
+        if (input.length()==2){
+            if (estSymbAvecEgal(input.charAt(0))){
+                if (input.charAt(1)=='='){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static boolean estSymbAvecEgal(char caractere){
-        if (caractere=="<" || caractere==">"  || caractere==":" || caractere=="/")
-            return true;
-        else
-            return false;
-    }
-
-    public static boolean estSymbEgal(char caractere){
-        if (caractere=="=")
+        if (caractere=='<' || caractere=='>'  || caractere==':' || caractere=='/')
             return true;
         else
             return false;
     }
 
     public static boolean estSymb(char caractere){
-        if (caractere==";" || caractere=="(" || caractere==")" || caractere=="+" || caractere=="-" ||caractere=="*" || caractere=="." || caractere=="=")
+        if (caractere==';' || caractere=='(' || caractere==')' || caractere=='+' || caractere=='-' ||caractere=='*' || caractere=='.' || caractere=='=')
             return true;
         else
             return false;
