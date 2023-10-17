@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class AutomateIdentificateur{
     public static void main(String[] args){
         Scanner clavier = new Scanner(System.in);                               /*Récupération caractère depuis le terminal */
-        System.out.println("Entrez un caractere minuscule :");
+        System.out.println("Entrez une chaine de caractere :");
         String input = clavier.nextLine();
         clavier.close();
         if (estReconnu(input)){ 
@@ -31,7 +31,7 @@ public class AutomateIdentificateur{
     }
 
     public static boolean estCaractere(char caractere){
-        if (caractere >='a' && caractere <='z' || caractere>='A' && caractere <='Z'|| caractere>='0'&& caractere<='9'|| caractere=='_')
+        if (caractere >=97 && caractere <='z' || caractere>='A' && caractere <='Z'|| caractere>='0'&& caractere<='9'|| caractere=='_')
             return true;
         else
             return false;
