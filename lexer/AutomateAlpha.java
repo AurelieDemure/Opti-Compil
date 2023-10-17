@@ -1,3 +1,5 @@
+package lexer; /*pour le mettre dans le package de l'analyseur lexicale*/
+
 import java.util.Scanner;
 
 public class AutomateAlpha{
