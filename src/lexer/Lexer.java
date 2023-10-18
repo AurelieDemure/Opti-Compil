@@ -31,22 +31,9 @@ public class Lexer {
         else{
             caractere=(char)System.in.read();
         }
-        System.out.println((int)caractere);
-        if(caractere=='$'){
-            System.out.println("this is the eeend");
-            return 1;
-        }
-        while(caractere==' ' || caractere=='\t' || caractere=='\n' || caractere =='-'){
-            System.out.println(caractere);
+        while(caractere<=32 || caractere =='-'){
             if(caractere=='\n'){/*on incremente le compteur de ligne si on a un saut de ligne, utile pour la gestion de bug*/
                 line=line+1;
-                System.out.println("saut ligne");
-            }
-            if(caractere=='\t'){
-                System.out.println("tab");
-            }
-            if(caractere==' '){
-                System.out.println("in spaaaaaaaace");
             }
             else if(caractere=='-'){
                 caractere=(char)System.in.read();
@@ -90,6 +77,6 @@ public class Lexer {
         /*il faudra plutot renvoyer une erreur si aucun automate n'a reconnu le caractere ou la chaine suivante*/
         Token t=new Token(caractere);/*on renvoie le caractere en question sous forme de token*/
         System.out.println(line);
-        return 0;
+        return 1;
     }
 }
