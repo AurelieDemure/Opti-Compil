@@ -5,10 +5,16 @@ import java.util.*;
 
 public class Lexer {
 
-    public int line=1;/*compteur de ligne*/
+    /*compteur de ligne*/
+    public int line=1;
+    /*pour sauvegarder le debut des commentaires, afin de gerer les messages d erreurs*/
+    public int lineComment=1;
+    /*le caractere que l on lit*/
     private char caractere=' ';
-    private char prochain=' ';/*prochain caractere a lire*/
-    private Hashtable mots=new Hashtable();/* Table des string, pour gerer les mots cles et identifiants. Utilisation d une table de hashage*/
+    /*prochain caractere a lire*/
+    private char prochain=' ';
+    /* Table des string, pour gerer les mots cles et identifiants. Utilisation d une table de hashage*/
+    private Hashtable mots=new Hashtable();
 
     /*permet de mettre les tokens des mots cles dans la table des strings*/
     void reserve(Mots t){
@@ -23,32 +29,61 @@ public class Lexer {
     }
     public int scan() throws IOException{/*pour le System.in.read()*/
         
-        /*suppression des espaces et tabulation (on pourra aussi traiter les commentaires en meme temps*/
-        /*on initialise caractere à espace, et tant que l'on a des espaces ou tabulation, on continue de lire*/
+        /*suppression des espaces, tabulation, retours a la ligne et les commentaires*/
+
+        /*on remet caractere a la bonne valeur si jamais on a lut 1 caractere en avance a un moment*/
         if(prochain!=' '){
             caractere=prochain;
         }
         else{
             caractere=(char)System.in.read();
         }
+
         while(caractere<=32 || caractere =='-'){
-            if(caractere=='\n'){/*on incremente le compteur de ligne si on a un saut de ligne, utile pour la gestion de bug*/
+
+            /*on incremente le compteur de ligne si on a un saut de ligne, utile pour la gestion de bug*/
+            if(caractere=='\n'){
                 line=line+1;
             }
+
+            /*on gere les commenentaires*/
             else if(caractere=='-'){
                 caractere=(char)System.in.read();
                 if(caractere=='-'){
-                    caractere=(char)System.in.read();
-                    while(caractere!='-' && (char)System.in.read()!='-'){
-                        caractere=(char)System.in.read();
+                    /*detection du debut du commentaire*/
+
+                    /*on enregistre la ligne du debut du commentaire*/
+                    lineComment=line;
+                    prochain=(char)System.in.read();/*on lit en avance*/
+
+                    /*tant que les deux curseurs n ont pas des "-", on continue a skip*/
+                    while(caractere!='-' || prochain!='-'){
+                        /*on continue a compter les retours a la ligne*/
+                        if(prochain=='\n'){
+                            line=line+1;
+                        }
+                        /*on decales les curseurs de 1*/
+                        caractere=prochain;
+                        prochain=(char)System.in.read();
+
+                        /*si le commentaire n a pas de fin, on renvoie une erreur*/
+                        if((int)prochain==65535){
+                            throw new IOException("The comment begin on line " + lineComment + " has not end");
+                        }
                     }
-                    
+                    /*quand on a fini de traiter les commentaires, on remet les curseurs comme il faut*/
+                    caractere=(char)System.in.read();
+                    prochain=' ';
                 }
+
+                /*si ce n est pas un debut de commentaire, on remet le curseur comme il faut*/
                 else{
                     prochain=caractere;
                     caractere='-';
                 }
             }
+        
+        /*on avance*/
         caractere=(char)System.in.read();
         }
 
@@ -76,7 +111,6 @@ public class Lexer {
         /*si on a pas reconnu le caractere*/
         /*il faudra plutot renvoyer une erreur si aucun automate n'a reconnu le caractere ou la chaine suivante*/
         Token t=new Token(caractere);/*on renvoie le caractere en question sous forme de token*/
-        System.out.println(line);
         return 1;
     }
 }
