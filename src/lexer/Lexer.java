@@ -3,12 +3,14 @@ package lexer; /*pour le mettre dans le package de l'analyseur lexical*/
 import java.io.*;
 import java.util.*;
 
+/*Le programme peut marcher avec une extension pour les commentaires : un commentaire ne s'arrete plus en fin de ligne mais au prochain "--"*/
+
 public class Lexer {
 
     /*compteur de ligne*/
     public int line=1;
     /*pour sauvegarder le debut des commentaires, afin de gerer les messages d erreurs*/
-    public int lineComment=1;
+    /*public int lineComment=1;*/
     /*le caractere que l on lit*/
     private char caractere=' ';
     /*prochain caractere a lire*/
@@ -53,27 +55,29 @@ public class Lexer {
                     /*detection du debut du commentaire*/
 
                     /*on enregistre la ligne du debut du commentaire*/
-                    lineComment=line;
-                    prochain=(char)System.in.read();/*on lit en avance*/
+                    /*lineComment=line;
+                    prochain=(char)System.in.read();*//*on lit en avance*/
 
                     /*tant que les deux curseurs n ont pas des "-", on continue a skip*/
-                    while(caractere!='-' || prochain!='-'){
+                    while(caractere!='\n'){/*(caractere!='-' || prochain!='-'){*/
                         /*on continue a compter les retours a la ligne*/
-                        if(prochain=='\n'){
+                        /*if(prochain=='\n'){
                             line=line+1;
-                        }
+                        }*/
                         /*on decales les curseurs de 1*/
-                        caractere=prochain;
-                        prochain=(char)System.in.read();
+                        caractere=(char)System.in.read();
+                        /*caractere=prochain;
+                        prochain=(char)System.in.read();*/
 
                         /*si le commentaire n a pas de fin, on renvoie une erreur*/
-                        if((int)prochain==65535){
+                        /*if((int)prochain==65535){
                             throw new IOException("The comment begin on line " + lineComment + " has not end");
-                        }
+                        }*/
                     }
                     /*quand on a fini de traiter les commentaires, on remet les curseurs comme il faut*/
+                    line=line+1;
                     caractere=(char)System.in.read();
-                    prochain=' ';
+                    /*prochain=' ';*/
                 }
 
                 /*si ce n est pas un debut de commentaire, on remet le curseur comme il faut*/
