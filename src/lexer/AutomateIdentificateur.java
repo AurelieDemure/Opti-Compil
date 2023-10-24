@@ -1,13 +1,8 @@
 package lexer; /*pour le mettre dans le package de l'analyseur lexicale*/
 
-import java.util.Scanner;
-
 public class AutomateIdentificateur{
     public static void main(String[] args){
-        Scanner clavier = new Scanner(System.in);                               /*Récupération caractère depuis le terminal */
-        System.out.println("Entrez une chaine de caractere :");
-        String input = clavier.nextLine();
-        clavier.close();
+        String input = args[0];
         if (estReconnu(input)){ 
             System.out.println("L'input est reconnu");
         }
@@ -17,7 +12,7 @@ public class AutomateIdentificateur{
     }
 
     public static boolean estReconnu(String input){
-        if(input.charAt(0)<'a'|| input.charAt(0)>'z')           /*Vérification premier caractère lettre minuscule */
+        if(input.charAt(0)<'A'|| input.charAt(0)>'Z' && input.charAt(0)<'a' || input.charAt(0)>'z')           /*Vérification premier caractère lettre minuscule */
             return false;
         else{
             for (int i=1; i<input.length();i++){                            /*Vérification des autres caractères */
@@ -31,7 +26,7 @@ public class AutomateIdentificateur{
     }
 
     public static boolean estCaractere(char caractere){
-        if (caractere >=97 && caractere <='z' || caractere>='A' && caractere <='Z'|| caractere>='0'&& caractere<='9'|| caractere=='_')
+        if (caractere >='a' && caractere <='z' || caractere>='A' && caractere <='Z'|| caractere>='0'&& caractere<='9'|| caractere=='_')
             return true;
         else
             return false;
