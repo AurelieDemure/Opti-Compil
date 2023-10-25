@@ -16,10 +16,10 @@ Supprimer tout les fichiers .class :
 make clean
 ```
 
-Pour gerer les branches :
+## Pour gerer les branches :
 Créer une branche :
 ```bash
-git branch new brach
+git branch new branch
 ```
 
 Regarder les branches existantes et sur quelle branche on est :
