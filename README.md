@@ -3,20 +3,20 @@ Accéder au Makefile :
 cd src
 ```
 
-Faire tout les fichiers .class :
+Faire tous les fichiers .class :
 ```bash
 make all
 ```
-Executer les tests :
+Exécuter les tests :
 ```bash
 make tests
 ```
-Supprimer tout les fichiers .class :
+Supprimer tous les fichiers .class :
 ```bash
 make clean
 ```
 
-## Pour gerer les branches :
+## Pour gérer les branches :
 Créer une branche :
 ```bash
 git branch new branch
