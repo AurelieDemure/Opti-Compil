@@ -1,35 +1,36 @@
-package lexer; /*pour le mettre dans le package de l'analyseur lexicale*/
+package lexer; /*pour le mettre dans le package de l'analyseur lexical*/
 
 import java.util.Scanner;
 
-public class AutomateSymboles{
-    public static void main(String[] args){
-        Scanner clavier = new Scanner(System.in);
-        System.out.println("chaine :");
-        String input = clavier.nextLine();
-        clavier.close();
-        if (estSymbole(input)){ 
-            System.out.println("L'input est reconnu");
-        }
-        else{
-            System.out.println("L'input n'est pas reconnu");
-        }
+public class AutomateSymboles extends Automate{
+
+    public AutomateSymboles(String token,String read,char nextLexeur){
+        super(token,read,nextLexeur);
     }
 
-    public static boolean estSymbole(String input){
-        if (input.length()==1){
-            if (estSymb(input.charAt(0)) || estSymbAvecEgal(input.charAt(0))){
-                return true;
+    public static void main(char first,String[] args){
+        Symbole(first,args);
+    }
+    public static void Symbole(char first,String[] args){
+        this.token+=first;
+        this.read=this.token;
+        this.nextLexeur=(char)Lexer.read();
+        if (estSymb(this.token)){
+            return this;
+        }
+        else{
+            if (estSymbAvecEgal(this.token)){
+                if (this.nextLexeur=='='){
+                    this.token+='=';
+                    this.nextLexeur=(char)Lexer.read();
+                } 
+                this.read=this.token;
+                return this;
+            }
+            else {
+                System.out.println("Erreur");
             }
         }
-        if (input.length()==2){
-            if (estSymbAvecEgal(input.charAt(0))){
-                if (input.charAt(1)=='='){
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     public static boolean estSymbAvecEgal(char caractere){
