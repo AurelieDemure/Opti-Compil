@@ -19,7 +19,7 @@ make clean
 ## Pour gérer les branches :
 Créer une branche :
 ```bash
-git branch new branch
+git branch new-branch-name
 ```
 
 Regarder les branches existantes et sur quelle branche on est :
@@ -29,5 +29,5 @@ git branch
 
 Pour changer de branche :
 ```bash
-git checkout new branch
+git checkout branch-name
 ```
