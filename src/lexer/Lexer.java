@@ -87,8 +87,8 @@ public class Lexer {
                 }
             }
         
-        /*on avance*/
-        caractere=(char)System.in.read();
+            /*on avance*/
+            caractere=(char)System.in.read();
         }
 
         /*on teste si on a un nombre (automate entier)*/
