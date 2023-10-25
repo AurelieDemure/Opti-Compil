@@ -3,14 +3,14 @@ package lexer; /*pour le mettre dans le package de l'analyseur lexical*/
 import java.io.*;
 import java.util.*;
 
-/*Le programme peut marcher avec une extension pour les commentaires : un commentaire ne s'arrete plus en fin de ligne mais au prochain "--"*/
-
 public class Lexer {
 
     /*compteur de ligne*/
-    public int line=1;
-    /*pour sauvegarder le debut des commentaires, afin de gerer les messages d erreurs*/
-    /*public int lineComment=1;*/
+    private int line=1;
+    /*compteur de caractere*/
+    private int nbChar=0;
+    /*la ligne en cours*/
+    private String currentLine="";
     /*le caractere que l on lit*/
     private char caractere=' ';
     /*prochain caractere a lire*/
@@ -23,72 +23,63 @@ public class Lexer {
         mots.put(t.lexeme, t);
     }
 
+    /*pour lire le prochain caractere*/
+    public void read() throws IOException{
+        this.nbChar+=1;
+        this.caractere=(char)System.in.read();
+        this.currentLine+=this.caractere;
+    }
+
     /*on initialise la table des strings*/
     public Lexer(){
         reserve(new Mots(Tag.TRUE, "true"));
         reserve(new Mots(Tag.FALSE, "false"));
         /*a continuer avec les autres mots cles*/
     }
-    public int scan() throws IOException{/*pour le System.in.read()*/
+    public int scan() throws IOException{
         
         /*suppression des espaces, tabulation, retours a la ligne et les commentaires*/
 
         /*on remet caractere a la bonne valeur si jamais on a lut 1 caractere en avance a un moment*/
-        if(prochain!=' '){
-            caractere=prochain;
+        if(this.prochain!=' '){
+            this.caractere=this.prochain;
         }
         else{
-            caractere=(char)System.in.read();
+            read();
         }
 
-        while(caractere<=32 || caractere =='-'){
+        while(this.caractere<=32 || this.caractere =='-'){
 
             /*on incremente le compteur de ligne si on a un saut de ligne, utile pour la gestion de bug*/
-            if(caractere=='\n'){
-                line=line+1;
+            if(this.caractere=='\n'){
+                this.line+=1;
+                this.nbChar=0;
+                currentLine="";
             }
 
             /*on gere les commenentaires*/
-            else if(caractere=='-'){
-                caractere=(char)System.in.read();
-                if(caractere=='-'){
+            else if(this.caractere=='-'){
+                read();
+                if(this.caractere=='-'){
                     /*detection du debut du commentaire*/
-
-                    /*on enregistre la ligne du debut du commentaire*/
-                    /*lineComment=line;
-                    prochain=(char)System.in.read();*//*on lit en avance*/
-
                     /*tant que les deux curseurs n ont pas des "-", on continue a skip*/
-                    while(caractere!='\n'){/*(caractere!='-' || prochain!='-'){*/
-                        /*on continue a compter les retours a la ligne*/
-                        /*if(prochain=='\n'){
-                            line=line+1;
-                        }*/
-                        /*on decales les curseurs de 1*/
-                        caractere=(char)System.in.read();
-                        /*caractere=prochain;
-                        prochain=(char)System.in.read();*/
-
-                        /*si le commentaire n a pas de fin, on renvoie une erreur*/
-                        /*if((int)prochain==65535){
-                            throw new IOException("The comment begin on line " + lineComment + " has not end");
-                        }*/
+                    while(this.caractere!='\n'){
+                        /*on continue a skip*/
+                        read();
                     }
                     /*quand on a fini de traiter les commentaires, on remet les curseurs comme il faut*/
-                    line=line+1;
-                    caractere=(char)System.in.read();
-                    /*prochain=' ';*/
+                    this.line+=1;
+                    read();
                 }
-
                 /*si ce n est pas un debut de commentaire, on remet le curseur comme il faut*/
                 else{
-                    prochain=caractere;
-                    caractere='-';
+                    this.prochain=this.caractere;
+                    this.caractere='-';
                 }
             }
         
             /*on avance*/
-            caractere=(char)System.in.read();
+            read();
         }
 
         /*on teste si on a un nombre (automate entier)*/
@@ -110,11 +101,15 @@ public class Lexer {
 
         /*on teste si on a un caractere (automate caractere)*/
 
-        /*gestion des nombres flottants ? pas vu dans le sujet en tout cas*/
 
+        if((int)this.caractere==65535){
+            Token t=new Token('$');
+        }
         /*si on a pas reconnu le caractere*/
-        /*il faudra plutot renvoyer une erreur si aucun automate n'a reconnu le caractere ou la chaine suivante*/
-        Token t=new Token(caractere);/*on renvoie le caractere en question sous forme de token*/
+        else{
+            /*renvoyer message d erreur*/
+            System.out.println("Le caractere " + this.caractere + " n'est pas reconnu\nLigne :"+this.line+"\n"+currentLine+"\nIndice :"+this.nbChar);
+        }
         return 1;
     }
 }
