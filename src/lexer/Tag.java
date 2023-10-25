@@ -1,6 +1,6 @@
 package lexer;
 
-/*on initialise des tags particuliers pour les tokens*/
+//on initialise des tags particuliers pour les tokens
 public class Tag {
     public final static int ENTIER=256;
     public final static int IDENT=257;
