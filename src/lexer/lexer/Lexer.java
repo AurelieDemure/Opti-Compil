@@ -16,9 +16,9 @@ public class Lexer {
     //prochain caractere a lire
     private char prochain=' ';
     // Table des string, pour gerer les mots cles et identifiants. Utilisation d une table de hashage
-    private Hashtable mots=new Hashtable();
-    //Ensemble des erreurs a traiter
-    private List<Error> errors = new ArrayList<Error>();
+    private HashMap<String, Mots> mots=new HashMap<String, Mots>();
+    //Pour gerer les erruers, ie les stocker et les envoyer
+    public ErrorManager errorManager = new ErrorManager();
 
     //permet de mettre les tokens des mots cles dans la table des strings
     void reserve(Mots t){
@@ -50,7 +50,7 @@ public class Lexer {
         this.caractere=(char)System.in.read();
         //on incremente le compteur de ligne si on a un saut de ligne, utile pour la gestion de bug
         if(this.caractere=='\n'){
-            this.throwErrors();//On renvoie toutes les erreurs
+            errorManager.throwErrorsLexer(this);//On renvoie toutes les erreurs
             this.line+=1;//incremente le nombre de ligne
             this.nbChar=0;//Le compteur de caractere repart au debut
             currentLine="";//La ligne courante se reinitialise
@@ -58,14 +58,6 @@ public class Lexer {
         else{//On rajoute le caractere lu a la ligne courante
             this.currentLine+=this.caractere;
         }
-    }
-
-    //renvoie toutes les erreurs de la liste d erreur, puis la reinitialise
-    public void throwErrors(){
-        for(Error error : this.errors){
-            error.throwErrorLexer(this);
-        }
-        this.errors.clear();
     }
 
     public int scan() throws IOException{
@@ -126,17 +118,16 @@ public class Lexer {
 
         //on teste si on a un caractere (automate caractere)
 
-
+        //Si on arrive en fin du fichier
         if((int)this.caractere==65535){
-            Token t=new Token('$');
-            this.throwErrors();
+            Token t=new Token('$');//token fin de texte
+            errorManager.throwErrorsLexer(this);//On renvoie toutes les erreurs
             return 1;
         }
         //si on a pas reconnu le caractere
         else{
-            //renvoyer message d erreur
-            Error errorMessage = new Error(this.line, this.nbChar, "Le caractere " + this.caractere + " n'est pas reconnu");
-            errors.add(errorMessage);//On ajoute a la liste des erreurs a renvoyer
+            //sauvegarde du message d erreur
+            errorManager.saveError(this.line, this.nbChar, "Le caractere " + this.caractere + " n'est pas reconnu");
         }
         return 0;
     }

@@ -7,6 +7,9 @@ public class TestError {
 
 public static void main(String[] arg){
         Error error = new Error(("this is an error"));
-        error.throwError(); 
+        ErrorManager errorManager = new ErrorManager();
+        error.throwError();
+        errorManager.saveError("message");
+        errorManager.throwErrors();
     }
 }

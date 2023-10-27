@@ -1,5 +1,5 @@
 all :
-	find . -name *.java | xargs javac -d .run -Xlint:unchecked
+	find . -name *.java | xargs javac -d .run
 
 tests :
 	java -classpath .run lexer/TestLexer < lexer/tests/test_folders/test_work.txt
