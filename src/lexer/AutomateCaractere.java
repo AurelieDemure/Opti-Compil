@@ -8,11 +8,11 @@ public class AutomateCaractere extends Automate {
         super(token, read, nextLexeur);
     }
     
-    public void main(String[] args, char firstLexeur) {
+    /*public void main(String[] args, char firstLexeur) {
         estCaractere(firstLexeur);
-    }
+    }*/
     
-    public void estCaractere(char firstLexeur){
+    public void estCaractere(char firstLexeur, Lexer Lexer){
 
         this.token += firstLexeur;
         this.read += firstLexeur;
@@ -23,7 +23,8 @@ public class AutomateCaractere extends Automate {
             this.read += nextLexeur;
         }
         else{
-            System.out.println("Le caractère n'est pas un caracère ASCII imprimable");
+            /*System.out.println("Le caractère n'est pas un caracère ASCII imprimable");*/
+            ErrorManager.saveError("Le caractère n'est pas un caractère ASCII imprimable");
         }
 
         this.nextLexeur = (char)Lexer.read();
@@ -34,7 +35,8 @@ public class AutomateCaractere extends Automate {
         }
 
         else {
-            System.out.println("Pour identifier un caractère il faut fermer le guillemet")
+            /*System.out.println("Pour identifier un caractère il faut fermer le guillemet");*/
+            ErrorManager.saveError("Pour identifier un caractère il faut fermer le guillemet");
             this.token += '\'';
         }
     }
