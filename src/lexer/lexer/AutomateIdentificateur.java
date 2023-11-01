@@ -6,7 +6,11 @@ public class AutomateIdentificateur extends Automate{
         super(token, read, nextLexeur);
     }
 
-    public void estIdenticateur(char firstLexeur){
+    /*public void main(char firstLexeur, String[] args){
+        estIdenticateur(firstLexeur, args, lexer);
+    }*/
+
+    public void estIdenticateur(char firstLexeur, Lexer lexer){
         this.token += firstLexeur;
         this.read += firstLexeur;
         this.nextLexeur = (char)Lexer.read();
@@ -15,6 +19,22 @@ public class AutomateIdentificateur extends Automate{
             this.read += nextLexeur;
             this.nextLexeur = (char)Lexer.read();
         }
+        if(estReconnuAda(firstLexeur)){             //On regarde si le prochain caractère est . ou ' afin de voir si c'est une chaine spécifique du langage Ada
+            while(estReconnu(nextLexeur)){          //Si on reconnait . ou ' on continue jusqu'à la ne plus reconnaitre de caractère
+                this.token += nextLexeur;
+                this.read += nextLexeur;
+                this.nextLexeur = (char)Lexer.read();
+            }
+            if(!estAda(token))                      //Si on a reconnu . ou ' on vérifie bien finalement que c'est l'une des 3 chaines de Ada 
+                ErrorManager.saveError("La chaine n'est pas un identificateur");
+        }
+    }
+
+    public boolean estReconnuAda(char nextLexeur){
+        if(nextLexeur=='\'' || nextLexeur=='.')
+            return true;
+        else
+            return false;
     }
 
     public boolean estReconnu(char nextLexeur){
@@ -24,7 +44,11 @@ public class AutomateIdentificateur extends Automate{
             return false;
     }
 
-    public void main(char firstLexeur){
-        estIdenticateur(firstLexeur);
+    public boolean estAda(String token){
+        if(token =="character'val" || token=="Ada.Text_IO" || token=="Ada.Integer_IO")
+            return true;
+        else
+            return false;
     }
+
 }
