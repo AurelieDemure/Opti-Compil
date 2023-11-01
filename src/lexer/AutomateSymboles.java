@@ -8,10 +8,10 @@ public class AutomateSymboles extends Automate{
         super(token,read,nextLexeur);
     }
 
-    public void main(char first,String[] args){
+    /*public void main(char first,String[] args){
         Symbole(first,args);
-    }
-    public Automate Symbole(char first,String[] args){
+    }*/
+    public Automate Symbole(char first,String[] args,Lexer Lexer){
         this.token+=first;
         this.read=this.token;
         this.nextLexeur=(char)Lexer.read();
@@ -26,7 +26,7 @@ public class AutomateSymboles extends Automate{
                 this.read=this.token;
             }
             else {
-                System.out.println("Erreur");
+                ErrorManager.saveError("Le caractère n'est pas un symbole");
             }
         }
     }
