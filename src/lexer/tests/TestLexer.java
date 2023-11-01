@@ -7,9 +7,9 @@ public class TestLexer{
 
     public static void main(String[] arg) throws IOException{
         Lexer lexer = new Lexer();
-        int fin = 0;
-        while(fin==0){
-            fin = lexer.scan();
+        Token token = new Token(' ');
+        while(token.tag!='$'){
+            token = lexer.scan();
         }
     }
 }
