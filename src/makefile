@@ -1,12 +1,9 @@
 all :
-	javac lexer/Tag.java
-	javac lexer/Token.java
-	javac lexer/Mots.java
-	javac lexer/Entier.java
-	javac lexer/Lexer.java
-	javac lexer/TestLexer.java
+	find . -name *.java | xargs javac -d .run
 
 tests :
-	java lexer/TestLexer < lexer/tests.txt
+	java -classpath .run lexer/TestLexer < lexer/tests/test_folders/test_work.txt
+	java -classpath .run lexer/TestLexer < lexer/tests/test_folders/test_unknow_char.txt
+	java -classpath .run lexer/TestError
 clean :
-	rm -f lexer/*.class
+	find . -name *.class -delete
