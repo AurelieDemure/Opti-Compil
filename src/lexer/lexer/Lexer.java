@@ -107,7 +107,7 @@ public class Lexer {
             int s=automate.getToken();;//le mot qu'on a recconu avec l'automate
             caractere=automate.getNextLexeur();
             Token t=new Entier(Tag.ENTIER, s);
-            return t
+            return t;
         }*/
 
         //on teste si on a un identifiant (automate ident)
@@ -128,13 +128,14 @@ public class Lexer {
         
         //on teste si on a un symbole (automate symbole)
         /*if(caractere==';' || caractere=='(' || caractere==')' || caractere=='+' || caractere=='-' ||caractere=='*' || caractere=='.' || caractere=='=' || caractere=='<' || caractere=='>'  || caractere==':' || caractere=='/'){
-            AutomateSymboles automate = new AutomateSymboles();
-            estSymbole(caractere, this);
-            String s=automate.getToken();;//le mot qu'on a recconu avec l'automate
+            AutomateSymboles automate = new AutomateSymboles(caractere,caractere,prochain);
+            automate.estSymbole(caractere, this);
+            String s=automate.getToken();//le mot qu'on a recconu avec l'automate
             caractere=automate.getNextLexeur();
             Token t=new Token(s);
             return t
-        }*/
+
+        }
 
         //on teste si on a un caractere (automate caractere)
         /*if(caractere=='''){
@@ -143,7 +144,7 @@ public class Lexer {
             char s=automate.getToken();;//le mot qu'on a recconu avec l'automate
             caractere=automate.getNextLexeur();
             Token t=new Caractere(Tag.CHAR, s);
-            return t
+            return t;
         }*/
 
         //Si on arrive en fin du fichier
