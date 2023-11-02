@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class AutomateCaractere extends Automate {
 
-    public AutomateCaractere(String token, String read, char nextLexeur) {
+    public AutomateCaractere(char token, char read, char nextLexeur) {
         super(token, read, nextLexeur);
     }
     
