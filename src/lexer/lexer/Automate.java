@@ -5,9 +5,13 @@ public class Automate {
     protected String read;
     protected char nextLexeur;
 
-    public Automate(String token, String read, char nextLexeur){
-        this.token = token;
-        this.read = read;
+    public Automate(char token, char read, char nextLexeur){
+        String t="";
+        t+=token;
+        this.token = t;
+        String r="";
+        r+=read;
+        this.read = r;
         this.nextLexeur = nextLexeur;
     }
 

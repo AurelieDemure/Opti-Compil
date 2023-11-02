@@ -1,17 +1,17 @@
 package lexer; /*pour le mettre dans le package de l'analyseur lexical*/
 
-import java.util.Scanner;
+import java.io.IOException;
 
 public class AutomateSymboles extends Automate{
 
-    public AutomateSymboles(String token,String read,char nextLexeur){
+    public AutomateSymboles(char token,char read,char nextLexeur){
         super(token,read,nextLexeur);
     }
 
     /*public void main(char first,String[] args){
         Symbole(first,args);
     }*/
-    public Automate Symbole(char first,String[] args,Lexer Lexer){
+    public void estSymbole(char first,Lexer Lexer) throws IOException{
         this.token+=first;
         this.read=this.token;
         this.nextLexeur=(char)Lexer.read();
@@ -26,7 +26,7 @@ public class AutomateSymboles extends Automate{
                 this.read=this.token;
             }
             else {
-                ErrorManager.saveError("Le caractère n'est pas un symbole");
+                (Lexer.errorManager).saveError("Le caractère n'est pas un symbole");
             }
         }
     }
