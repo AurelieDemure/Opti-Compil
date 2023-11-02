@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class AutomateIdentificateur extends Automate{
 
-    public AutomateIdentificateur(String token, String read, char nextLexeur) {
+    public AutomateIdentificateur(char token, char read, char nextLexeur) {
         super(token, read, nextLexeur);
     }
 
@@ -52,5 +52,4 @@ public class AutomateIdentificateur extends Automate{
         else
             return false;
     }
-
 }
