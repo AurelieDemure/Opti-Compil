@@ -1,10 +1,11 @@
 package lexer; /*pour le mettre dans le package de l'analyseur lexicale*/
  
-import java.util.Scanner;
+import java.io.IOException;
+
 
 public class AutomateCaractere extends Automate {
 
-    public AutomateCaractere(String token, String read, char nextLexeur) {
+    public AutomateCaractere(char token, char read, char nextLexeur) {
         super(token, read, nextLexeur);
     }
     
@@ -12,7 +13,7 @@ public class AutomateCaractere extends Automate {
         estCaractere(firstLexeur);
     }*/
     
-    public void estCaractere(char firstLexeur, Lexer Lexer){
+    public void estCaractere(char firstLexeur, Lexer Lexer) throws IOException{
 
         this.token += firstLexeur;
         this.read += firstLexeur;
@@ -24,7 +25,7 @@ public class AutomateCaractere extends Automate {
         }
         else{
             /*System.out.println("Le caractère n'est pas un caracère ASCII imprimable");*/
-            ErrorManager.saveError("Le caractère n'est pas un caractère ASCII imprimable");
+            Lexer.errorManager.saveError("Le caractère n'est pas un caractère ASCII imprimable");
         }
 
         this.nextLexeur = (char)Lexer.read();
@@ -36,7 +37,7 @@ public class AutomateCaractere extends Automate {
 
         else {
             /*System.out.println("Pour identifier un caractère il faut fermer le guillemet");*/
-            ErrorManager.saveError("Pour identifier un caractère il faut fermer le guillemet");
+            Lexer.errorManager.saveError("Pour identifier un caractère il faut fermer le guillemet");
             this.token += '\'';
         }
     }

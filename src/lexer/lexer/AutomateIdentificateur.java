@@ -1,5 +1,7 @@
 package lexer; /*pour le mettre dans le package de l'analyseur lexicale*/
 
+import java.io.IOException;
+
 public class AutomateIdentificateur extends Automate{
 
     public AutomateIdentificateur(String token, String read, char nextLexeur) {
@@ -10,7 +12,7 @@ public class AutomateIdentificateur extends Automate{
         estIdenticateur(firstLexeur, args, lexer);
     }*/
 
-    public void estIdenticateur(char firstLexeur, Lexer lexer){
+    public void estIdenticateur(char firstLexeur, Lexer Lexer) throws IOException{
         this.token += firstLexeur;
         this.read += firstLexeur;
         this.nextLexeur = (char)Lexer.read();
@@ -26,7 +28,7 @@ public class AutomateIdentificateur extends Automate{
                 this.nextLexeur = (char)Lexer.read();
             }
             if(!estAda(token))                      //Si on a reconnu . ou ' on vérifie bien finalement que c'est l'une des 3 chaines de Ada 
-                ErrorManager.saveError("La chaine n'est pas un identificateur");
+                Lexer.errorManager.saveError("La chaine n'est pas un identificateur");
         }
     }
 
