@@ -1,32 +1,30 @@
-package lexer;
+package lexer; /*pour le mettre dans le package de l'analyseur lexicale*/
 
-import java.util.Scanner;
+import java.io.IOException;
 
-public class AutomateEntier {
-    public static void main(String[] args){
-        Scanner clavier = new Scanner(System.in);                               /*Récupération caractère depuis le terminal */
-        System.out.println("Entrez un entier :");
-        String input = clavier.nextLine();
-        clavier.close();
-        if (estReconnu(input)){ 
-            System.out.println("L'input est reconnu");
-        }
-        else{
-            System.out.println("L'input n'est pas reconnu");
+public class AutomateEntier extends Automate {
+
+    public AutomateEntier(char token, char read, char nextLexeur) {
+        super(token, read, nextLexeur);
+    }
+
+    /*public void main(char firstLexeur, String[] args){
+        estEntier(firstLexeur, args, lexer);
+    }*/
+
+    public void estEntier(char firstLexeur, Lexer Lexer) throws IOException{
+        this.token += firstLexeur;
+        this.read += firstLexeur;
+        this.nextLexeur = (char)Lexer.read();
+        while(estReconnu(nextLexeur)){ 
+            this.token += nextLexeur;
+            this.read += nextLexeur;
+            this.nextLexeur = (char)Lexer.read();
         }
     }
 
-    public static boolean estReconnu(String input){
-        if(input.length()>1)
-            return false;
-        if (!estEntier(input.charAt(0))){
-            return false;
-        }
-        return true;
-    }
-    
-    public static boolean estEntier(char caractere){
-        if (caractere>='0'&& caractere<='9')
+    public static boolean estReconnu(char nextLexeur){
+        if (nextLexeur>='0'&& nextLexeur<='9')
             return true;
         else
             return false;
