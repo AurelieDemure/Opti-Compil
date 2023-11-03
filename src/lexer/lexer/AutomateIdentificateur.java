@@ -28,7 +28,7 @@ public class AutomateIdentificateur extends Automate{
                 this.nextLexeur = (char)Lexer.read();
             }
             if(!estAda(token))                      //Si on a reconnu . ou ' on vérifie bien finalement que c'est l'une des 3 chaines de Ada 
-                Lexer.errorManager.saveError("La chaine n'est pas un identificateur");
+                Lexer.errorManager.saveError(Lexer.getLine(), Lexer.getNbChar(), "La chaine n'est pas un identificateur");
         }
     }
 

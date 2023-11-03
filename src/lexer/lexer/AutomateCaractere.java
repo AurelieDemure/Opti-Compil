@@ -25,7 +25,7 @@ public class AutomateCaractere extends Automate {
         }
         else{
             /*System.out.println("Le caractère n'est pas un caracère ASCII imprimable");*/
-            Lexer.errorManager.saveError("Le caractère n'est pas un caractère ASCII imprimable");
+            Lexer.errorManager.saveError(Lexer.getLine(), Lexer.getNbChar(), "Le caractère n'est pas un caractère ASCII imprimable");
         }
 
         this.nextLexeur = (char)Lexer.read();
@@ -37,7 +37,7 @@ public class AutomateCaractere extends Automate {
 
         else {
             /*System.out.println("Pour identifier un caractère il faut fermer le guillemet");*/
-            Lexer.errorManager.saveError("Pour identifier un caractère il faut fermer le guillemet");
+            Lexer.errorManager.saveError(Lexer.getLine(), Lexer.getNbChar(), "Pour identifier un caractère il faut fermer le guillemet");
             this.token += '\'';
         }
     }

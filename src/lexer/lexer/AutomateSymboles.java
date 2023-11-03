@@ -26,7 +26,7 @@ public class AutomateSymboles extends Automate{
                 this.read=this.token;
             }
             else {
-                (Lexer.errorManager).saveError("Le caractère n'est pas un symbole");
+                (Lexer.errorManager).saveError(Lexer.getLine(), Lexer.getNbChar(), "Le caractère n'est pas un symbole");
             }
         }
     }
