@@ -29,6 +29,33 @@ public class Lexer {
     public Lexer(){
         reserve(new Mots(Tag.TRUE, "true"));
         reserve(new Mots(Tag.FALSE, "false"));
+        reserve(new Mots(Tag.ACCESS,"access"));
+        reserve(new Mots(Tag.AND,"and"));
+        reserve(new Mots(Tag.BEGIN,"begin"));
+        reserve(new Mots(Tag.ELSE,"else"));
+        reserve(new Mots(Tag.ELSIF,"elsif"));
+        reserve(new Mots(Tag.END,"end"));
+        reserve(new Mots(Tag.FOR,"for"));
+        reserve(new Mots(Tag.FUNCTION,"function"));
+        reserve(new Mots(Tag.IF,"if"));
+        reserve(new Mots(Tag.IN,"in"));
+        reserve(new Mots(Tag.IS,"is"));
+        reserve(new Mots(Tag.LOOP,"loop"));
+        reserve(new Mots(Tag.NEW,"new"));
+        reserve(new Mots(Tag.NOT,"not"));
+        reserve(new Mots(Tag.NULL,"null"));
+        reserve(new Mots(Tag.OR,"or"));
+        reserve(new Mots(Tag.OUT,"out"));
+        reserve(new Mots(Tag.PROCEDURE,"procedure"));
+        reserve(new Mots(Tag.RECORD,"record"));
+        reserve(new Mots(Tag.REM,"rem"));
+        reserve(new Mots(Tag.RETURN,"return"));
+        reserve(new Mots(Tag.REVERSE,"reverse"));
+        reserve(new Mots(Tag.THEN,"then"));
+        reserve(new Mots(Tag.TYPE,"type"));
+        reserve(new Mots(Tag.USE,"use"));
+        reserve(new Mots(Tag.WHILE,"while"));
+        reserve(new Mots(Tag.WITH,"with"));
         //a continuer avec les autres mots cles
     }
 
