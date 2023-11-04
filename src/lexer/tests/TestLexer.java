@@ -19,5 +19,6 @@ public class TestLexer{
             token = lexer.scan();
         }
         System.out.println("###EOF###");
+        //System.out.println(lexer.getMots());
     }
 }
