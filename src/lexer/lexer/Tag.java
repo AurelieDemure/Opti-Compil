@@ -4,7 +4,6 @@ package lexer;
 public class Tag {
     public final static int ENTIER=256;
     public final static int IDENT=257;
-    public final static int SYMB=258;
     public final static int CHAR=259;
     public final static int TRUE=260;
     public final static int FALSE=261;
@@ -35,4 +34,20 @@ public class Tag {
     public final static int USE=286;
     public final static int WHILE=287;
     public final static int WITH=288;
+    public final static int POINTV=289;// ;
+    public final static int PO=290;// (
+    public final static int PF=291;// )
+    public final static int PLUS=292;// +
+    public final static int MOINS=293;// -
+    public final static int ETOILE=294;// *
+    public final static int POINT=295;// .
+    public final static int EGALE=296;// =
+    public final static int SUP=297;// >
+    public final static int INF=298;// <
+    public final static int DPOINTS=299;// :
+    public final static int DIV=300;// /
+    public final static int SUPEG=301;// >=
+    public final static int INFEG=302;// <=
+    public final static int AFFECT=303;// :=
+    public final static int NEGALE=304;// /=
 }

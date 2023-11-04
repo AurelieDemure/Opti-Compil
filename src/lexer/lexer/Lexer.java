@@ -145,7 +145,55 @@ public class Lexer {
             automateSymboles.estSymbole(caractere, this);
             String s=automateSymboles.getToken();//le mot qu'on a recconu avec l'automate
             this.caractere=automateSymboles.getNextLexeur();
-            Token t=new Mots(Tag.SYMB, s);
+            Token t;
+            if(s.compareTo(";")==0){
+                t=new Mots(Tag.POINTV, s);
+            }
+            else if(s.compareTo("(")==0){
+                t=new Mots(Tag.PO, s);
+            }
+            else if(s.compareTo(")")==0){
+                t=new Mots(Tag.PF, s);
+            }
+            else if(s.compareTo("+")==0){
+                t=new Mots(Tag.PLUS, s);
+            }
+            else if(s.compareTo("-")==0){
+                t=new Mots(Tag.MOINS, s);
+            }
+            else if(s.compareTo("*")==0){
+                t=new Mots(Tag.ETOILE, s);
+            }
+            else if(s.compareTo(".")==0){
+                t=new Mots(Tag.POINT, s);
+            }
+            else if(s.compareTo("=")==0){
+                t=new Mots(Tag.EGALE, s);
+            }
+            else if(s.compareTo(">")==0){
+                t=new Mots(Tag.SUP, s);
+            }
+            else if(s.compareTo("<")==0){
+                t=new Mots(Tag.INF, s);
+            }
+            else if(s.compareTo(":")==0){
+                t=new Mots(Tag.DPOINTS, s);
+            }
+            else if(s.compareTo("/")==0){
+                t=new Mots(Tag.DIV, s);
+            }
+            else if(s.compareTo(">=")==0){
+                t=new Mots(Tag.SUPEG, s);
+            }
+            else if(s.compareTo("<=")==0){
+                t=new Mots(Tag.INFEG, s);
+            }
+            else if(s.compareTo(":=")==0){
+                t=new Mots(Tag.AFFECT, s);
+            }
+            else{// /=
+                t=new Mots(Tag.NEGALE, s);
+            }
             return t;
         }
 
