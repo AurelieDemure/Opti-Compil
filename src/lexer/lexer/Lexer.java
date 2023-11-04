@@ -113,7 +113,7 @@ public class Lexer {
         //on teste si on a un nombre (automate entier)
         if(caractere>=48 && caractere <=57){
             //l'automate pour les entiers
-            AutomateEntier automateEntier = new AutomateEntier(' ',' ',' ');
+            AutomateEntier automateEntier = new AutomateEntier();
             automateEntier.estEntier(caractere, this);
             String s=automateEntier.getToken();;//le mot qu'on a recconu avec l'automate
             this.caractere=automateEntier.getNextLexeur();
@@ -124,12 +124,13 @@ public class Lexer {
         //on teste si on a un identifiant (automate ident)
         else if(this.caractere >='a' && this.caractere <='z' || this.caractere>='A' && this.caractere <='Z'){
             //l'automate pour les indentifiants
-            AutomateIdentificateur automateIndent = new AutomateIdentificateur(' ',' ',' ');
+            AutomateIdentificateur automateIndent = new AutomateIdentificateur();
             automateIndent.estIdenticateur(caractere, this);
             String s=automateIndent.getToken();;//le mot qu'on a recconu avec l'automate
             this.caractere=automateIndent.getNextLexeur();
             Mots w=(Mots)mots.get(s);//on recupere sa valeur dans la table des strings
             if(w!=null){
+                System.out.println(w.lexeme);
                 return w;//si il est dans la table, on a pas a le traiter plus
             }
             w=new Mots(Tag.IDENT, s);//si il n est pas dans la table, on cree le token associe
@@ -140,7 +141,7 @@ public class Lexer {
         //on teste si on a un symbole (automate symbole)
         else if(caractere==';' || caractere=='(' || caractere==')' || caractere=='+' || caractere=='-' ||caractere=='*' || caractere=='.' || caractere=='=' || caractere=='<' || caractere=='>'  || caractere==':' || caractere=='/'){
             //l'automate pour les symboles 
-            AutomateSymboles automateSymboles = new AutomateSymboles(' ',' ',' ');
+            AutomateSymboles automateSymboles = new AutomateSymboles();
             automateSymboles.estSymbole(caractere, this);
             String s=automateSymboles.getToken();//le mot qu'on a recconu avec l'automate
             this.caractere=automateSymboles.getNextLexeur();
@@ -151,7 +152,7 @@ public class Lexer {
         //on teste si on a un caractere (automate caractere)
         else if(this.caractere=='\''){
             //l'automate pour les caracteres 
-            AutomateCaractere automateCar = new AutomateCaractere(' ',' ',' ');
+            AutomateCaractere automateCar = new AutomateCaractere();
             automateCar.estCaractere(caractere, this);
             String s=automateCar.getToken();;//le mot qu on a recconu avec l automate
             this.caractere=this.read();

@@ -5,8 +5,8 @@ import java.io.IOException;
 
 public class AutomateCaractere extends Automate {
 
-    public AutomateCaractere(char token, char read, char nextLexeur) {
-        super(token, read, nextLexeur);
+    public AutomateCaractere() {
+        super();
     }
     
     /*public void main(String[] args, char firstLexeur) {

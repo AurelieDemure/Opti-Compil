@@ -4,8 +4,8 @@ import java.io.IOException;
 
 public class AutomateEntier extends Automate {
 
-    public AutomateEntier(char token, char read, char nextLexeur) {
-        super(token, read, nextLexeur);
+    public AutomateEntier() {
+        super();
     }
 
     /*public void main(char firstLexeur, String[] args){

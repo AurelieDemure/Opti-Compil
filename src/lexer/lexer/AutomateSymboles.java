@@ -4,8 +4,8 @@ import java.io.IOException;
 
 public class AutomateSymboles extends Automate{
 
-    public AutomateSymboles(char token,char read,char nextLexeur){
-        super(token,read,nextLexeur);
+    public AutomateSymboles(){
+        super();
     }
 
     /*public void main(char first,String[] args){
