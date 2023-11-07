@@ -17,7 +17,7 @@ public class Lexer {
     private char prochain=' ';
     // Table des string, pour gerer les mots cles et identifiants. Utilisation d une table de hashage
     private HashMap<String, Mots> mots=new HashMap<String, Mots>();
-    //Pour gerer les erruers, ie les stocker et les envoyer
+    //Pour gerer les erreurs, ie les stocker et les envoyer
     public ErrorManager errorManager = new ErrorManager();
 
     //permet de mettre les tokens des mots cles dans la table des strings
@@ -94,10 +94,10 @@ public class Lexer {
 
     public Token scan() throws IOException{
         
-        //suppression des espaces, tabulation et les commentaires
+        //suppression des espaces, tabulations et commentaires
         while(this.caractere<=32 || this.caractere =='-' && this.prochain=='-'){
 
-            //on gere les commenentaires
+            //on gere les commentaires
             if(this.caractere=='-' && this.prochain=='-'){
                 //detection du debut du commentaire
                 while(this.caractere!='\n'){
@@ -115,7 +115,7 @@ public class Lexer {
             //l'automate pour les entiers
             AutomateEntier automateEntier = new AutomateEntier();
             automateEntier.estEntier(caractere, this);
-            String s=automateEntier.getToken();;//le mot qu'on a recconu avec l'automate
+            String s=automateEntier.getToken();;//le mot qu'on a reconnu avec l'automate
             this.caractere=automateEntier.getNextLexeur();
             Token t=new Mots(Tag.ENTIER, s);
             return t;
@@ -126,12 +126,12 @@ public class Lexer {
             //l'automate pour les indentifiants
             AutomateIdentificateur automateIndent = new AutomateIdentificateur();
             automateIndent.estIdenticateur(caractere, this);
-            String s=automateIndent.getToken();;//le mot qu'on a recconu avec l'automate
+            String s=automateIndent.getToken();;//le mot qu'on a reconnu avec l'automate
             this.caractere=automateIndent.getNextLexeur();
             Mots w=(Mots)mots.get(s);//on recupere sa valeur dans la table des strings
             if(w!=null){
                 System.out.println(w.lexeme);
-                return w;//si il est dans la table, on a pas a le traiter plus
+                return w;//si il est dans la table, pas besoin de le traiter plus
             }
             w=new Mots(Tag.IDENT, s);//si il n est pas dans la table, on cree le token associe
             mots.put(s,w);//et on le met dans la table
@@ -143,7 +143,7 @@ public class Lexer {
             //l'automate pour les symboles 
             AutomateSymboles automateSymboles = new AutomateSymboles();
             automateSymboles.estSymbole(caractere, this);
-            String s=automateSymboles.getToken();//le mot qu'on a recconu avec l'automate
+            String s=automateSymboles.getToken();//le mot qu'on a reconnu avec l'automate
             this.caractere=automateSymboles.getNextLexeur();
             Token t;
             if(s.compareTo(";")==0){
@@ -202,7 +202,7 @@ public class Lexer {
             //l'automate pour les caracteres 
             AutomateCaractere automateCar = new AutomateCaractere();
             automateCar.estCaractere(caractere, this);
-            String s=automateCar.getToken();;//le mot qu on a recconu avec l automate
+            String s=automateCar.getToken();;//le mot qu on a reconnu avec l automate
             this.caractere=this.read();
             Token t=new Mots(Tag.CHAR, s);
             return t;
