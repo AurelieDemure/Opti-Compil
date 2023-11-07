@@ -77,18 +77,23 @@ loop **\<instr>**+ end loop ;
 | Params    | (                                                                                           | is, return                                                                                                   |
 | Param     | a-z, A-Z                                                                                    | ;                                                                                                            |
 | Mode      | in, in out                                                                                  | PREMIERTYPE                                                                                                  |
-| Expr      | a-z, A-Z , 0-9, ', true, false, null, (, not, new, character'val                            | ) , PREMIEROPÉRATEUR, , , ; ,then, SUIVANTINSTR, loop, . ,  ????????                                         |
+| Expr      | a-z, A-Z , 0-9, ', true, false, null, (, not, new, character'val                            | ) , PREMIEROPÉRATEUR, , (virgule) , ; ,then, SUIVANTINSTR, loop, . ,  ????????                                         |
 | Instr     | a-z, A-Z , 0-9, ', true, false, null, (, not, new, character' return, begin, if, for, while | PREMIERINSTR, end                                                                                            |
 | Opérateur | =, /=, <, <=, >, >=, +, -, *, / , rem, and, and then, or, or else                           | PREMIEREXPR                                                                                                  |
 | Accès     | a-z, A-Z , 0-9, ', true, false, null, (, not, new, character'                               | SUIVANTEXPR, :                                                                                               |
-| Ident     | a-z, A-Z                                                                                    | is, ; , , , PREMIERPARAMS, SUIVANTDECL, return, SUIVANTTYPE, SUIVANTEXPR, ( , SUIVANTINSTR, in, SUIVANTACCES |
+| Ident     | a-z, A-Z                                                                                    | is, ; , , (virgule) , PREMIERPARAMS, SUIVANTDECL, return, SUIVANTTYPE, SUIVANTEXPR, ( , SUIVANTINSTR, in, SUIVANTACCES |
 | Alpha     | a-z, A-Z                                                                                    | SUIVANTIDENT, PREMIERCHIFFRE, _ , PREMIERALPHA                                                               |
 | Entier    | 0-9                                                                                         | SUIVANTEXPR                                                                                                  |
 | Chiffre   | 0-9                                                                                         | PREMIERCHIFFRE, _ , PREMIERALPHA, SUIVANTENTIER                                                              |
 | Caractère | '                                                                                           | SUIVANTEXPR                                                                                                  |
 | ASCII     | ASCII                                                                                       | '                                                                                                            |
 
+<div style="page-break-after: always; visibility: hidden"> 
+\pagebreak 
+</div>
 
-
+G = (S', N, T, ->) avec :
 S' = **\<fichier>**
-N = {fichier, decl, champs, type, params, param, mode, expr, instr, opérateur, accès, ident, alpha, entier, chiffre, caractere, ASCII}
+N = {fichier, decl, champs, type, params, param, mode, expr, instr, opérateur, accès, 		ident, alpha, entier, chiffre, caractere, ASCII}
+T = {with, Ada.Text_I0, ; , use, procedure, is, begin, end, EOF, type, access, record, 		function, return, access, in, out, true, false, null, not, new, character', val, if, then, 			elsif, else, for, reverse?, loop, while, = , /= , < , <= , > , >=, +, -, *, rem, and, or, SPC , 	! , " , # , $ , % , & , ' , ( , ) , * , + , , , - , . , / , 0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , : , ; , < , = 	, > , ? , @ , A , B , C , D , E , F , G , H , I , J , K , L , M , N , O , P , Q , R , S , T , U , V		, W , X , Y , Z , [ | \ | ] , ^ , _ , \` , a , b , c , d , e, f , g , h , i , j , k , l , m , n , o , p , q , r 	, s , t , u , v , w , x , y , z , { | | | } , ~  }
+-> ensemble des règles définies plus haut par des ::=
