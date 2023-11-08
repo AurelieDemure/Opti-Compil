@@ -5,5 +5,9 @@ tests :
 	java -classpath .run lexer/TestLexer < lexer/tests/test_folders/test_work.txt
 	java -classpath .run lexer/TestLexer < lexer/tests/test_folders/test_unknow_char.txt
 	java -classpath .run lexer/TestError
+
+test_symboles : 
+	java -classpath .run lexer/TestLexer < lexer/tests/test_folders/test_symboles.txt
+
 clean :
 	find . -name *.class -delete
