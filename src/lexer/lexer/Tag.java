@@ -34,20 +34,21 @@ public class Tag {
     public final static int USE=286;
     public final static int WHILE=287;
     public final static int WITH=288;
-    public final static int POINTV=289;// ;
-    public final static int PO=290;// (
-    public final static int PF=291;// )
-    public final static int PLUS=292;// +
-    public final static int MOINS=293;// -
-    public final static int ETOILE=294;// *
-    public final static int POINT=295;// .
-    public final static int EGALE=296;// =
-    public final static int SUP=297;// >
-    public final static int INF=298;// <
-    public final static int DPOINTS=299;// :
-    public final static int DIV=300;// /
-    public final static int SUPEG=301;// >=
-    public final static int INFEG=302;// <=
-    public final static int AFFECT=303;// :=
-    public final static int NEGALE=304;// /=
+    public final static int PUT=289;
+    public final static int POINTV=59;// ;
+    public final static int PO=40;// (
+    public final static int PF=41;// )
+    public final static int PLUS=43;// +
+    public final static int MOINS=45;// -
+    public final static int ETOILE=42;// *
+    public final static int POINT=46;// .
+    public final static int EGALE=61;// =
+    public final static int SUP=62;// >
+    public final static int INF=60;// <
+    public final static int DPOINTS=58;// :
+    public final static int DIV=57;// /
+    public final static int SUPEG=290;// >=
+    public final static int INFEG=291;// <=
+    public final static int AFFECT=292;// :=
+    public final static int NEGALE=293;// /=
 }

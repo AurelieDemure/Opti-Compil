@@ -56,6 +56,7 @@ public class Lexer {
         reserve(new Mots(Tag.USE,"use"));
         reserve(new Mots(Tag.WHILE,"while"));
         reserve(new Mots(Tag.WITH,"with"));
+        reserve(new Mots(Tag.PUT,"put"));
     }
 
     public int getLine(){
@@ -203,7 +204,7 @@ public class Lexer {
             AutomateCaractere automateCar = new AutomateCaractere();
             automateCar.estCaractere(caractere, this);
             String s=automateCar.getToken();;//le mot qu on a reconnu avec l automate
-            this.caractere=this.read();
+            this.caractere=' ';
             Token t=new Mots(Tag.CHAR, s);
             return t;
         }
