@@ -1,0 +1,3 @@
+character'val
+Ada.Integer_IO
+AdA.TEXT_iOoooooo
