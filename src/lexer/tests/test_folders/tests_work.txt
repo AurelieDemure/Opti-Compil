@@ -8,3 +8,7 @@ ljhflhjA86_wnbc
 bleubleu
 while
 bleubleu
+character'val
+Ada.Integer_IO
+
+
