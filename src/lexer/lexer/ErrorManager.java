@@ -1,6 +1,6 @@
 package lexer; /*pour le mettre dans le package de l'analyseur lexical*/
 
-import java.io.*;
+/*import java.io.*;*/
 import java.util.*;
 
 public class ErrorManager {

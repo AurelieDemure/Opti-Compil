@@ -1,45 +1,44 @@
-package lexer; /*pour le mettre dans le package de l'analyseur lexicale*/
+package lexer; /*pour le mettre dans le package de l'analyseur lexical*/
 
-import java.util.Scanner;
+import java.io.IOException;
 
-public class AutomateSymboles{
-    public static void main(String[] args){
-        Scanner clavier = new Scanner(System.in);
-        System.out.println("chaine :");
-        String input = clavier.nextLine();
-        clavier.close();
-        if (estSymbole(input)){ 
-            System.out.println("L'input est reconnu");
+public class AutomateSymboles extends Automate{
+
+    public AutomateSymboles(){
+        super();
+    }
+
+    /*public void main(char first,String[] args){
+        Symbole(first,args);
+    }*/
+    public void estSymbole(char first,Lexer Lexer) throws IOException{
+        this.token+=first;
+        this.read=this.token;
+        this.nextLexeur=(char)Lexer.read();
+        if (estSymb(first)){
         }
         else{
-            System.out.println("L'input n'est pas reconnu");
+            if (estSymbAvecEgal(first)){
+                if (this.nextLexeur=='='){
+                    this.token+='=';
+                    this.nextLexeur=(char)Lexer.read();
+                } 
+                this.read=this.token;
+            }
+            else {
+                (Lexer.errorManager).saveError(Lexer.getLine(), Lexer.getNbChar(), "Le caractère n'est pas un symbole");
+            }
         }
     }
 
-    public static boolean estSymbole(String input){
-        if (input.length()==1){
-            if (estSymb(input.charAt(0)) || estSymbAvecEgal(input.charAt(0))){
-                return true;
-            }
-        }
-        if (input.length()==2){
-            if (estSymbAvecEgal(input.charAt(0))){
-                if (input.charAt(1)=='='){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public static boolean estSymbAvecEgal(char caractere){
+    public boolean estSymbAvecEgal(char caractere){
         if (caractere=='<' || caractere=='>'  || caractere==':' || caractere=='/')
             return true;
         else
             return false;
     }
 
-    public static boolean estSymb(char caractere){
+    public boolean estSymb(char caractere){
         if (caractere==';' || caractere=='(' || caractere==')' || caractere=='+' || caractere=='-' ||caractere=='*' || caractere=='.' || caractere=='=')
             return true;
         else

@@ -17,7 +17,7 @@ public class Lexer {
     private char prochain=' ';
     // Table des string, pour gerer les mots cles et identifiants. Utilisation d une table de hashage
     private HashMap<String, Mots> mots=new HashMap<String, Mots>();
-    //Pour gerer les erruers, ie les stocker et les envoyer
+    //Pour gerer les erreurs, ie les stocker et les envoyer
     public ErrorManager errorManager = new ErrorManager();
 
     //permet de mettre les tokens des mots cles dans la table des strings
@@ -29,7 +29,34 @@ public class Lexer {
     public Lexer(){
         reserve(new Mots(Tag.TRUE, "true"));
         reserve(new Mots(Tag.FALSE, "false"));
-        //a continuer avec les autres mots cles
+        reserve(new Mots(Tag.ACCESS,"access"));
+        reserve(new Mots(Tag.AND,"and"));
+        reserve(new Mots(Tag.BEGIN,"begin"));
+        reserve(new Mots(Tag.ELSE,"else"));
+        reserve(new Mots(Tag.ELSIF,"elsif"));
+        reserve(new Mots(Tag.END,"end"));
+        reserve(new Mots(Tag.FOR,"for"));
+        reserve(new Mots(Tag.FUNCTION,"function"));
+        reserve(new Mots(Tag.IF,"if"));
+        reserve(new Mots(Tag.IN,"in"));
+        reserve(new Mots(Tag.IS,"is"));
+        reserve(new Mots(Tag.LOOP,"loop"));
+        reserve(new Mots(Tag.NEW,"new"));
+        reserve(new Mots(Tag.NOT,"not"));
+        reserve(new Mots(Tag.NULL,"null"));
+        reserve(new Mots(Tag.OR,"or"));
+        reserve(new Mots(Tag.OUT,"out"));
+        reserve(new Mots(Tag.PROCEDURE,"procedure"));
+        reserve(new Mots(Tag.RECORD,"record"));
+        reserve(new Mots(Tag.REM,"rem"));
+        reserve(new Mots(Tag.RETURN,"return"));
+        reserve(new Mots(Tag.REVERSE,"reverse"));
+        reserve(new Mots(Tag.THEN,"then"));
+        reserve(new Mots(Tag.TYPE,"type"));
+        reserve(new Mots(Tag.USE,"use"));
+        reserve(new Mots(Tag.WHILE,"while"));
+        reserve(new Mots(Tag.WITH,"with"));
+        reserve(new Mots(Tag.PUT,"put"));
     }
 
     public int getLine(){
@@ -44,91 +71,156 @@ public class Lexer {
         return(this.currentLine);
     }
 
+    public HashMap<String, Mots> getMots(){
+        return(this.mots);
+    }
+
     //pour lire le prochain caractere
-    public void read() throws IOException{
+    public char read() throws IOException{
         this.nbChar+=1;
-        this.caractere=(char)System.in.read();
+        this.caractere=this.prochain;
+        this.prochain=(char)System.in.read();
         //on incremente le compteur de ligne si on a un saut de ligne, utile pour la gestion de bug
         if(this.caractere=='\n'){
             errorManager.throwErrorsLexer(this);//On renvoie toutes les erreurs
             this.line+=1;//incremente le nombre de ligne
             this.nbChar=0;//Le compteur de caractere repart au debut
-            currentLine="";//La ligne courante se reinitialise
+            this.currentLine="";//La ligne courante se reinitialise
         }
-        else{//On rajoute le caractere lu a la ligne courante
+        else if((int)this.caractere!=65535){//On rajoute le caractere lu a la ligne courante
             this.currentLine+=this.caractere;
         }
+        return this.caractere;
     }
 
-    public int scan() throws IOException{
+    public Token scan() throws IOException{
         
-        //suppression des espaces, tabulation et les commentaires
+        //suppression des espaces, tabulations et commentaires
+        while(this.caractere<=32 || this.caractere =='-' && this.prochain=='-'){
 
-        //on remet caractere a la bonne valeur si jamais on a lut 1 caractere en avance a un moment
-        if(this.prochain!=' '){
-            this.caractere=this.prochain;
-        }
-        else{
-            read();
-        }
-
-        while(this.caractere<=32 || this.caractere =='-'){
-
-            //on gere les commenentaires
-            if(this.caractere=='-'){
-                read();
-                if(this.caractere=='-'){
-                    //detection du debut du commentaire
-                    //tant que les deux curseurs n ont pas des "-", on continue a skip
-                    while(this.caractere!='\n'){
-                        //on continue a skip
-                        read();
-                    }
-                    //quand on a fini de traiter les commentaires, on remet les curseurs comme il faut
-                    this.line+=1;
-                    read();
-                }
-                //si ce n est pas un debut de commentaire, on remet le curseur comme il faut
-                else{
-                    this.prochain=this.caractere;
-                    this.caractere='-';
+            //on gere les commentaires
+            if(this.caractere=='-' && this.prochain=='-'){
+                //detection du debut du commentaire
+                while(this.caractere!='\n'){
+                    //on continue a skip
+                    this.read();
                 }
             }
-        
+   
             //on avance
-            read();
+            this.read();
         }
 
         //on teste si on a un nombre (automate entier)
+        if(caractere>=48 && caractere <=57){
+            //l'automate pour les entiers
+            AutomateEntier automateEntier = new AutomateEntier();
+            automateEntier.estEntier(caractere, this);
+            String s=automateEntier.getToken();;//le mot qu'on a reconnu avec l'automate
+            this.caractere=automateEntier.getNextLexeur();
+            Token t=new Mots(Tag.ENTIER, s);
+            return t;
+        }
 
         //on teste si on a un identifiant (automate ident)
-        /*
-        if(Automate.estIdent(caractere)){
-            String s;//le mot qu'on a recconu avec l'automate//
-            Mots w=(Mots)mots.get(s);//on recupere sa valeur dans la table des strings//
+        else if(this.caractere >='a' && this.caractere <='z' || this.caractere>='A' && this.caractere <='Z'){
+            //l'automate pour les indentifiants
+            AutomateIdentificateur automateIndent = new AutomateIdentificateur();
+            automateIndent.estIdenticateur(caractere, this);
+            String s=automateIndent.getToken();;//le mot qu'on a reconnu avec l'automate
+            this.caractere=automateIndent.getNextLexeur();
+            Mots w=(Mots)mots.get(s);//on recupere sa valeur dans la table des strings
             if(w!=null){
-                return w;//si il est dans la table, on a pas a le traiter plus//
+                System.out.println(w.lexeme);
+                return w;//si il est dans la table, pas besoin de le traiter plus
             }
-            w=new Mots(Tag.IDENT, s);//si il n est pas dans la table, on cree le token associe//
-            mots.put(s,w);//et on le met dans la table//
+            w=new Mots(Tag.IDENT, s);//si il n est pas dans la table, on cree le token associe
+            mots.put(s,w);//et on le met dans la table
             return w;
-        }*/
+        }
         
         //on teste si on a un symbole (automate symbole)
+        else if(caractere==';' || caractere=='(' || caractere==')' || caractere=='+' || caractere=='-' ||caractere=='*' || caractere=='.' || caractere=='=' || caractere=='<' || caractere=='>'  || caractere==':' || caractere=='/'){
+            //l'automate pour les symboles 
+            AutomateSymboles automateSymboles = new AutomateSymboles();
+            automateSymboles.estSymbole(caractere, this);
+            String s=automateSymboles.getToken();//le mot qu'on a reconnu avec l'automate
+            this.caractere=automateSymboles.getNextLexeur();
+            Token t;
+            if(s.compareTo(";")==0){
+                t=new Mots(Tag.POINTV, s);
+            }
+            else if(s.compareTo("(")==0){
+                t=new Mots(Tag.PO, s);
+            }
+            else if(s.compareTo(")")==0){
+                t=new Mots(Tag.PF, s);
+            }
+            else if(s.compareTo("+")==0){
+                t=new Mots(Tag.PLUS, s);
+            }
+            else if(s.compareTo("-")==0){
+                t=new Mots(Tag.MOINS, s);
+            }
+            else if(s.compareTo("*")==0){
+                t=new Mots(Tag.ETOILE, s);
+            }
+            else if(s.compareTo(".")==0){
+                t=new Mots(Tag.POINT, s);
+            }
+            else if(s.compareTo("=")==0){
+                t=new Mots(Tag.EGALE, s);
+            }
+            else if(s.compareTo(">")==0){
+                t=new Mots(Tag.SUP, s);
+            }
+            else if(s.compareTo("<")==0){
+                t=new Mots(Tag.INF, s);
+            }
+            else if(s.compareTo(":")==0){
+                t=new Mots(Tag.DPOINTS, s);
+            }
+            else if(s.compareTo("/")==0){
+                t=new Mots(Tag.DIV, s);
+            }
+            else if(s.compareTo(">=")==0){
+                t=new Mots(Tag.SUPEG, s);
+            }
+            else if(s.compareTo("<=")==0){
+                t=new Mots(Tag.INFEG, s);
+            }
+            else if(s.compareTo(":=")==0){
+                t=new Mots(Tag.AFFECT, s);
+            }
+            else{// /=
+                t=new Mots(Tag.NEGALE, s);
+            }
+            return t;
+        }
 
         //on teste si on a un caractere (automate caractere)
+        else if(this.caractere=='\''){
+            //l'automate pour les caracteres 
+            AutomateCaractere automateCar = new AutomateCaractere();
+            automateCar.estCaractere(caractere, this);
+            String s=automateCar.getToken();;//le mot qu on a reconnu avec l automate
+            this.caractere=' ';
+            Token t=new Mots(Tag.CHAR, s);
+            return t;
+        }
 
         //Si on arrive en fin du fichier
-        if((int)this.caractere==65535){
-            Token t=new Token('$');//token fin de texte
+        else if((int)this.caractere==65535){
+            Token t=new Token((int)'$');//token fin de texte
             errorManager.throwErrorsLexer(this);//On renvoie toutes les erreurs
-            return 1;
+            return t;
         }
         //si on a pas reconnu le caractere
         else{
             //sauvegarde du message d erreur
             errorManager.saveError(this.line, this.nbChar, "Le caractere " + this.caractere + " n'est pas reconnu");
+            this.caractere=' ';
+            return(this.scan());
         }
-        return 0;
     }
 }
