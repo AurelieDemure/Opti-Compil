@@ -1,5 +1,7 @@
 package parser;
 
+import java.util.List;
+
 public class TableAnalyse {
     public final int[][] table={
         {,},
@@ -17,9 +19,10 @@ public class TableAnalyse {
         }
         return this.table[i][j];
     }
-    public Symbole.List RenvoieSortiePile(NonTerminal sommetPile, Terminal teteLecture) {
+    public List<Symbole> RenvoieSortiePile(NonTerminal sommetPile, Terminal teteLecture) {
         int numRegle=TrouveRegle(sommetPile,teteLecture);
         RegleGrammaire r=getRegle(numRegle);
+        return r.MembreDroit;
     }
 
 
