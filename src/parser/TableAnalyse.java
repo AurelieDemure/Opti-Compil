@@ -3,6 +3,7 @@ package parser;
 import java.util.List;
 
 public class TableAnalyse {
+    public final List<RegleGrammaire> regles;
     public final int[][] table={
         {,},
         {,},
@@ -18,6 +19,14 @@ public class TableAnalyse {
             i++;
         }
         return this.table[i][j];
+    }
+    public RegleGrammaire getRegle(int num){
+        for (int i=0;i<this.regles.size();i++){
+            if (this.regles.get(i).Numero==num){
+                return this.regles.get(i);
+            }
+        }
+        return this.regles.get(-1);
     }
     public List<Symbole> RenvoieSortiePile(NonTerminal sommetPile, Terminal teteLecture) {
         int numRegle=TrouveRegle(sommetPile,teteLecture);
