@@ -1,7 +1,7 @@
-package lexer; /*pour le mettre dans le package de l'analyseur lexical*/
+package tests; /*pour le mettre dans le package de l'analyseur lexical*/
 
-import java.io.*;
-import java.util.*;
+import lexer.*;
+import lexer.Error;
 
 public class TestError {
 

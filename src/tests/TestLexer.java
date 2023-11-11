@@ -1,7 +1,7 @@
-package lexer;
+package tests;
 
 import java.io.*;
-import java.util.*;
+import lexer.*;
 
 public class TestLexer{
 
