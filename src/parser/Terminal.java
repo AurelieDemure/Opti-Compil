@@ -1,5 +1,7 @@
 package parser;
 
+import lexer.*;
+
 public class Terminal extends Symbole{
 
     private Token value;
