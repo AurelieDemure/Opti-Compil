@@ -1,14 +1,22 @@
 package parser;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+import lexer.*;
 
 public class TableAnalyse {
-    public final List<RegleGrammaire> regles=new ArrayList<RegleGrammaire>();
-    public final int[][] table={
+    private final List<RegleGrammaire> regles=new ArrayList<RegleGrammaire>();
+    private final int[][] table={
         {,},
         {,},
     };
+    public TableAnalyse(){
+        Mots erreur=new Mots(Tag.ERREUR,"Le programme n'est pas reconnu par la grammaire");
+        Terminal symbMembreDroit=new Terminal(erreur);
+        List<Symbole> membreDroit=Arrays.asList(symbMembreDroit);
+        RegleGrammaire regleErreur=new RegleGrammaire(new NonTerminal(-1),membreDroit);
+        this.regles.add(regleErreur);
+    }
     /*première ligne correspond aux terminaux (numéros d'id), première colonne aux non-terminaux (numéros d'id) */
     public int TrouveNumRegle(NonTerminal sommetPile, Terminal teteLecture){
         int i=1;
@@ -27,7 +35,11 @@ public class TableAnalyse {
                 return this.regles.get(i);
             }
         }
-        return this.regles.get(-1);
+        return this.regles.get(0);
+    }
+    
+    public NonTerminal getAxiome(){
+        return getRegle(0).MembreGauche;
     }
     public List<Symbole> RenvoieSortiePile(NonTerminal sommetPile, Terminal teteLecture) {
         int numRegle=TrouveNumRegle(sommetPile,teteLecture);
