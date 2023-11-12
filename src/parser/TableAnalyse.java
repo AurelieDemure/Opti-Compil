@@ -17,6 +17,12 @@ public class TableAnalyse {
         RegleGrammaire regleErreur=new RegleGrammaire(new NonTerminal(-1),membreDroit);
         this.regles.add(regleErreur);
     }
+    public List<RegleGrammaire> getRegles(){
+        return this.regles;
+    }
+    public int[][] getTable(){
+        return this.table;
+    }
     /*première ligne correspond aux terminaux (numéros d'id), première colonne aux non-terminaux (numéros d'id) */
     public int TrouveNumRegle(NonTerminal sommetPile, Terminal teteLecture){
         int i=1;
@@ -31,7 +37,7 @@ public class TableAnalyse {
     }
     public RegleGrammaire getRegle(int num){
         for (int i=0;i<this.regles.size();i++){
-            if (this.regles.get(i).Numero==num){
+            if (this.regles.get(i).getNumero()==num){
                 return this.regles.get(i);
             }
         }
@@ -39,12 +45,12 @@ public class TableAnalyse {
     }
     
     public NonTerminal getAxiome(){
-        return getRegle(0).MembreGauche;
+        return getRegle(0).getMembreGauche();
     }
     public List<Symbole> RenvoieSortiePile(NonTerminal sommetPile, Terminal teteLecture) {
         int numRegle=TrouveNumRegle(sommetPile,teteLecture);
         RegleGrammaire r=getRegle(numRegle);
-        return r.MembreDroit;
+        return r.getMembreDroit();
     }
 
 
