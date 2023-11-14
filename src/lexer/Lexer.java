@@ -143,7 +143,7 @@ public class Lexer {
         }
         
         //on teste si on a un symbole (automate symbole)
-        else if(caractere==';' || caractere=='(' || caractere==')' || caractere=='+' || caractere=='-' ||caractere=='*' || caractere=='.' || caractere=='=' || caractere=='<' || caractere=='>'  || caractere==':' || caractere=='/'){
+        else if(caractere==';' || caractere=='(' || caractere==')' || caractere=='+' || caractere=='-' ||caractere=='*' || caractere=='.' || caractere=='=' || caractere=='<' || caractere=='>'  || caractere==':' || caractere=='/' || caractere==','){
             //l'automate pour les symboles 
             AutomateSymboles automateSymboles = new AutomateSymboles();
             automateSymboles.estSymbole(caractere, this);
