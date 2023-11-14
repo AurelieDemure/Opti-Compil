@@ -14,6 +14,7 @@ testError :
 
 testlexer :
 	java -classpath .run tests.TestLexer < tests/test_folders/test_work.txt
+	java -classpath .run tests.TestLexer < tests/test_folders/canAdaSujet.txt
 
 testIdent : 
 	java -classpath .run tests.TestLexer < tests/test_folders/test_identificateur.txt
