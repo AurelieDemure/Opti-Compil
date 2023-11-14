@@ -39,7 +39,7 @@ public class AutomateSymboles extends Automate{
     }
 
     public boolean estSymb(char caractere){
-        if (caractere==';' || caractere=='(' || caractere==')' || caractere=='+' || caractere=='-' ||caractere=='*' || caractere=='.' || caractere=='=')
+        if (caractere==';' || caractere=='(' || caractere==')' || caractere=='+' || caractere=='-' ||caractere=='*' || caractere=='.' || caractere=='=' || caractere==',')
             return true;
         else
             return false;
