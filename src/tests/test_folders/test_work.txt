@@ -1,14 +1,22 @@
      
-     --sckvbl
---<kjbv<kk-<sdvlk<bl-<vs-dfwbwd-dh-wdng-nw
-0235454
-ljhflhjA86_wnbc
-'b'
->=
-bleubleu
-while
-bleubleu
-character'val
-Ada.Integer_IO
+     --ceci est un message
+--test-avec-des-tirets
 
+!
+"
+#
+$
+%
+&
+?
+@
+[
+]
+^
+_
+`
+{
+}
+|
+~
 
