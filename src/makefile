@@ -6,6 +6,7 @@ test :
 	java -classpath .run tests.TestLexer < tests/test_folders/test_identificateur.txt
 	java -classpath .run tests.TestLexer < tests/test_folders/test_symboles.txt
 	java -classpath .run tests.TestLexer < tests/test_folders/test_caractere.txt
+	java -classpath .run tests.TestLexer < tests/test_folders/test_entier.txt
 	java -classpath .run tests.TestError
 
 testError :
@@ -22,6 +23,9 @@ test_symboles :
 	
 testsCaractere :
 	java -classpath .run tests.TestLexer < tests/test_folders/test_caractere.txt
+
+testEntier :
+	java -classpath .run tests.TestLexer < tests/test_folders/test_entier.txt
 
 clean :
 	find . -name *.class -delete
