@@ -6,12 +6,16 @@ public class NonTerminal extends Symbole{
     private int id;
 
     public NonTerminal(){
-        this.id=this.nextId;
-        this.nextId++;
+        this.id=NonTerminal.nextId;
+        NonTerminal.nextId++;
     }
 
     public int getId(){
         return(this.id);
+    }
+
+    public static int getNextId(){
+        return NonTerminal.nextId;
     }
 
 }

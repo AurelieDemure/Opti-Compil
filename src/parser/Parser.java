@@ -22,7 +22,7 @@ public class Parser {
         while (statut==-1) {
             Symbole X=Pile.peek();
             if (X instanceof NonTerminal) {
-                List<Symbole> mDroit=table.RenvoieSortiePile((NonTerminal)X,a);
+                List<Symbole> mDroit=table.RenvoieSortiePile(((NonTerminal)X).getId(),(a.getValue()).tag);
                 if (mDroit.get(0) instanceof Terminal && ((Terminal)mDroit.get(0)).getValue().tag!=-1){
                     statut=1;
                 }
