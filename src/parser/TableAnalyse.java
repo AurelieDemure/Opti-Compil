@@ -14,7 +14,7 @@ public class TableAnalyse {
         Mots erreur=new Mots(Tag.ERREUR,"Le programme n'est pas reconnu par la grammaire");
         Terminal symbMembreDroit=new Terminal(erreur);
         List<Symbole> membreDroit=Arrays.asList(symbMembreDroit);
-        RegleGrammaire regleErreur=new RegleGrammaire(new NonTerminal(-1),membreDroit);
+        RegleGrammaire regleErreur=new RegleGrammaire(new NonTerminal(),membreDroit);
         this.regles.add(regleErreur);
     }
     public List<RegleGrammaire> getRegles(){

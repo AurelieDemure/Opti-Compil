@@ -2,15 +2,16 @@ package parser;
 
 public class NonTerminal extends Symbole{
 
-    private int value;
+    private static int nextId = -1;
+    private int id;
 
-    public NonTerminal(int value){
-        super(Symbole.TERMINAL);
-        this.value=value;
+    public NonTerminal(){
+        this.id=this.nextId;
+        this.nextId++;
     }
 
-    public int getValue(){
-        return(this.value);
+    public int getId(){
+        return(this.id);
     }
 
 }
