@@ -55,4 +55,5 @@ public class Tag {
     public final static int ADATEXTIO=295;
     public final static int ADAINTEGERIO=296;
     public final static int VIRGULE=44; // ,
+    public final static int POINTPOINT=297; // ..
 }
