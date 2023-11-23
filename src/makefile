@@ -14,7 +14,7 @@ test :
 testError :
 	java -classpath .run tests.TestError
 
-testlexer :
+testLexer :
 	java -classpath .run tests.TestLexer < tests/test_folders/test_lexer.txt
 	java -classpath .run tests.TestLexer < tests/test_folders/canAdaSujet.txt
 	java -classpath .run tests.TestLexer < tests/test_folders/canAdaErreur.txt
@@ -22,10 +22,10 @@ testlexer :
 testIdent : 
 	java -classpath .run tests.TestLexer < tests/test_folders/test_identificateur.txt
 
-test_symboles : 
+testSymbole : 
 	java -classpath .run tests.TestLexer < tests/test_folders/test_symboles.txt
 	
-testsCaractere :
+testCaractere :
 	java -classpath .run tests.TestLexer < tests/test_folders/test_caractere.txt
 
 testEntier :

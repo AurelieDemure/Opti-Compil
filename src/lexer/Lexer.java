@@ -198,6 +198,9 @@ public class Lexer {
             else if(s.compareTo(",")==0){
                 t=new Token(Tag.VIRGULE);
             }
+            else if(s.compareTo("..")==0){
+                t=new Token(Tag.POINTPOINT);
+            }
             else{// /=
                 t=new Token(Tag.NEGALE);
             }

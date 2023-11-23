@@ -18,13 +18,20 @@ public class AutomateSymboles extends Automate{
         if (estSymb(first)){
         }
         else{
-            if (estSymbAvecEgal(first)){
+            if (estSymbAvecPoint(first)){
+                if (this.nextLexeur=='.'){
+                    this.token+='.';
+                    this.nextLexeur=(char)Lexer.read();
+                } 
+                this.read=this.token;
+            }
+            else if (estSymbAvecEgal(first)){
                 if (this.nextLexeur=='='){
                     this.token+='=';
                     this.nextLexeur=(char)Lexer.read();
                 } 
                 this.read=this.token;
-            }
+            } 
             else {
                 (Lexer.errorManager).saveError(Lexer.getLine(), Lexer.getNbChar(), "Le caractère n'est pas un symbole");
             }
@@ -38,8 +45,16 @@ public class AutomateSymboles extends Automate{
             return false;
     }
 
+     public boolean estSymbAvecPoint(char caractere){
+        if (caractere=='.')
+            return true;
+        else
+            return false;
+    }
+
+
     public boolean estSymb(char caractere){
-        if (caractere==';' || caractere=='(' || caractere==')' || caractere=='+' || caractere=='-' ||caractere=='*' || caractere=='.' || caractere=='=' || caractere==',')
+        if (caractere==';' || caractere=='(' || caractere==')' || caractere=='+' || caractere=='-' ||caractere=='*' || caractere=='=' || caractere==',')
             return true;
         else
             return false;
