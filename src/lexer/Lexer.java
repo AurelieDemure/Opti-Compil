@@ -56,6 +56,9 @@ public class Lexer {
         reserve(new Mots(Tag.USE,"use"));
         reserve(new Mots(Tag.WHILE,"while"));
         reserve(new Mots(Tag.WITH,"with"));
+        reserve(new Mots(Tag.CARACTEREVAL,"character'val"));
+        reserve(new Mots(Tag.ADAINTEGERIO,"ada.text_io"));
+        reserve(new Mots(Tag.ADATEXTIO,"ada.integer_io"));
         reserve(new Mots(Tag.PUT,"put"));
     }
 
@@ -135,12 +138,12 @@ public class Lexer {
                 return w;//si il est dans la table, pas besoin de le traiter plus
             }
             w=new Mots(Tag.IDENT, s);//si il n est pas dans la table, on cree le token associe
-            mots.put(s,w);//et on le met dans la table
+            reserve(w);//et on le met dans la table
             return w;
         }
         
         //on teste si on a un symbole (automate symbole)
-        else if(caractere==';' || caractere=='(' || caractere==')' || caractere=='+' || caractere=='-' ||caractere=='*' || caractere=='.' || caractere=='=' || caractere=='<' || caractere=='>'  || caractere==':' || caractere=='/'){
+        else if(caractere==';' || caractere=='(' || caractere==')' || caractere=='+' || caractere=='-' ||caractere=='*' || caractere=='.' || caractere=='=' || caractere=='<' || caractere=='>'  || caractere==':' || caractere=='/' || caractere==','){
             //l'automate pour les symboles 
             AutomateSymboles automateSymboles = new AutomateSymboles();
             automateSymboles.estSymbole(caractere, this);
@@ -148,52 +151,58 @@ public class Lexer {
             this.caractere=automateSymboles.getNextLexeur();
             Token t;
             if(s.compareTo(";")==0){
-                t=new Mots(Tag.POINTV, s);
+                t=new Token(Tag.POINTV);
             }
             else if(s.compareTo("(")==0){
-                t=new Mots(Tag.PO, s);
+                t=new Token(Tag.PO);
             }
             else if(s.compareTo(")")==0){
-                t=new Mots(Tag.PF, s);
+                t=new Token(Tag.PF);
             }
             else if(s.compareTo("+")==0){
-                t=new Mots(Tag.PLUS, s);
+                t=new Token(Tag.PLUS);
             }
             else if(s.compareTo("-")==0){
-                t=new Mots(Tag.MOINS, s);
+                t=new Token(Tag.MOINS);
             }
             else if(s.compareTo("*")==0){
-                t=new Mots(Tag.ETOILE, s);
+                t=new Token(Tag.ETOILE);
             }
             else if(s.compareTo(".")==0){
-                t=new Mots(Tag.POINT, s);
+                t=new Token(Tag.POINT);
             }
             else if(s.compareTo("=")==0){
-                t=new Mots(Tag.EGALE, s);
+                t=new Token(Tag.EGALE);
             }
             else if(s.compareTo(">")==0){
-                t=new Mots(Tag.SUP, s);
+                t=new Token(Tag.SUP);
             }
             else if(s.compareTo("<")==0){
-                t=new Mots(Tag.INF, s);
+                t=new Token(Tag.INF);
             }
             else if(s.compareTo(":")==0){
-                t=new Mots(Tag.DPOINTS, s);
+                t=new Token(Tag.DPOINTS);
             }
             else if(s.compareTo("/")==0){
-                t=new Mots(Tag.DIV, s);
+                t=new Token(Tag.DIV);
             }
             else if(s.compareTo(">=")==0){
-                t=new Mots(Tag.SUPEG, s);
+                t=new Token(Tag.SUPEG);
             }
             else if(s.compareTo("<=")==0){
-                t=new Mots(Tag.INFEG, s);
+                t=new Token(Tag.INFEG);
             }
             else if(s.compareTo(":=")==0){
-                t=new Mots(Tag.AFFECT, s);
+                t=new Token(Tag.AFFECT);
+            }
+            else if(s.compareTo(",")==0){
+                t=new Token(Tag.VIRGULE);
+            }
+            else if(s.compareTo("..")==0){
+                t=new Token(Tag.POINTPOINT);
             }
             else{// /=
-                t=new Mots(Tag.NEGALE, s);
+                t=new Token(Tag.NEGALE);
             }
             return t;
         }
@@ -204,7 +213,9 @@ public class Lexer {
             AutomateCaractere automateCar = new AutomateCaractere();
             automateCar.estCaractere(caractere, this);
             String s=automateCar.getToken();;//le mot qu on a reconnu avec l automate
-            this.caractere=' ';
+            if(this.caractere=='\''){
+                this.caractere=' ';
+            }
             Token t=new Mots(Tag.CHAR, s);
             return t;
         }

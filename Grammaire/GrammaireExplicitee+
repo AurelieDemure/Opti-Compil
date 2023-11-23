@@ -228,3 +228,93 @@ loop **\<instr>**+ end loop ;
 La création de EXPR et le changement de quelques règles relatives a permis de dérécursiver la grammaire.
 
 ## Factorisation
+
+## Explicitation des +*,? et priorités
+
+**\<fichier>** = with Ada.Text_I0; use Ada.Text_I0;
+procedure **\<ident>** is **\<DECL*>**
+begin **\<instr>** **\<INSTR*>** end **\<IDENT?>** ; EOF
+
+**\<DECL*>** = ^ | **\<decl>** **\<DECL*>**
+**\<INSTR*>** = ^ | **\<instr>** **\<INSTR*>**
+**\<IDENT?>** = ^ | **\<ident>**
+
+**\<decl>** = type **\<ident>** ;
+\| type **\<ident>** is access **\<ident>**;
+\| type **\<ident>** is record **\<champs>** **\<CHAMPS*>** end record ;
+\| **\<ident>** **\<IDENT,*>** : **\<type>** **\<EXPR?:=>**
+\| procedure **\<ident>** **\<PARAMS?>** is **\<DECL*>**
+begin **\<instr>** **\<INSTR*>** end **\<IDENT>**
+\| function **\<ident>** **\<PARAMS?>** return **\<type>** is **\<DECL*>** 
+begin **\<instr>** **\<INSTR*>** end **\<IDENT?>**
+
+**\<CHAMPS*>** = ^ | **\<champs>** **\<CHAMPS*>**
+**\<IDENT,*>** = , **\<ident>** **\<IDENT,*>** | ^
+**\<EXPR?:=>** = ^ | :=**\<expr>**
+**\<PARAMS?>** = **\<params>** | ^
+
+**\<champs>** = **\<ident>** **\<IDENT,*>** : **\<type>**;
+
+**\<type>** = **\<ident>**
+\| access **\<ident>**
+
+**\<params>** = (**\<param>** **\<PARAM;*>** )
+
+**\<PARAM;*>** = ^ | ; **\<param>** **\<PARAM;*>**
+
+**\<param>** = **\<ident>** **\<IDENT,*>** : **\<MODE?>** **\<type>**
+
+**\<MODE?>** = ^ | **\<mode>**
+
+**\<mode>** = in 
+\| in out
+
+**\<expr>** = **\<entier>** I **\<caractère>** I true | false | null
+\| (**\<expr>**)
+\| **\<accès>**
+\| **\<expr>** **\<opérateur>** **\<expr>**
+\| **\<expr>**
+\| not **\<expr>**
+\| new **\<ident>**
+\| **\<ident>** (**\<expr>** **\<EXPR,*>**)
+\| character' val  (**\<expr>**)
+
+**\<EXPR,*>** = ^ | , **\<expr>** **\<EXPR,*>**
+
+**\<instr>** = **\<accès>** := **\<expr>**;
+\| **\<ident>**
+\| **\<ident>** (**\<expr>** **\<EXPR,*>**);
+\| return **\<EXPR?>**;
+\| begin **\<instr>** **\<INSTR*>** end
+\| if **\<expr>** then **\<instr>** **\<INSTR*>** **\<ELSIF>** 
+**\<ELSE>** end if;
+\| for **\<ident>** in **\<reverse?>** **\<expr>** .. **\<expr>** 
+loop **\<instr>** **\<INSTR*>** end loop ;
+\| while **\<expr>** loop **\<instr>** **\<INSTR*>** end loop ;
+
+**\<EXPR?>** = ^ | **\<expr>**
+**\<ELSIF>** = ^ | elsif **\<expr>** then **\<instr>** **\<ISTR*>** **\<ELSIF>**
+**\<ELSE>** = ^ | else **\<instr>** **\<INSTR*>** 
+**\<reverse?>** = ^ | reverse
+
+**\<opérateur>** ::= = | /= | < | <= | > | >=
+\| + | - | * | / | rem
+\| and | and then | or | or else
+
+**\<accès>** ::= **\<ident>** | **\<expr>** . **\<ident>**
+
+**\<ident>** ::= **\<alpha>** **\<IDENT>**
+
+**\<IDENT>** = ^ | **\<alpha>** **\<IDENT>** | **\<chiffre>** **\<IDENT>** | _ **\<IDENT>**
+
+**\<alpha>** ::= [a-z|A-Z]
+
+**\<entier>** ::= **\<chiffre>** **\<CHIFFRE*>**
+
+**\<CHIFFRE*>** = ^ | **\<chiffre>** **\<CHIFFRE*>**
+
+**\<chiffre>** ::= [0-9]
+
+**\<caractère>** ::= '**\<ASCII>**'
+
+**\<ASCII>** ::= SPC | ! | " | # | $ | % | & | ' | ( | ) | * | + | , | - | . | / | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | : | ; | < | = | > | ? | @ | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | [ | \ | ] | ^ | _ | \` | a | b | c | d | e| f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | { | | | } | ~ |

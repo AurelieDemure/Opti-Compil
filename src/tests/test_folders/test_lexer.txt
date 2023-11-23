@@ -1,0 +1,22 @@
+     
+     --ceci est un message
+--test-avec-des-tirets
+
+!
+"
+#
+$
+%
+&
+?
+@
+[
+]
+^
+_
+`
+{
+}
+|
+~
+

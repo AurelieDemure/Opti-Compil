@@ -1,5 +1,6 @@
 package tests;
 
+import lexer.*;
 import java.io.*;
 import lexer.*;
 
@@ -12,8 +13,11 @@ public class TestLexer{
             if(token.tag!=0){
                 System.out.println("##line : "+ lexer.getLine());
                 System.out.println("Token : "+token.tag);
-                if(token.tag>255){
+                if(token instanceof Mots){
                     System.out.println("Its value : "+((Mots)token).lexeme);
+                }
+                else if(token.tag<256){
+                    System.out.println("Its value : "+(char)token.tag);
                 }
             }
             token = lexer.scan();

@@ -1,0 +1,35 @@
+with Ada.Text_IOkjhg ; use Aba.Tefghxt_IO ; --Erreurs sur Ada.Text_IO et Ada.Text_IO
+
+procedure unDebut is
+
+    FUNCTION aireRectangle(larg : integer; long : integer) return integer is --Test de casse avec function
+    aire: integer;
+    car='b'; --Ajout de caractere
+    begin
+        aire := larg * long ;
+        car='a; --Erreur caractere
+    return aire
+    end aireRectangle ;
+
+    function perimetreRectangle(larg : integer; long : integer) return integer is
+    p : integer
+    begin
+        p := _larg*2 + long*2 ; --Erreur _
+    return p
+    end perimetreRectangle;
+$ --Erreur caractere non reconnu
+        -- VARIABLES
+choix : integer ;
+
+        -- PROCEDURE PRINCIPALE
+
+begin
+    choix := 2,57; --Ajout flottant
+
+    if choix = 1
+        then valeur := perimetreRectangle(2, 3) ;
+            put(valeur) ;
+        else valeur :=: aireRectangale(2, 3) ; --Erreur :=
+            put(valeur) ;
+    end if;
+end unDebut ;

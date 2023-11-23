@@ -47,9 +47,14 @@ public class Tag {
     public final static int SUP=62;// >
     public final static int INF=60;// <
     public final static int DPOINTS=58;// :
-    public final static int DIV=57;// /
+    public final static int DIV=92;// /
     public final static int SUPEG=290;// >=
     public final static int INFEG=291;// <=
     public final static int AFFECT=292;// :=
     public final static int NEGALE=293;// /=
+    public final static int CARACTEREVAL=294;
+    public final static int ADATEXTIO=295;
+    public final static int ADAINTEGERIO=296;
+    public final static int VIRGULE=44; // ,
+    public final static int POINTPOINT=297; // ..
 }
