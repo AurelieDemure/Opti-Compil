@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.util.*;
 import lexer.*;
 
-public class Parser (int[][] table){
+public class Parser {
     public Stack<Symbole> Pile=new Stack<Symbole>();
-    public TableAnalyse table=new TableAnalyse(int[][] table);
-    public Parser(){
+    public TableAnalyse table;
+    public Parser(int[][] tab){
+        this.table=new TableAnalyse(tab);
         NonTerminal axiome=table.getAxiome();
         Token d=new Token((int) '$');
         Terminal dollar=new Terminal(d);

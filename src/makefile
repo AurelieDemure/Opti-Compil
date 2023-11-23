@@ -18,6 +18,9 @@ testlexer :
 testparser :
 	java -classpath .run TestParseur 
 
+testTableAnalyse :
+	java -classpath .run testTableAnalyse
+
 testIdent : 
 	java -classpath .run TestLexer < tests/test_folders/test_identificateur.txt
 
