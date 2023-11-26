@@ -10,13 +10,19 @@ test :
 	java -classpath .run tests.TestLexer < tests/test_folders/canAdaSujet.txt
 	java -classpath .run tests.TestLexer < tests/test_folders/canAdaErreur.txt
 	java -classpath .run tests.TestError
-	java -classpath .run testTableAnalyse
+	java -classpath .run tests.TestTableAnalyse
 
 testError :
 	java -classpath .run tests.TestError
 
 testTableAnalyse :
-	java -classpath .run testTableAnalyse
+	java -classpath .run tests.TestTableAnalyse
+
+testParser :
+	java -classpath .run tests.TestParseur < tests/test_folders/test_parser.txt
+	java -classpath .run tests.TestParseur < tests/test_folders/test_parser2.txt
+	java -classpath .run tests.TestParseur < tests/test_folders/test_parser3.txt
+	java -classpath .run tests.TestParseur < tests/test_folders/test_parser4.txt
 
 testLexer :
 	java -classpath .run tests.TestLexer < tests/test_folders/test_lexer.txt

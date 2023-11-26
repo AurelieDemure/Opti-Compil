@@ -6,7 +6,7 @@ import lexer.*;
 
 public class TableAnalyse {
     private List<RegleGrammaire> regles=new ArrayList<RegleGrammaire>();
-    private int[][] table;    
+    private int[][] table;   
 
     public void setRegles(List<RegleGrammaire> regles){
         this.regles=regles;
@@ -53,6 +53,7 @@ public class TableAnalyse {
         return getRegle(0).getMembreGauche();
     }
     public List<Symbole> RenvoieSortiePile(int idSommetPile, int tagTeteLecture) { /*renvoie l'action a effectuer a partir du numero de regle trouvé dans la table */
+        System.out.println("NonTerminalId :"+idSommetPile+"\nTerminalId :"+tagTeteLecture);
         int numRegle=TrouveNumRegle(idSommetPile,tagTeteLecture);
         RegleGrammaire r=getRegle(numRegle);
         return r.getMembreDroit();

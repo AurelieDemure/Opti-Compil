@@ -6,6 +6,7 @@ public class NonTerminal extends Symbole{
     private int id;
 
     public NonTerminal(){
+        System.out.println(NonTerminal.nextId);
         this.id=NonTerminal.nextId;
         NonTerminal.nextId++;
     }
