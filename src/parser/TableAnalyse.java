@@ -38,8 +38,10 @@ public class TableAnalyse {
   
 
     public int TrouveNumRegle(int idSommetPile, int tagTeteLecture){ /* trouve dans la table quel est le numero de la regle à appliquer */
+        //System.out.println("num regle : "+(this.table[idSommetPile][tagTeteLecture]+1));
         return this.table[idSommetPile][tagTeteLecture];
     }
+
     public RegleGrammaire getRegle(int num){ /*renvoie l'objet regle qui a le numero num */
         for (int i=0;i<this.regles.size();i++){
             if (this.regles.get(i).getNumero()==num){
@@ -53,7 +55,6 @@ public class TableAnalyse {
         return getRegle(0).getMembreGauche();
     }
     public List<Symbole> RenvoieSortiePile(int idSommetPile, int tagTeteLecture) { /*renvoie l'action a effectuer a partir du numero de regle trouvé dans la table */
-        System.out.println("NonTerminalId :"+idSommetPile+"\nTerminalId :"+tagTeteLecture);
         int numRegle=TrouveNumRegle(idSommetPile,tagTeteLecture);
         RegleGrammaire r=getRegle(numRegle);
         return r.getMembreDroit();

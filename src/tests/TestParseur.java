@@ -8,16 +8,16 @@ import lexer.*;
 
 public class TestParseur {
     public static void main(String[] arg) throws IOException{
-        int[] tableTag = {(int)'a',(int)'b',(int)'(',(int)')',(int)';',(int)'$'};
+        int[] tableTag = {Tag.AND,Tag.BEGIN,(int)'(',(int)')',(int)';',(int)'$'};
         int[][] table = {{0,1,2,-1,-1,-1},
                          {3,3,3,-1,-1,-1},
-                         {-1,-1,-1,5,6,-1}};
+                         {-1,-1,-1,5,4,-1}};
         Parser parser=new Parser(tableTag, table);
         NonTerminal S = new NonTerminal();
         NonTerminal T = new NonTerminal();
         NonTerminal U = new NonTerminal();
-        Terminal a = new Terminal(new Token((int)'a'));
-        Terminal b = new Terminal(new Token((int)'b'));
+        Terminal a = new Terminal(new Token(Tag.AND));
+        Terminal b = new Terminal(new Token(Tag.BEGIN));
         Terminal c = new Terminal(new Token((int)'('));
         Terminal d = new Terminal(new Token((int)')'));
         Terminal e = new Terminal(new Token((int)';'));
@@ -26,7 +26,7 @@ public class TestParseur {
         parser.table.addRegle(new RegleGrammaire(S,Arrays.asList(b)));
         parser.table.addRegle(new RegleGrammaire(S,Arrays.asList(c,T,d)));
         parser.table.addRegle(new RegleGrammaire(T,Arrays.asList(S,U)));
-        parser.table.addRegle(new RegleGrammaire(T,Arrays.asList(S,U)));
+        parser.table.addRegle(new RegleGrammaire(T,Arrays.asList(e,S,U)));
         parser.table.addRegle(new RegleGrammaire(U,Arrays.asList()));
         
         int statut=parser.Analyseur();
