@@ -2,6 +2,7 @@ package lexer;
 
 //on initialise des tags particuliers pour les tokens
 public class Tag {
+    public final static int ERREUR=-1;
     public final static int ENTIER=256;
     public final static int IDENT=257;
     public final static int CHAR=259;
@@ -55,4 +56,5 @@ public class Tag {
     public final static int ADATEXTIO=295;
     public final static int ADAINTEGERIO=296;
     public final static int VIRGULE=44; // ,
+    public final static int POINTPOINT=297; // ..
 }

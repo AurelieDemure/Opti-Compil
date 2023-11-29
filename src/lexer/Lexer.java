@@ -134,7 +134,6 @@ public class Lexer {
             this.caractere=automateIndent.getNextLexeur();
             Mots w=(Mots)mots.get(s);//on recupere sa valeur dans la table des strings
             if(w!=null){
-                System.out.println(w.lexeme);
                 return w;//si il est dans la table, pas besoin de le traiter plus
             }
             w=new Mots(Tag.IDENT, s);//si il n est pas dans la table, on cree le token associe
@@ -197,6 +196,9 @@ public class Lexer {
             }
             else if(s.compareTo(",")==0){
                 t=new Token(Tag.VIRGULE);
+            }
+            else if(s.compareTo("..")==0){
+                t=new Token(Tag.POINTPOINT);
             }
             else{// /=
                 t=new Token(Tag.NEGALE);
