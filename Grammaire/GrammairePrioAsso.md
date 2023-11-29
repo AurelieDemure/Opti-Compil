@@ -325,7 +325,7 @@ loop **\<instr>** **\<INSTR\*>** end loop ;
 **\<expr>** = **\<exprTerm>**
 \| **\<exprOperateur>**
 
-**\<exprOperateur>** =  **\<exprUnaire>** or **\<exprAnd>** |  **\<exprUnaire>** or else **\<exprAnd>** | **\<exprAnd>**
+**\<exprOperateur>** =  **\<exprOperateur>** or **\<exprAnd>** |  **\<exprOperateur>** or else **\<exprAnd>** | **\<exprAnd>**
 
 **\<exprAnd>** = **\<exprAnd>** and **\<exprNot>** | **\<exprAnd>** and then **\<exprNot>** | **\<exprNot>**
 
