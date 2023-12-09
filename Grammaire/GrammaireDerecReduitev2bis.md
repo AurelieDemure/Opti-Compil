@@ -503,7 +503,7 @@ loop **\<instr>** **\<INSTR\*>** end loop ;
 
 
 
-![RéductionSupérieure.png](../_resources/RéductionSupérieure.png)
+![RéductionSupérieure.png](../_resources/RéductionSupérieure-1.png)
 
 Tous les non terminaux sont bien accessibles depuis fichier.
 
@@ -511,25 +511,46 @@ Tous les non terminaux sont bien accessibles depuis fichier.
 # Réduction Inférieure
 
 E0 = ∅
+
 E1 = {mode , alpha , chiffre , ASCII , reverse?}
+
 E2 = {caractère , CHIFFRE* , IDENT , MODE?} U E1
+
 E3 = {entier , ident , exprTerm} U E2
+
 E4 = {accès , instr , exprUnaire , type , IDENT,* , decl , IDENT?} U E3
+
 E5 = {EXPRMULT , param , champs , INSTR* , DECL*} U E4
+
 E6 = {ELSE , exprMult , PARAM;* , CHAMPS* , fichier} U E5
+
 E7 = {EXPRSOMME , params} U E6
+
 E8 = {exprSomme , PARAMS?} U E7
+
 E9 = {EXPRCOMPARAISON} U E8
+
 E10 = {exprComparaison} U E9
+
 E11 = {EXPREGAL} U E10
+
 E12 = {exprEgal} U E11
+
 E13 = {EXPRNOT} U E12
+
 E14 = {exprNot} U E13
+
 E15 = {EXPRAND} U E14
+
 E16 = {exprAnd} U E15
+
 E17 = {EXPROPERATEUR} U E16
+
 E18 = {exprOperateur} U E17
+
 E19 = {expr} U E18
+
 E20 = {EXPR?:= , EXPR,* , EXPR? , ELSIF} U E19
+
 
 On obtient également tous les non terminaux.
