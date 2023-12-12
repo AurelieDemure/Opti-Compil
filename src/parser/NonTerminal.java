@@ -1,6 +1,8 @@
 package parser;
 
-public class NonTerminal extends Symbole{
+import java.util.List;
+
+public class NonTerminal implements Symbole{
 
     private static int nextId = -1;
     private int id;
@@ -17,5 +19,9 @@ public class NonTerminal extends Symbole{
     public static int getNextId(){
         return NonTerminal.nextId;
     }
+
+    
+
+    
 
 }

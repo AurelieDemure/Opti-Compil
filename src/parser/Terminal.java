@@ -2,7 +2,7 @@ package parser;
 
 import lexer.*;
 
-public class Terminal extends Symbole{
+public class Terminal implements Symbole{
 
     private Token value;
 

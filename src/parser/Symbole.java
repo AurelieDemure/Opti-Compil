@@ -1,3 +1,4 @@
 package parser;
 
-public abstract class Symbole{}
+public interface Symbole{
+}
