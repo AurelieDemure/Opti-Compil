@@ -774,7 +774,7 @@ EXPREGAL ::= = exprComparaison EXPREGAL
 EXPREGAL ::= /= exprComparaison EXPREGAL 
 EXPREGAL ::= ^
 
-exprComparaison ::=exprSomme EXPRCOMPARAISON
+exprComparaison ::= exprSomme EXPRCOMPARAISON
 
 EXPRCOMPARAISON ::= > exprSomme EXPRCOMPARAISON 
 EXPRCOMPARAISON ::= >= exprSomme EXPRCOMPARAISON 
@@ -795,22 +795,25 @@ EXPRMULT ::= / exprUnaire EXPRMULT
 EXPRMULT ::= rem exprUnaire EXPRMULT 
 EXPRMULT ::= ^
 
-exprUnaire ::= exprTerm 
-exprUnaire ::= - exprTerm
+exprUnaire ::= exprTerm1
+exprUnaire ::= exprTerm2 
+exprUnaire ::= - exprUnaire
 
-exprTerm ::= entier EXPRTERM
-exprTerm ::= caractère EXPRTERM
-exprTerm ::= true EXPRTERM
-exprTerm ::= false EXPRTERM
-exprTerm ::= null EXPRTERM
-exprTerm ::= (expr) EXPRTERM
-exprTerm ::= ident G1
-exprTerm ::= not expr EXPRTERM
-exprTerm ::= new ident EXPRTERM
-exprTerm ::= character' val ( expr ) EXPRTERM
+exprTerm1 ::= entier EXPRTERM
+exprTerm1 ::= caractère EXPRTERM
+exprTerm1 ::= true EXPRTERM
+exprTerm1 ::= false EXPRTERM
+exprTerm1 ::= null EXPRTERM
+exprTerm1 ::= (expr) EXPRTERM
+exprTerm2 ::= ident G1
+exprTerm1 ::= not expr EXPRTERM
+exprTerm1 ::= new ident EXPRTERM
+exprTerm1 ::= character' val ( expr ) EXPRTERM
 
-G1 ::= ( expr EXPR,* ) EXPRTERM
-G1 ::= EXPRTERM
+G1 ::= G11
+G1 ::= G12
+G11 ::= EXPRTERM
+G12 ::= ( expr EXPR,* ) EXPRTERM
 
 
 EXPRTERM ::= . ident EXPRTERM 
@@ -819,17 +822,22 @@ EXPRTERM ::= ^
 EXPR,* ::= ^ 
 EXPR,* ::= , expr EXPR,*
 
-instr ::= ident F1
-instr ::= exprTerm . ident := expr ;
+instr ::= ident H1
+instr ::= exprTerm1 . ident := expr ;
 instr ::= return EXPR? ;
 instr ::= begin instr INSTR* end
 instr ::= if expr then instr INSTR* ELSIF ELSE end if;
 instr ::= for ident in reverse? expr .. expr loop instr INSTR* end loop ;
 instr ::= while expr loop instr INSTR* end loop ;
 
-F1 ::= := expr ; 
-F1 ::= ^ 
-F1 ::= ( expr EXPR,* ) ;
+F11 ::= := expr ; 
+F11 ::= ^ 
+F12 ::= ( expr EXPR,* ) ;
+
+H1 ::= F11
+H1 ::= F12
+H1 ::= G11 . ident := expr ;
+H1 ::= G12 . ident := expr ;
 
 EXPR? ::= ^ 
 EXPR? ::= expr
