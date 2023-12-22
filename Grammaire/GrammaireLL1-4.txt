@@ -1,0 +1,143 @@
+fichier ::= with Ada.Text_I0; use Ada.Text_I0;
+procedure ident is DECL*
+begin instr INSTR* end IDENT? ; EOF
+
+DECL* ::= ''
+DECL* ::= decl DECL*
+INSTR* ::= ''
+INSTR* ::= instr INSTR*
+IDENT? ::= ''
+IDENT? ::= ident
+
+decl ::= type ident A1
+decl ::= ident IDENT,* : TYPE EXPR?:=
+decl ::= procedure ident PARAMS? is DECL* begin instr INSTR* end IDENT
+decl ::= function ident PARAMS? return TYPE is DECL* begin instr INSTR* end IDENT?
+
+A1 ::= ;
+A1 ::= is B1
+
+B1 ::= access ident;
+B1 ::= record champs CHAMPS* end record ;
+
+CHAMPS* ::= ''
+CHAMPS* ::= champs CHAMPS*
+IDENT,* ::= , ident IDENT,*
+IDENT,* ::= ''
+EXPR?:= ::= ''
+EXPR?:= ::= :=expr
+PARAMS? ::= params
+PARAMS? ::= ''
+
+champs ::= ident IDENT,* : TYPE ;
+
+TYPE ::= ident
+TYPE ::= access ident
+
+params ::= ( param PARAM;* )
+
+PARAM;* ::= ''
+PARAM;* ::= ; param PARAM;*
+
+param ::= ident IDENT,* : MODE? TYPE
+
+MODE? ::= ''
+MODE? ::= mode
+
+mode ::= in C
+
+C1 ::= ''
+C1 ::= out
+
+expr ::= exprOperateur
+
+exprOperateur ::= exprAnd EXPROPERATEUR
+
+EXPROPERATEUR ::= or D1
+EXPROPERATEUR ::= ''
+
+D1 ::= exprAnd EXPROPERATEUR
+D1 ::= else exprAnd EXPROPERATEUR
+
+exprAnd ::= exprNot EXPRAND
+
+EXPRAND ::= and E1
+EXPRAND ::= ''
+
+E1 ::= exprNot EXPRAND
+E1 ::= then exprNot EXPRAND
+
+exprNot ::= exprEgal EXPRNOT
+
+EXPRNOT ::= not exprEgal EXPRNOT
+EXPRNOT ::= ''
+
+exprEgal ::= exprComparaison EXPREGAL
+
+EXPREGAL ::= = exprComparaison EXPREGAL
+EXPREGAL ::= /= exprComparaison EXPREGAL
+EXPREGAL ::= ''
+
+exprComparaison ::=exprSomme EXPRCOMPARAISON
+
+EXPRCOMPARAISON ::= > exprSomme EXPRCOMPARAISON
+EXPRCOMPARAISON ::= >= exprSomme EXPRCOMPARAISON
+EXPRCOMPARAISON ::= < exprSomme EXPRCOMPARAISON
+EXPRCOMPARAISON ::= <= exprSomme EXPRCOMPARAISON
+EXPRCOMPARAISON ::= ''
+
+exprSomme ::= exprMult EXPRSOMME
+
+EXPRSOMME ::= + exprMult EXPRSOMME
+EXPRSOMME ::= - exprMult EXPRSOMME
+EXPRSOMME ::= ''
+
+exprMult ::= exprUnaire EXPRMULT
+
+EXPRMULT ::= * exprUnaire EXPRMULT
+EXPRMULT ::= / exprUnaire EXPRMULT
+EXPRMULT ::= rem exprUnaire EXPRMULT
+EXPRMULT ::= ''
+
+exprUnaire ::= exprTerm
+exprUnaire ::= - exprUnaire
+
+exprTerm ::= entier 
+exprTerm ::= caractère 
+exprTerm ::= true 
+exprTerm ::= false 
+exprTerm ::= null 
+exprTerm ::= (expr) 
+exprTerm ::= ident G1
+exprTerm ::= new ident 
+exprTerm ::= character' val ( expr ) 
+
+G1 ::= ( expr EXPR,* ) EXPRTERM
+G1 ::= EXPRTERM
+
+EXPRTERM ::= . ident EXPRTERM
+EXPRTERM ::= ''
+
+EXPR,* ::= ''
+EXPR,* ::= , expr EXPR,*
+
+instr ::= ident F1
+instr ::= exprTerm . ident := expr ;
+instr ::= return EXPR? ;
+instr ::= begin instr INSTR* end
+instr ::= if expr then instr INSTR* ELSIF ELSE end if;
+instr ::= for ident in reverse? expr .. expr loop instr INSTR* end loop ;
+instr ::= while expr loop instr INSTR* end loop ;
+
+F1 ::= := expr ;
+F1 ::= ''
+F1 ::= ( expr EXPR,* ) ;
+
+EXPR? ::= ''
+EXPR? ::= expr
+ELSIF ::= ''
+ELSIF ::= elsif expr then instr INSTR* ELSIF
+ELSE ::= ''
+ELSE ::= else instr INSTR*
+reverse? ::= ''
+reverse? ::= reverse
