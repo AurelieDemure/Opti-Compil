@@ -2,8 +2,6 @@ package tests;
 
 import lexer.*;
 import lexer.Error;
-import java.io.*;
-import java.util.*;
 
 public class TestError {
 

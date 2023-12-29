@@ -2,7 +2,6 @@ package tests;
 
 import lexer.*;
 import java.io.*;
-import lexer.*;
 
 public class TestLexer{
 
