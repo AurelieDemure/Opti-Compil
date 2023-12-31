@@ -148,7 +148,7 @@ r105 : H1 ::= EXPRTERM2 := expr ;
 r106 : I1 ::= ;
 r107 : I1 ::= EXPRTERM2 := expr ;
 
-r108 : Er0 : XPR? ::= ''
+r108 : EXPR? ::= ''
 r109 : EXPR? ::= expr
 r110 : ELSIF ::= ''
 r111 : ELSIF ::= elsif expr then instr INSTR* ELSIF
