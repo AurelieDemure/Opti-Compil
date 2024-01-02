@@ -1,15 +1,15 @@
-r0 : fichier ::= with Ada.Text_I0; use Ada.Text_I0; procedure ident is DECL* begin instr INSTR* end IDENT?
+r0 : fichier ::= with Ada.Text_I0; use Ada.Text_I0; procedure ident is DECL* begin instr INSTR* end IDENT? EOF
 
 r1 : DECL* ::= ''
 r2 : DECL* ::= decl DECL*
 r3 : INSTR* ::= ''
 r4 : INSTR* ::= instr INSTR*
-r5 : IDENT? ::= ; EOF
-r6 : IDENT? ::= ident ; EOF
+r5 : IDENT? ::= ;
+r6 : IDENT? ::= ident ; 
 
 r7 : decl ::= type ident A1
 r8 : decl ::= ident IDENT,* : TYPE EXPR?:=
-r9 : decl ::= procedure ident PARAMS? is DECL* begin instr INSTR* end IDENT
+r9 : decl ::= procedure ident PARAMS? is DECL* begin instr INSTR* end IDENT?
 r10 : decl ::= function ident PARAMS? return TYPE is DECL* begin instr INSTR* end IDENT?
 
 r11 : A1 ::= ;
@@ -42,7 +42,7 @@ r29 : param ::= ident IDENT,* : MODE? TYPE
 r30 : MODE? ::= ''
 r31 : MODE? ::= mode
 
-r32 : mode ::= in C
+r32 : mode ::= in C1
 
 r33 : C1 ::= ''
 r34 : C1 ::= out
