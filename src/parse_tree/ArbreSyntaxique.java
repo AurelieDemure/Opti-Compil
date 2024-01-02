@@ -6,8 +6,4 @@ public class ArbreSyntaxique {
     public void setRacine(Noeud racine){
         this.racine=racine;
     }
-
-    public void ajouterFils(Noeud parent, Noeud fils){
-        parent.ajouterFils(fils);
-    }
 }

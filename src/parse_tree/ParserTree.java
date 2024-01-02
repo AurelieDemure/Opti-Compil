@@ -24,7 +24,7 @@ public class ParserTree {
     }
 
     public ArbreSyntaxique Analyseur() throws IOException{
-        Stack<Noeud> pilNoeuds = new Stack<>();
+        Stack<Noeud> pilNoeuds = new Stack<>();   //pile pour gérer les noeuds de l'arbre
         ArbreSyntaxique arbreSyntaxique = new ArbreSyntaxique();
 
         NonTerminal axiome=table.getAxiome();
@@ -55,7 +55,7 @@ public class ParserTree {
                 List<Symbole> mDroit=table.RenvoieSortiePile(((NonTerminal)X).getId(),getId((a.getValue()).tag));
                 if (mDroit.isEmpty() || mDroit.get(0) instanceof NonTerminal || ((Terminal)mDroit.get(0)).getValue().tag!=-1){
                     Pile.pop();
-                    pileNoeuds.pop();
+                    pileNoeuds.pop();   // on syncrhonise la pile avec celle des symboles
                     for (int i=mDroit.size()-1;i>=0;i--){
                         Pile.push(mDroit.get(i));
 
@@ -66,7 +66,7 @@ public class ParserTree {
                             Noeud noeudFils = new NoeudNonTerminal("La fonction sémantique"); //dépend de fonction sémantique à voir !
                         }
                         noeudActuel.ajouterFils(noeudFils);
-                        pileNoeuds.push(noeudFils);
+                        pileNoeuds.push(noeudFils); //correspond au Pile.push(mDroit.get(i));
                     }
                 }
                 else {
