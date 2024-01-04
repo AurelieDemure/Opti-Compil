@@ -16,7 +16,7 @@ public class NoeudNonTerminal implements Noeud{
 
     @Override
     public String interpret(){
-        //appelle fonction sémantique et la retourne
+        //appelle fontionSémantique en tant qu'instruction
     }
 
     @Override

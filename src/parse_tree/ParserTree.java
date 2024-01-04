@@ -9,7 +9,7 @@ public class ParserTree {
     private int[] tableTag; 
     public TableAnalyse table;
 
-    public Parser(int[] tableTag, int[][] tab){
+    public ParserTree(int[] tableTag, int[][] tab){
         this.table=new TableAnalyse(tab);
         this.tableTag = tableTag;
     }
@@ -99,5 +99,6 @@ public class ParserTree {
             arbreSyntaxique.setRacine(pileNoeuds.pop());
         }
         return arbreSyntaxique;
+        System.err.println("Arbre créé !");
     }
 }

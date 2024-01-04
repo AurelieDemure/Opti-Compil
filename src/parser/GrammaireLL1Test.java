@@ -65,7 +65,7 @@ public class GrammaireLL1Test extends Grammaire{
     private NonTerminal ELSE = createNonTerminal();
     private NonTerminal reverseOpt = createNonTerminal();
     
-    public GrammaireTest(){
+    public GrammaireLL1Test(){
         super(tableTag, table);
 
         for(int tag: tableTag){
@@ -73,7 +73,7 @@ public class GrammaireLL1Test extends Grammaire{
         }
 
         //création des règless:
-        createRegle(fichier, Arrays.asList(t(Tag.WITH), t(Tag.ADATEXTIO), t(Tag.POINTV), t(Tag.USE), t(Tag.ADATEXTIO), t(Tag.POINTV), t(Tag.PROCEDURE), t(Tag.IDENT), declEtoile, t(Tag.BEGIN), instrEtoile, t(Tag.END), identOpt, t(Tag.EOF))); r0
+        createRegle(fichier, Arrays.asList(t(Tag.WITH), t(Tag.ADATEXTIO), t(Tag.POINTV), t(Tag.USE), t(Tag.ADATEXTIO), t(Tag.POINTV), t(Tag.PROCEDURE), t(Tag.IDENT), declEtoile, t(Tag.BEGIN), instrEtoile, t(Tag.END), identOpt, t(Tag.EOF))); //r0
         createRegle(declEtoile, Arrays.asList()); // r1
         createRegle(declEtoile, Arrays.asList(decl, declEtoile)); //r2
         createRegle(instrEtoile, Arrays.asList()); // r3
