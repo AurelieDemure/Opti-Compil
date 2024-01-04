@@ -10,6 +10,7 @@ public class GrammaireTest extends Grammaire{
                         {{0,1,2,-1,-1,-1},
                          {3,3,3,-1,-1,-1},
                          {-1,-1,-1,5,4,-1}};
+
     private NonTerminal S = createNonTerminal();
     private NonTerminal T = createNonTerminal();
     private NonTerminal U = createNonTerminal();

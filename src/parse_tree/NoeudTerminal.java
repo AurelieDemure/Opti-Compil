@@ -11,4 +11,7 @@ public class NoeudTerminal implements Noeud {
     public String interpret(){
         return this.valeur;
     }
+
+    @Override
+    public Noeud getFils(Noeud NoeudCourant, int index){}
 }

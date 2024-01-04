@@ -1,15 +1,15 @@
-fichier ::= with Ada.Text_I0; use Ada.Text_I0; procedure ident is DECL* begin instr INSTR* end IDENT? ; EOF
+fichier ::= with Ada.Text_I0; use Ada.Text_I0; procedure ident is DECL* begin instr INSTR* end IDENT? EOF
 
 DECL* ::= ''
 DECL* ::= decl DECL*
 INSTR* ::= ''
 INSTR* ::= instr INSTR*
-IDENT? ::= ''
-IDENT? ::= ident
+IDENT? ::= ; 
+IDENT? ::= ident ; 
 
 decl ::= type ident A1
 decl ::= ident IDENT,* : TYPE EXPR?:=
-decl ::= procedure ident PARAMS? is DECL* begin instr INSTR* end IDENT
+decl ::= procedure ident PARAMS? is DECL* begin instr INSTR* end IDENT?
 decl ::= function ident PARAMS? return TYPE is DECL* begin instr INSTR* end IDENT?
 
 A1 ::= ;
@@ -42,7 +42,7 @@ param ::= ident IDENT,* : MODE? TYPE
 MODE? ::= ''
 MODE? ::= mode
 
-mode ::= in C
+mode ::= in C1
 
 C1 ::= ''
 C1 ::= out
@@ -97,39 +97,56 @@ EXPRMULT ::= / exprUnaire EXPRMULT
 EXPRMULT ::= rem exprUnaire EXPRMULT
 EXPRMULT ::= ''
 
-exprUnaire ::= exprTerm
+exprUnaire ::= exprTerm1
+exprUnaire ::= exprTerm2
 exprUnaire ::= - exprUnaire
 
-exprTerm ::= entier 
-exprTerm ::= caractère 
-exprTerm ::= true 
-exprTerm ::= false 
-exprTerm ::= null 
-exprTerm ::= (expr) 
-exprTerm ::= ident G1
-exprTerm ::= new ident 
-exprTerm ::= character' val ( expr ) 
+exprTerm1 ::= entier EXPRTERM
+exprTerm1 ::= caractère EXPRTERM
+exprTerm1 ::= true EXPRTERM
+exprTerm1 ::= false EXPRTERM
+exprTerm1 ::= null EXPRTERM
+exprTerm1 ::= (expr) EXPRTERM
+exprTerm2 ::= ident G1
+exprTerm1 ::= new ident EXPRTERM
+exprTerm1 ::= character' val ( expr ) EXPRTERM
 
-G1 ::= ( expr EXPR,* ) EXPRTERM
+exprTerm3 ::= entier EXPRTERM2
+exprTerm3 ::= caractère EXPRTERM2
+exprTerm3 ::= true EXPRTERM2
+exprTerm3 ::= false EXPRTERM2
+exprTerm3 ::= null EXPRTERM2
+exprTerm3 ::= (expr) EXPRTERM2
+exprTerm3 ::= new ident EXPRTERM2
+exprTerm3 ::= character' val ( expr ) EXPRTERM2
+
 G1 ::= EXPRTERM
+G1 ::= ( expr EXPR,* ) EXPRTERM
+
 
 EXPRTERM ::= . ident EXPRTERM
 EXPRTERM ::= ''
 
+EXPRTERM2 ::= . ident EXPRTERM
+
 EXPR,* ::= ''
 EXPR,* ::= , expr EXPR,*
 
-instr ::= ident F1
-instr ::= exprTerm . ident := expr ;
+instr ::= ident H1
+instr ::= exprTerm3 := expr ;
 instr ::= return EXPR? ;
 instr ::= begin instr INSTR* end
 instr ::= if expr then instr INSTR* ELSIF ELSE end if;
 instr ::= for ident in reverse? expr .. expr loop instr INSTR* end loop ;
 instr ::= while expr loop instr INSTR* end loop ;
 
-F1 ::= := expr ;
-F1 ::= ;
-F1 ::= ( expr EXPR,* ) ;
+H1 ::= := expr ;
+H1 ::= ;
+H1 ::= ( expr EXPR,* ) I1
+H1 ::= EXPRTERM2 := expr ; 
+
+I1 ::= ;
+I1 ::= EXPRTERM2 := expr ;
 
 EXPR? ::= ''
 EXPR? ::= expr

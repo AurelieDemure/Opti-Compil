@@ -24,7 +24,7 @@ public class ParserTree {
     }
 
     public ArbreSyntaxique Analyseur() throws IOException{
-        Stack<Noeud> pilNoeuds = new Stack<>();   //pile pour gérer les noeuds de l'arbre
+        Stack<Noeud> pileNoeuds = new Stack<>();   //pile pour gérer les noeuds de l'arbre
         ArbreSyntaxique arbreSyntaxique = new ArbreSyntaxique();
 
         NonTerminal axiome=table.getAxiome();
@@ -32,7 +32,7 @@ public class ParserTree {
         Terminal dollar=new Terminal(d);
         this.Pile.push(dollar);
         this.Pile.push(axiome);
-        pilNoeuds.push(new NoeudNonTerminal("axiome"));
+        pileNoeuds.push(new NoeudNonTerminal("axiome"));
 
         Lexer lexer=new Lexer();
         int statut=-1;
@@ -55,7 +55,7 @@ public class ParserTree {
                 List<Symbole> mDroit=table.RenvoieSortiePile(((NonTerminal)X).getId(),getId((a.getValue()).tag));
                 if (mDroit.isEmpty() || mDroit.get(0) instanceof NonTerminal || ((Terminal)mDroit.get(0)).getValue().tag!=-1){
                     Pile.pop();
-                    pileNoeuds.pop();   // on syncrhonise la pile avec celle des symboles
+                    pileNoeuds.pop();   // on synchronise la pile avec celle des symboles
                     for (int i=mDroit.size()-1;i>=0;i--){
                         Pile.push(mDroit.get(i));
 
@@ -96,7 +96,7 @@ public class ParserTree {
             }  
         }
         if(!pileNoeuds.isEmpty()){
-            arbreSyntaxique.setRacine(pilNoeuds.pop());
+            arbreSyntaxique.setRacine(pileNoeuds.pop());
         }
         return arbreSyntaxique;
     }
