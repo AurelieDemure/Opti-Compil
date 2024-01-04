@@ -23,7 +23,7 @@ CHAMPS* ::= champs CHAMPS*
 IDENT,* ::= , ident IDENT,*
 IDENT,* ::= ''
 EXPR?:= ::= ''
-EXPR?:= ::= :=expr
+EXPR?:= ::= := expr
 PARAMS? ::= params
 PARAMS? ::= ''
 
