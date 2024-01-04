@@ -1,10 +1,10 @@
 package parse_tree;
 
 public class NoeudNonTerminal implements Noeud{
-    private String fonctionSemantique;
+    private int fonctionSemantique;
     private List<Noeud> listFils;
 
-    public NoeudNonTerminal(String fonctionSemantique){   //voir comment récupérer la fonction en tant qu'instructions
+    public NoeudNonTerminal(int fonctionSemantique){   
         this.fonctionSemantique = fonctionSemantique;
         this.fils = new ArrayList<>();
     }
@@ -15,7 +15,7 @@ public class NoeudNonTerminal implements Noeud{
     }
 
     @Override
-    public String interpret(){
+    public Void interpret(){
         //appelle fontionSémantique en tant qu'instruction
     }
 
