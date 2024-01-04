@@ -11,6 +11,7 @@ public class GrammaireLL1Test extends Grammaire{
                             {3,3,3,-1,-1,-1},
                             {-1,-1,-1,5,4,-1}};
 
+
     private TableHachage<Integer, Terminal> terminaux = new HashMap<>();
 
     private NonTerminal fichier = createNonTerminal();
