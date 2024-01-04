@@ -15,7 +15,7 @@ decl ::= function ident PARAMS? return TYPE is DECL* begin instr INSTR* end IDEN
 A1 ::= ;
 A1 ::= is B1
 
-B1 ::= access ident;
+B1 ::= access ident ;
 B1 ::= record champs CHAMPS* end record ;
 
 CHAMPS* ::= ''
@@ -76,7 +76,7 @@ EXPREGAL ::= = exprComparaison EXPREGAL
 EXPREGAL ::= /= exprComparaison EXPREGAL
 EXPREGAL ::= ''
 
-exprComparaison ::=exprSomme EXPRCOMPARAISON
+exprComparaison ::= exprSomme EXPRCOMPARAISON
 
 EXPRCOMPARAISON ::= > exprSomme EXPRCOMPARAISON
 EXPRCOMPARAISON ::= >= exprSomme EXPRCOMPARAISON
@@ -136,7 +136,7 @@ instr ::= ident H1
 instr ::= exprTerm3 := expr ;
 instr ::= return EXPR? ;
 instr ::= begin instr INSTR* end
-instr ::= if expr then instr INSTR* ELSIF ELSE end if;
+instr ::= if expr then instr INSTR* ELSIF ELSE end if ;
 instr ::= for ident in reverse? expr .. expr loop instr INSTR* end loop ;
 instr ::= while expr loop instr INSTR* end loop ;
 
