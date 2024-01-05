@@ -1,4 +1,4 @@
-package parse_tree;
+package parser;
 
 public class ArbreSyntaxique {
     private Noeud racine;

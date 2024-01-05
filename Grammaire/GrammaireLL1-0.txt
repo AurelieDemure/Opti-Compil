@@ -15,7 +15,7 @@ decl ::= function ident PARAMS? return TYPE is DECL* begin instr INSTR* end IDEN
 A1 ::= ;
 A1 ::= is B1
 
-B1 ::= access ident;
+B1 ::= access ident ;
 B1 ::= record champs CHAMPS* end record ;
 
 CHAMPS* ::= ''
@@ -23,7 +23,7 @@ CHAMPS* ::= champs CHAMPS*
 IDENT,* ::= , ident IDENT,*
 IDENT,* ::= ''
 EXPR?:= ::= ''
-EXPR?:= ::= :=expr
+EXPR?:= ::= := expr
 PARAMS? ::= params
 PARAMS? ::= ''
 
@@ -106,7 +106,7 @@ exprTerm1 ::= caractère EXPRTERM
 exprTerm1 ::= true EXPRTERM
 exprTerm1 ::= false EXPRTERM
 exprTerm1 ::= null EXPRTERM
-exprTerm1 ::= (expr) EXPRTERM
+exprTerm1 ::= ( expr ) EXPRTERM
 exprTerm2 ::= ident G1
 exprTerm1 ::= new ident EXPRTERM
 exprTerm1 ::= character' val ( expr ) EXPRTERM
@@ -116,7 +116,7 @@ exprTerm3 ::= caractère EXPRTERM2
 exprTerm3 ::= true EXPRTERM2
 exprTerm3 ::= false EXPRTERM2
 exprTerm3 ::= null EXPRTERM2
-exprTerm3 ::= (expr) EXPRTERM2
+exprTerm3 ::= ( expr ) EXPRTERM2
 exprTerm3 ::= new ident EXPRTERM2
 exprTerm3 ::= character' val ( expr ) EXPRTERM2
 
@@ -136,7 +136,7 @@ instr ::= ident H1
 instr ::= exprTerm3 := expr ;
 instr ::= return EXPR? ;
 instr ::= begin instr INSTR* end
-instr ::= if expr then instr INSTR* ELSIF ELSE end if;
+instr ::= if expr then instr INSTR* ELSIF ELSE end if ;
 instr ::= for ident in reverse? expr .. expr loop instr INSTR* end loop ;
 instr ::= while expr loop instr INSTR* end loop ;
 

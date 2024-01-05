@@ -1,4 +1,4 @@
-package parser;
+/*package parser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -198,7 +198,7 @@ public class GrammaireLL1Test extends Grammaire{
 }
 
 
-
+*/
 
 
 

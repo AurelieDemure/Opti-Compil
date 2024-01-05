@@ -25,10 +25,10 @@ testParser :
 	java -classpath .run tests.TestParseur < tests/test_folders/test_parser4.txt
 
 testParserTree :
-	java -classpath .run tests.TestParseurTree < tests/test_folders/test_parser.txt
-	java -classpath .run tests.TestParseurTree < tests/test_folders/test_parser2.txt
-	java -classpath .run tests.TestParseurTree < tests/test_folders/test_parser3.txt
-	java -classpath .run tests.TestParseurTree < tests/test_folders/test_parser4.txt
+	java -classpath .run tests.TestParserTree < tests/test_folders/test_parser.txt
+	java -classpath .run tests.TestParserTree < tests/test_folders/test_parser2.txt
+	java -classpath .run tests.TestParserTree < tests/test_folders/test_parser3.txt
+	java -classpath .run tests.TestParserTree < tests/test_folders/test_parser4.txt
 
 testLexer :
 	java -classpath .run tests.TestLexer < tests/test_folders/test_lexer.txt

@@ -23,12 +23,17 @@ public class Parser {
         return(-1);
     }
 
-    public int Analyseur() throws IOException{
+    public ArbreSyntaxique Analyseur() throws IOException{
+        Stack<Noeud> pileNoeuds = new Stack<>();   //pile pour gérer les noeuds de l'arbre
+        ArbreSyntaxique arbreSyntaxique = new ArbreSyntaxique();
+
         NonTerminal axiome=table.getAxiome();
         Token d=new Token((int) '$');
         Terminal dollar=new Terminal(d);
         this.Pile.push(dollar);
         this.Pile.push(axiome);
+        pileNoeuds.push(new NoeudNonTerminal(1));
+
         Lexer lexer=new Lexer();
         int statut=-1;
         Terminal a=new Terminal(lexer.scan());
@@ -45,12 +50,27 @@ public class Parser {
             }
 
             Symbole X=Pile.peek();
+            Noeud noeudActuel = pileNoeuds.peek();
+            Noeud noeudFils = null;
             if (X instanceof NonTerminal) {
                 List<Symbole> mDroit=table.RenvoieSortiePile(((NonTerminal)X).getId(),getId((a.getValue()).tag));
                 if (mDroit.isEmpty() || mDroit.get(0) instanceof NonTerminal || ((Terminal)mDroit.get(0)).getValue().tag!=-1){
                     Pile.pop();
+                    pileNoeuds.pop();   // on synchronise la pile avec celle des symboles
                     for (int i=mDroit.size()-1;i>=0;i--){
                         Pile.push(mDroit.get(i));
+
+                        if(mDroit.get(i) instanceof Terminal){
+                            noeudFils = new NoeudTerminal(mDroit.get(i).toString());
+                            System.out.println(noeudFils.getValeur());
+                        }
+                        else{
+                            noeudFils = new NoeudNonTerminal(1); //dépend de fonction sémantique à voir !
+                            System.out.println(noeudFils.getFonctionSemantique());
+                        }
+                        noeudActuel.ajouterFils(noeudFils);
+                        pileNoeuds.push(noeudFils); //correspond au Pile.push(mDroit.get(i));
+                        
                     }
                 }
                 else {
@@ -77,14 +97,13 @@ public class Parser {
                         statut=1;
                     }
                 }
-            }
-
-
-            
+            }  
         }
-        return statut;
+        if(!pileNoeuds.isEmpty()){
+            arbreSyntaxique.setRacine(pileNoeuds.pop());
+        }
+        System.err.println("Arbre créé !");
+        return arbreSyntaxique;
         
     }
-
-    
 }

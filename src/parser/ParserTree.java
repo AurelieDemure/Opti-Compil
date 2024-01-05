@@ -1,4 +1,4 @@
-package parse_tree;
+package parser;
 
 import java.io.IOException;
 import java.util.*;
@@ -32,7 +32,7 @@ public class ParserTree {
         Terminal dollar=new Terminal(d);
         this.Pile.push(dollar);
         this.Pile.push(axiome);
-        pileNoeuds.push(new NoeudNonTerminal("axiome"));
+        pileNoeuds.push(new NoeudNonTerminal(1));
 
         Lexer lexer=new Lexer();
         int statut=-1;
@@ -50,7 +50,8 @@ public class ParserTree {
             }
 
             Symbole X=Pile.peek();
-            Noeud noeudActuel = pilNoeuds.peek();
+            Noeud noeudActuel = pileNoeuds.peek();
+            Noeud noeudFils = null;
             if (X instanceof NonTerminal) {
                 List<Symbole> mDroit=table.RenvoieSortiePile(((NonTerminal)X).getId(),getId((a.getValue()).tag));
                 if (mDroit.isEmpty() || mDroit.get(0) instanceof NonTerminal || ((Terminal)mDroit.get(0)).getValue().tag!=-1){
@@ -60,10 +61,12 @@ public class ParserTree {
                         Pile.push(mDroit.get(i));
 
                         if(mDroit.get(i) instanceof Terminal){
-                            Noeud noeudFils = new NoeudTerminal(mDroit.get(i).toString());
+                            noeudFils = new NoeudTerminal(mDroit.get(i).toString());
+                            System.out.println(noeudFils.getValeur());
                         }
                         else{
-                            Noeud noeudFils = new NoeudNonTerminal("La fonction sémantique"); //dépend de fonction sémantique à voir !
+                            noeudFils = new NoeudNonTerminal(1); //dépend de fonction sémantique à voir !
+                            System.out.println(noeudFils.getFonctionSemantique());
                         }
                         noeudActuel.ajouterFils(noeudFils);
                         pileNoeuds.push(noeudFils); //correspond au Pile.push(mDroit.get(i));
@@ -98,7 +101,8 @@ public class ParserTree {
         if(!pileNoeuds.isEmpty()){
             arbreSyntaxique.setRacine(pileNoeuds.pop());
         }
-        return arbreSyntaxique;
         System.err.println("Arbre créé !");
+        return arbreSyntaxique;
+        
     }
 }
