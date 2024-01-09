@@ -242,6 +242,116 @@ public class GrammaireLL1Test extends Grammaire{
                 node.addChild(noeud.getFils(4).interpret());
                 return node;   
 
+            case 100:
+            //a verifier avec pierre
+                node=new Node("For");
+                nodeFils1=new Node("Variable");
+                nodeFils1.addChild(noeud.getFils(0));
+                node.addChild(nodeFils1);
+                nodeFils2=new Node("Intervalle");
+                Node nodeFilsFils=new Node("reverse?");
+                nodeFilsFils.addChild(noeud.getFils(1).interpret());
+                nodeFilsFils.addChild(noeud.getFils(2).interpret());
+                nodeFils2.addChild(nodeFilsFils);
+                node.addChild(nodeFils2);
+                Node nodeFils3=new Node("Block");
+                nodeFils3.addChild(noeud.getFils(3).interpret());
+                nodeFils3.addChild(noeud.getFils(4).interpret());
+                node.addChild(nodeFils3);
+                return node;
+
+            case 101:
+                node=new Node("While");
+                nodeFilsGauche=new Node("Cond");
+                nodeFilsGauche.addChild(noeud.getFils(0).interpret());
+                node.addChild(nodeFilsGauche);
+                nodeFilsDroit=new Node("Block");
+                nodeFilsDroit.addChild(noeud.getFils(1).interpret());
+                nodeFilsDroit.addChild(noeud.getFils(2).interpret());
+                node.addChild(nodeFilsDroit);
+                return node;
+
+            case 102:
+                node=new Node("Affectation");
+                nodeFilsGauche=new Node("Terme gauche");
+                nodeFilsGauche.addChild(this.pile.remove());
+                node.addChild(nodeFilsGauche);
+                nodeFilsDroit=new Node("Terme droit");
+                nodeFilsDroit.addChild(noeud.getFils(0).interpret());
+                node.addChild(nodeFilsDroit);
+                return node;
+
+            case 103:
+                return this.pile.remove();
+
+            case 104:
+                node=new Node("Appel methode");
+                node.addChild(this.pile.remove());
+                nodeFilsDroit=new Node("Param");
+                nodeFilsDroit.addChild(noeud.getFils(0).interpret());
+                nodeFilsDroit.addChild(noeud.getFils(1).interpret());
+                node.addChild(nodeFilsDroit);
+                this.pile.add(node);
+                return noeud.getFils(2).interpret();
+
+            case 105:
+                node=new Node("Affectation");
+                nodeFilsGauche=new Node("Terme gauche");
+                nodeFilsGauche.addChild(noeud.getFils(0).interpret());
+                node.addChild(nodeFilsGauche);
+                nodeFilsDroit=new Node("Terme droit");
+                nodeFilsDroit.addChild(noeud.getFils(1).interpret());
+                node.addChild(nodeFilsDroit);
+                return node;
+                
+            case 106:
+                return this.pile.remove();
+
+            case 107:
+                node=new Node("Affectation");
+                nodeFilsGauche=new Node("Terme gauche");
+                nodeFilsGauche.addChild(noeud.getFils(0).interpret());
+                node.addChild(nodeFilsGauche);
+                nodeFilsDroit=new Node("Terme droit");
+                nodeFilsDroit.addChild(noeud.getFils(1).interpret());
+                node.addChild(nodeFilsDroit);
+                return node;
+
+            case 108:
+                return null;
+
+            case 109:
+                return noeud.getFils(0).interpret();
+
+            case 110:
+                return null;
+
+            case 111:
+                node=new Node("Elsif");
+                nodeFils1=new Node("Cond");
+                nodeFils1.addChild(noeud.getFils(0).interpret());
+                node.addChild(nodeFils1);
+                nodeFils2=new Node("Block");
+                nodeFils2.addChild(noeud.getFils(1).interpret());
+                nodeFils2.addChild(noeud.getFils(2).interpret());
+                node.addChild(nodeFils2);
+                node.addChild(noeud.getFils(3).interpret());
+                return node;
+
+            case 112:
+                return null;
+
+            case 113:
+                node=new Node("Else");
+                node.addChild(noeud.getFils(0).interpret());
+                node.addChild(noeud.getFils(1).interpret());
+                return node;
+
+            case 114:
+                return null;
+
+            case 115:
+                return noeud.getFils(0);
 
             default:
                 return null;
