@@ -8,6 +8,7 @@ public class Parser {
     public Stack<Symbole> Pile=new Stack<Symbole>();
     private int[] tableTag; 
     public TableAnalyse table;
+    Lexer lexer=new Lexer();
 
     public Parser(int[] tableTag, int[][] tab){
         this.table=new TableAnalyse(tab);
@@ -29,7 +30,6 @@ public class Parser {
         Terminal dollar=new Terminal(d);
         this.Pile.push(dollar);
         this.Pile.push(axiome);
-        Lexer lexer=new Lexer();
         int statut=-1;
         Terminal a=new Terminal(lexer.scan());
         while (statut==-1) {
@@ -55,6 +55,7 @@ public class Parser {
                 }
                 else {
                     statut=1;
+                    this.lexer.saveNewError("Le programme n'est pas reconnue par la grammaire, le token précédent ne donne aucune règle dans ce contexte");
                 }
             }
             else {
@@ -65,6 +66,7 @@ public class Parser {
                     else{
                         //System.out.println("Le terminal n'est pas $");
                         statut=1;
+                        this.lexer.saveNewError("Le programme est sensé s'arrêter ici");
                     }
                 }
                 else{
@@ -75,15 +77,21 @@ public class Parser {
                     else {
                         //System.out.println("Le terminal n'est pas le même");
                         statut=1;
+                        this.lexer.saveNewError("Le tag " + ((Terminal)X).getValue().tag + " est attendu, le tag " + a.getValue().tag + " à été trouvée");
                     }
                 }
             }
-
-
-            
         }
+        exitParser();
         return statut;
         
+    }
+
+    public void exitParser() throws IOException {
+        int c = 0;
+        while (this.lexer.scan().tag != (int)'$' && c<1000){
+            c++;
+        }
     }
 
     
