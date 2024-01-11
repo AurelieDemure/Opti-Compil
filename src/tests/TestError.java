@@ -1,7 +1,7 @@
 package tests;
 
-import lexer.*;
-import lexer.Error;
+import error.Error;
+import error.ErrorManager;
 
 public class TestError {
 

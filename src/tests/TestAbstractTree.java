@@ -2,7 +2,6 @@ package tests;
 
 import abstractTree.Leaf;
 import abstractTree.Node;
-import abstractTree.AbstractTree;
 
 import static abstractTree.AbstractTree.showAsAbstractTree;
 

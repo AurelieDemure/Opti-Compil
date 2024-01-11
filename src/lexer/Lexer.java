@@ -3,6 +3,8 @@ package lexer; //pour le mettre dans le package de l'analyseur lexical
 import java.io.*;
 import java.util.*;
 
+import error.ErrorManager;
+
 public class Lexer {
 
     //compteur de ligne
