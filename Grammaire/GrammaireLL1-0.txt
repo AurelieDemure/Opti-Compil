@@ -1,4 +1,4 @@
-fichier ::= with Ada.Text_I0; use Ada.Text_I0; procedure ident is DECL* begin instr INSTR* end IDENT? EOF
+fichier ::= with Ada.Text_I0 ; use Ada.Text_I0 ; procedure ident is DECL* begin instr INSTR* end IDENT? EOF
 
 DECL* ::= ''
 DECL* ::= decl DECL*
@@ -76,7 +76,7 @@ EXPREGAL ::= = exprComparaison EXPREGAL
 EXPREGAL ::= /= exprComparaison EXPREGAL
 EXPREGAL ::= ''
 
-exprComparaison ::=exprSomme EXPRCOMPARAISON
+exprComparaison ::= exprSomme EXPRCOMPARAISON
 
 EXPRCOMPARAISON ::= > exprSomme EXPRCOMPARAISON
 EXPRCOMPARAISON ::= >= exprSomme EXPRCOMPARAISON

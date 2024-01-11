@@ -1,10 +1,10 @@
-r0 : fichier ::= with Ada.Text_I0; use Ada.Text_I0; procedure ident is DECL* begin instr INSTR* end IDENT? EOF
+r0 : fichier ::= with Ada.Text_I0 ; use Ada.Text_I0 ; procedure ident is DECL* begin instr INSTR* end IDENT? EOF
 
 r1 : DECL* ::= ''
 r2 : DECL* ::= decl DECL*
 r3 : INSTR* ::= ''
 r4 : INSTR* ::= instr INSTR*
-r5 : IDENT? ::= ; 
+r5 : IDENT? ::= ;
 r6 : IDENT? ::= ident ; 
 
 r7 : decl ::= type ident A1
@@ -15,7 +15,7 @@ r10 : decl ::= function ident PARAMS? return TYPE is DECL* begin instr INSTR* en
 r11 : A1 ::= ;
 r12 : A1 ::= is B1
 
-r13 : B1 ::= access ident;
+r13 : B1 ::= access ident ;
 r14 : B1 ::= record champs CHAMPS* end record ;
 
 r15 : CHAMPS* ::= ''
@@ -23,7 +23,7 @@ r16 : CHAMPS* ::= champs CHAMPS*
 r17 : IDENT,* ::= , ident IDENT,*
 r18 : IDENT,* ::= ''
 r19 : EXPR?:= ::= ''
-r20 : EXPR?:= ::= :=expr
+r20 : EXPR?:= ::= := expr
 r21 : PARAMS? ::= params
 r22 : PARAMS? ::= ''
 
@@ -76,7 +76,7 @@ r50 : EXPREGAL ::= = exprComparaison EXPREGAL
 r51 : EXPREGAL ::= /= exprComparaison EXPREGAL
 r52 : EXPREGAL ::= ''
 
-r53 : exprComparaison ::=exprSomme EXPRCOMPARAISON
+r53 : exprComparaison ::= exprSomme EXPRCOMPARAISON
 
 r54 : EXPRCOMPARAISON ::= > exprSomme EXPRCOMPARAISON
 r55 : EXPRCOMPARAISON ::= >= exprSomme EXPRCOMPARAISON
@@ -136,7 +136,7 @@ r95 : instr ::= ident H1
 r96 : instr ::= exprTerm3 := expr ;
 r97 : instr ::= return EXPR? ;
 r98 : instr ::= begin instr INSTR* end
-r99 : instr ::= if expr then instr INSTR* ELSIF ELSE end if;
+r99 : instr ::= if expr then instr INSTR* ELSIF ELSE end if ;
 r100 : instr ::= for ident in reverse? expr .. expr loop instr INSTR* end loop ;
 r101 : instr ::= while expr loop instr INSTR* end loop ;
 
@@ -156,3 +156,5 @@ r112 : ELSE ::= ''
 r113 : ELSE ::= else instr INSTR*
 r114 : reverse? ::= ''
 r115 : reverse? ::= reverse
+
+

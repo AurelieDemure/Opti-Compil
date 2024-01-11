@@ -15,6 +15,9 @@ test :
 testError :
 	java -classpath .run tests.TestError
 
+testAbstractTree :
+	java -classpath .run tests.TestAbstractTree
+
 testTableAnalyse :
 	java -classpath .run tests.TestTableAnalyse
 
