@@ -3,6 +3,7 @@ package parser;
 import java.util.HashMap;
 import java.util.Map;
 import lexer.*;
+import java.util.Arrays;
 
 public class GrammaireLL1Test extends Grammaire{
     private static int[] tableTag = {Tag.ERREUR, Tag.ENTIER, Tag.IDENT, Tag.CHAR, Tag.TRUE, Tag.FALSE, Tag.ACCESS, Tag.AND, Tag.BEGIN, Tag.ELSE, Tag.ELSIF, Tag.END, Tag.FOR, Tag.FUNCTION, Tag.IF, Tag.IN, Tag.IS, Tag.LOOP, Tag.NEW, Tag.NOT, Tag.NULL, Tag.OR, Tag.OUT, Tag.PROCEDURE, Tag.RECORD, Tag.REM, Tag.RETURN, Tag.REVERSE, Tag.THEN, Tag.TYPE, Tag.USE, Tag.WHILE, Tag.WITH, Tag.PUT, Tag.POINTV, Tag.PO, Tag.PF, Tag.PLUS, Tag.MOINS, Tag.ETOILE, Tag.POINT, Tag.EGALE, Tag.SUP, Tag.INF, Tag.DPOINTS, Tag.DIV, Tag.SUPEG, Tag.INFEG, Tag.AFFECT, Tag.NEGALE, Tag.CARACTEREVAL, Tag.ADATEXTIO, Tag.ADAINTEGERIO, Tag.VIRGULE, Tag.POINTPOINT};
@@ -61,7 +62,7 @@ public class GrammaireLL1Test extends Grammaire{
                         };
 
 
-    private TableHachage<Integer, Terminal> terminaux = new HashMap<>();
+    private Map<Integer, Terminal> terminaux = new HashMap<>();
 
     private NonTerminal fichier = createNonTerminal();
     private NonTerminal declEtoile = createNonTerminal();
@@ -75,7 +76,7 @@ public class GrammaireLL1Test extends Grammaire{
     private NonTerminal exprOptEgal = createNonTerminal();
     private NonTerminal paramsOpt = createNonTerminal();
     private NonTerminal champs = createNonTerminal();
-    private NonTerminal TYPE = createNonTerminal();
+    private NonTerminal type = createNonTerminal();
     private NonTerminal params = createNonTerminal();
     private NonTerminal paramsPVE = createNonTerminal();
     private NonTerminal param = createNonTerminal();
@@ -123,7 +124,7 @@ public class GrammaireLL1Test extends Grammaire{
         }
 
         //création des règles:
-        createRegle(fichier, Arrays.asList(t(Tag.WITH), t(Tag.ADATEXTIO), t(Tag.POINTV), t(Tag.USE), t(Tag.ADATEXTIO), t(Tag.POINTV), t(Tag.PROCEDURE), t(Tag.IDENT), declEtoile, t(Tag.BEGIN), instrEtoile, t(Tag.END), identOpt, t(Tag.EOF))); //r0
+        createRegle(fichier, Arrays.asList(t(Tag.WITH), t(Tag.ADATEXTIO), t(Tag.POINTV), t(Tag.USE), t(Tag.ADATEXTIO), t(Tag.POINTV), t(Tag.PROCEDURE), t(Tag.IDENT), t(Tag.IS), declEtoile, t(Tag.BEGIN), instrEtoile, t(Tag.END), identOpt)); //r0
         createRegle(declEtoile, Arrays.asList()); // r1
         createRegle(declEtoile, Arrays.asList(decl, declEtoile)); //r2
         createRegle(instrEtoile, Arrays.asList()); // r3
@@ -146,13 +147,13 @@ public class GrammaireLL1Test extends Grammaire{
         createRegle(exprOptEgal, Arrays.asList(t(Tag.AFFECT), expr)); // r20
         createRegle(paramsOpt, Arrays.asList(params));   // r21
         createRegle(paramsOpt, Arrays.asList());// r22
-        createRegle(champs, Arrays.asList(t(Tag.IDENT), identVE, t(Tag.DPOINTS), TYPE, t(Tag.POINTV))); // r23
-        createRegle(TYPE, Arrays.asList(t(Tag.IDENT))); // r24
-        createRegle(TYPE, Arrays.asList(t(Tag.ACCESS), t(Tag.IDENT))); //r25
+        createRegle(champs, Arrays.asList(t(Tag.IDENT), identVE, t(Tag.DPOINTS), type, t(Tag.POINTV))); // r23
+        createRegle(type, Arrays.asList(t(Tag.IDENT))); // r24
+        createRegle(type, Arrays.asList(t(Tag.ACCESS), t(Tag.IDENT))); //r25
         createRegle(params, Arrays.asList(t(Tag.PO), param, paramsPVE, t(Tag.PF))); // r26
         createRegle(paramsPVE, Arrays.asList()); // r27
         createRegle(paramsPVE, Arrays.asList(t(Tag.POINTV), param, paramsPVE)); // r28
-        createRegle(param, Arrays.asList(t(Tag.IDENT), identVE, t(Tag.DPOINTS), modeOpt, TYPE)); // r29
+        createRegle(param, Arrays.asList(t(Tag.IDENT), identVE, t(Tag.DPOINTS), modeOpt, type)); // r29
         createRegle(modeOpt, Arrays.asList()); // r30
         createRegle(modeOpt, Arrays.asList(mode)); // r31
         createRegle(mode, Arrays.asList(t(Tag.IN), C1)); //r32

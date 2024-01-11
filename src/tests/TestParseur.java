@@ -6,9 +6,8 @@ import parser.*;
 
 public class TestParseur {
     public static void main(String[] arg) throws IOException{
-        Grammaire g=new GrammaireTest();
-        ArbreSyntaxique arbre=g.analyse();
-        int statut=1;
+        Grammaire g=new GrammaireLL1Test();
+        int statut=g.analyse();
         if (statut==1){
             System.out.println("Le programme n'est pas reconnu par la grammaire");
         }

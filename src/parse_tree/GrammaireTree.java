@@ -5,10 +5,10 @@ import java.util.List;
 
 import lexer.Token;
 
-public abstract class Grammaire {
-    private Parser parser;
-    public Grammaire(int[] tableTag,int[][] table){
-        parser=new Parser(tableTag, table);
+public abstract class GrammaireTree {
+    private ParserTree parser;
+    public GrammaireTree(int[] tableTag,int[][] table){
+        parser=new ParserTree(tableTag, table);
     }
     public ArbreSyntaxique analyse() throws IOException{
         return parser.Analyseur();

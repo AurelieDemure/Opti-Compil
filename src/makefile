@@ -24,6 +24,11 @@ testParser :
 	java -classpath .run tests.TestParseur < tests/test_folders/test_parser3.txt
 	java -classpath .run tests.TestParseur < tests/test_folders/test_parser4.txt
 
+testParserAda :
+	java -classpath .run tests.TestParseur < tests/test_folders/canAdaSujet.txt
+	java -classpath .run tests.TestParseur < tests/test_folders/canAdaErreur.txt
+	java -classpath .run tests.TestParseur < tests/test_folders/canAdaTest1.txt
+
 testParserTree :
 	java -classpath .run tests.TestParserTree < tests/test_folders/test_parser.txt
 	java -classpath .run tests.TestParserTree < tests/test_folders/test_parser2.txt
