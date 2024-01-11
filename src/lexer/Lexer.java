@@ -3,6 +3,8 @@ package lexer; //pour le mettre dans le package de l'analyseur lexical
 import java.io.*;
 import java.util.*;
 
+import error.ErrorManager;
+
 public class Lexer {
 
     //compteur de ligne
@@ -228,9 +230,13 @@ public class Lexer {
         //si on a pas reconnu le caractere
         else{
             //sauvegarde du message d erreur
-            errorManager.saveError(this.line, this.nbChar, "Le caractere " + this.caractere + " n'est pas reconnu");
+            saveNewError("Le caractere " + this.caractere + " n'est pas reconnu");
             this.caractere=' ';
             return(this.scan());
         }
+    }
+
+    public void saveNewError(String message) {
+        errorManager.saveError(this.line, this.nbChar, message);
     }
 }

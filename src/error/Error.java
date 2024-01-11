@@ -1,4 +1,6 @@
-package lexer; /*pour le mettre dans le package de l'analyseur lexical*/
+package error; /*pour le mettre dans le package d'erreur'*/
+
+import lexer.Lexer;
 
 /*import java.io.*;
 import java.util.*;*/

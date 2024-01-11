@@ -1,7 +1,9 @@
-package lexer; /*pour le mettre dans le package de l'analyseur lexical*/
+package error; /*pour le mettre dans le package d'erreur'*/
 
 /*import java.io.*;*/
 import java.util.*;
+
+import lexer.Lexer;
 
 public class ErrorManager {
     //Ensemble des erreurs a traiter
