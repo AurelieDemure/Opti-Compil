@@ -1,5 +1,7 @@
-package parser;
+package parse_tree;
 
+import parser.*;
+import abstractTree.*;
 public class ArbreSyntaxique {
     private Noeud racine;
 

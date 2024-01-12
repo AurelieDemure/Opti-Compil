@@ -10,7 +10,7 @@ public abstract class Grammaire {
     public Grammaire(int[] tableTag,int[][] table){
         parser=new Parser(tableTag, table);
     }
-    public int analyse() throws IOException{
+    public ArbreSyntaxique analyse() throws IOException{
         return parser.Analyseur();
     }
     public void createRegle(NonTerminal mGauche,List<Symbole> mDroit){

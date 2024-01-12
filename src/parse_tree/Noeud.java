@@ -1,9 +1,11 @@
-package parser;
+package parse_tree;
 
+import parser.*;
+import abstractTree.*;
 public interface Noeud {
-    public void interpret();
+    public Component interpret();
     public void ajouterFils(Noeud fils);
-    public Noeud getFils(Noeud NoeudCourant, int index);
+    public Noeud getFils(int index);
     public String getValeur();
     public int getFonctionSemantique();
 }

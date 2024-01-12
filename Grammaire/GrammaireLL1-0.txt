@@ -109,7 +109,7 @@ exprTerm1 ::= null EXPRTERM
 exprTerm1 ::= ( expr ) EXPRTERM
 exprTerm2 ::= ident G1
 exprTerm1 ::= new ident EXPRTERM
-exprTerm1 ::= character' val ( expr ) EXPRTERM
+exprTerm1 ::= character'val ( expr ) EXPRTERM
 
 exprTerm3 ::= entier EXPRTERM2
 exprTerm3 ::= caractère EXPRTERM2
@@ -118,7 +118,7 @@ exprTerm3 ::= false EXPRTERM2
 exprTerm3 ::= null EXPRTERM2
 exprTerm3 ::= ( expr ) EXPRTERM2
 exprTerm3 ::= new ident EXPRTERM2
-exprTerm3 ::= character' val ( expr ) EXPRTERM2
+exprTerm3 ::= character'val ( expr ) EXPRTERM2
 
 G1 ::= EXPRTERM
 G1 ::= ( expr EXPR,* ) EXPRTERM

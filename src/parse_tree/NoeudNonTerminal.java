@@ -1,4 +1,7 @@
-package parser;
+package parse_tree;
+
+import parser.*;
+import abstractTree.*;
 
 import java.util.*;
 
@@ -17,12 +20,12 @@ public class NoeudNonTerminal implements Noeud{
     }
 
     @Override
-    public void interpret(){
-        //appelle fontionSémantique en tant qu'instruction
+    public Component interpret(){
+        return GrammaireLL1Test.fonctionSemantique(fonctionSemantique,this);
     }
 
     @Override
-    public Noeud getFils(Noeud NoeudCourant, int index){
+    public Noeud getFils(int index){
         return listFils.get(index);
     }
 

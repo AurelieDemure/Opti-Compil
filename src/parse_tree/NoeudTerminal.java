@@ -1,5 +1,7 @@
-package parser;
+package parse_tree;
 
+import parser.*;
+import abstractTree.*;
 import java.util.*;
 
 public class NoeudTerminal implements Noeud {
@@ -10,12 +12,12 @@ public class NoeudTerminal implements Noeud {
     }
 
     @Override
-    public void interpret(){
-        System.out.println("jsp");
+    public Component interpret(){
+        return new Leaf(this.value);
     }
 
     @Override
-    public Noeud getFils(Noeud NoeudCourant, int index){
+    public Noeud getFils(int index){
         return this;
     }
 
