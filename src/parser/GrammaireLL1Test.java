@@ -158,6 +158,10 @@ public class GrammaireLL1Test extends Grammaire{
             case 26:
                 node=new Node("Parametres");
                 node.addChild(noeud.getFils(1).interpret());
+                if (noeud.getFils(2).interpret()!=null){
+                    node.addChild(noeud.getFils(2).interpret().get(0));
+                    node.addChild(noeud.getFils(2).interpret().get(1));
+                }
                 node.addChild(noeud.getFils(2).interpret());
                 return node;
 
@@ -165,7 +169,10 @@ public class GrammaireLL1Test extends Grammaire{
                 return this.pile.remove();
                 
             case 28:
-                //a voir
+                node=new Node("tmp");
+                node.addChild(noeud.getFils(1).interpret());
+                node.addChild(noeud.getFils(2).interpret());
+                return node;
 
             case 29:
                 node=new Node("parametres");
@@ -472,7 +479,13 @@ public class GrammaireLL1Test extends Grammaire{
                 node.addChild(this.pile.remove());
                 Node nodeFilsDroit=new Node("param");
                 nodeFilsDroit.addChild(noeud.getFils(1).interpret());
-                nodeFilsDroit.addChild(noeud.getFils(2).interpret());
+                if (noeud.getFils(2)!=null){
+                    nodeFilsDroit.addChild(noeud.getFils(2).interpret().get(0));
+                    nodeFilsDroit.addChild(noeud.getFils(2).interpret().get(1));
+                }
+                else{
+                    nodeFilsDroit.addChild(noeud.getFils(2).interpret());
+                }
                 node.addChild((nodeFilsDroit));
                 this.pile.add(node);
                 return noeud.getFils(4).interpret();
@@ -498,7 +511,10 @@ public class GrammaireLL1Test extends Grammaire{
                 return null;
 
             case 94:
-                //a voir
+                node=new Node("tmp");
+                node.addChild(noeud.getFils(1).interpret());
+                node.addChild(noeud.getFils(2).interpret());
+                return node;
 
             case 95:
                 this.pile.add(noeud.getFils(0));
