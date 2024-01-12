@@ -125,7 +125,7 @@ public class GrammaireLL1Test extends Grammaire{
         }
 
         //création des règles:
-        createRegle(fichier, Arrays.asList(t(Tag.WITH), t(Tag.ADATEXTIO), t(Tag.POINTV), t(Tag.USE), t(Tag.ADATEXTIO), t(Tag.POINTV), t(Tag.PROCEDURE), t(Tag.IDENT), t(Tag.IS), declEtoile, t(Tag.BEGIN), instrEtoile, t(Tag.END), identOpt)); //r0
+        createRegle(fichier, Arrays.asList(t(Tag.WITH), t(Tag.ADATEXTIO), t(Tag.POINTV), t(Tag.USE), t(Tag.ADATEXTIO), t(Tag.POINTV), t(Tag.PROCEDURE), t(Tag.IDENT), t(Tag.IS), declEtoile, t(Tag.BEGIN), instr, instrEtoile, t(Tag.END), identOpt)); //r0
         createRegle(declEtoile, Arrays.asList()); // r1
         createRegle(declEtoile, Arrays.asList(decl, declEtoile)); //r2
         createRegle(instrEtoile, Arrays.asList()); // r3

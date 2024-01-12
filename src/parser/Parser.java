@@ -37,7 +37,7 @@ public class Parser {
         Terminal dollar=new Terminal(d);
         this.Pile.push(dollar);
         this.Pile.push(axiome);
-        pileNoeuds.push(new NoeudNonTerminal(1));
+        pileNoeuds.push(new NoeudNonTerminal());
         int statut=-1;
         Terminal a=new Terminal(lexer.scan());
         while (statut==-1) {
