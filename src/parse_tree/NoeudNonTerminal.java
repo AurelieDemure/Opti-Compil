@@ -8,6 +8,7 @@ import java.util.*;
 public class NoeudNonTerminal implements Noeud{
     private int fonctionSemantique;
     private List<Noeud> listFils;
+    private GrammaireLL1Test grammar = new GrammaireLL1Test();
 
     public NoeudNonTerminal(int fonctionSemantique){   
         this.fonctionSemantique = fonctionSemantique;
@@ -21,7 +22,7 @@ public class NoeudNonTerminal implements Noeud{
 
     @Override
     public Component interpret(){
-        return GrammaireLL1Test.fonctionSemantique(fonctionSemantique,this);
+        return this.grammar.fonctionSemantique(fonctionSemantique,this);
     }
 
     @Override

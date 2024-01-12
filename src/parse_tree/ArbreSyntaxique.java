@@ -8,4 +8,8 @@ public class ArbreSyntaxique {
     public void setRacine(Noeud racine){
         this.racine=racine;
     }
+
+    public Noeud getRacine() {
+        return this.racine;
+    }
 }

@@ -11,4 +11,8 @@ public class Leaf implements Component {
     public void show() {
         System.out.print("" + value);
     }
+
+    public Component getFils(int index){
+        return this;
+    }
 }

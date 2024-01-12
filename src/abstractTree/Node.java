@@ -2,6 +2,8 @@ package abstractTree;
 
 import java.util.ArrayList;
 
+import parse_tree.Noeud;
+
 public class Node implements Component {
     private String value;
     private ArrayList<Component> children;
@@ -28,5 +30,9 @@ public class Node implements Component {
     @Override
     public void show() {
         System.out.print("" + value);
+    }
+
+    public Component getFils(int index){
+        return this.children.get(index);
     }
 }
