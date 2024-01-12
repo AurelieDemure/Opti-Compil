@@ -3,11 +3,16 @@ package parser;
 import java.io.IOException;
 import java.util.*;
 import lexer.*;
+import parser.NonTerminal;
+import parser.Symbole;
+import parser.TableAnalyse;
+import parser.Terminal;
 
 public class ParserTree {
     public Stack<Symbole> Pile=new Stack<Symbole>();
     private int[] tableTag; 
     public TableAnalyse table;
+    Lexer lexer=new Lexer();
 
     public ParserTree(int[] tableTag, int[][] tab){
         this.table=new TableAnalyse(tab);
@@ -33,8 +38,6 @@ public class ParserTree {
         this.Pile.push(dollar);
         this.Pile.push(axiome);
         pileNoeuds.push(new NoeudNonTerminal(1));
-
-        Lexer lexer=new Lexer();
         int statut=-1;
         Terminal a=new Terminal(lexer.scan());
         while (statut==-1) {
@@ -74,6 +77,7 @@ public class ParserTree {
                 }
                 else {
                     statut=1;
+                    this.lexer.saveNewError("Le programme n'est pas reconnue par la grammaire, le token précédent ne donne aucune règle dans ce contexte");
                 }
             }
             else {
@@ -84,6 +88,7 @@ public class ParserTree {
                     else{
                         //System.out.println("Le terminal n'est pas $");
                         statut=1;
+                        this.lexer.saveNewError("Le programme est sensé s'arrêter ici");
                     }
                 }
                 else{
@@ -94,6 +99,7 @@ public class ParserTree {
                     else {
                         //System.out.println("Le terminal n'est pas le même");
                         statut=1;
+                        this.lexer.saveNewError("Le tag " + ((Terminal)X).getValue().tag + " est attendu, le tag " + a.getValue().tag + " à été trouvée");
                     }
                 }
             }  
@@ -101,8 +107,16 @@ public class ParserTree {
         if(!pileNoeuds.isEmpty()){
             arbreSyntaxique.setRacine(pileNoeuds.pop());
         }
-        System.err.println("Arbre créé !");
+        exitParser();
         return arbreSyntaxique;
         
     }
+
+    public void exitParser() throws IOException {
+        int c = 0;
+        while (this.lexer.scan().tag != (int)'$' && c<1000){
+            c++;
+        }
+    }
+
 }
