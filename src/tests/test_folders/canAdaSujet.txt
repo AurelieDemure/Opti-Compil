@@ -1,4 +1,4 @@
-with Ada.Integer_IO ; use Ada.Integer_IO ;
+with Ada.Text_IO ; use Ada.Text_IO ;
 
 procedure unDebut is
 
