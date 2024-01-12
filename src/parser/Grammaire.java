@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import lexer.Token;
+import parse_tree.ArbreSyntaxique;
 
 public abstract class Grammaire {
     private Parser parser;

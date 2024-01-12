@@ -54,10 +54,10 @@ public class TableAnalyse {
     public NonTerminal getAxiome(){ 
         return getRegle(0).getMembreGauche();
     }
-    public List<Symbole> RenvoieSortiePile(int idSommetPile, int tagTeteLecture) { /*renvoie l'action a effectuer a partir du numero de regle trouvé dans la table */
+    public RegleGrammaire RenvoieSortiePile(int idSommetPile, int tagTeteLecture) { /*renvoie l'action a effectuer a partir du numero de regle trouvé dans la table */
         int numRegle=TrouveNumRegle(idSommetPile,tagTeteLecture);
         RegleGrammaire r=getRegle(numRegle);
-        return r.getMembreDroit();
+        return r;
     }
 
 

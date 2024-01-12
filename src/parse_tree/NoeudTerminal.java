@@ -12,8 +12,13 @@ public class NoeudTerminal implements Noeud {
     }
 
     @Override
+    public void show() {
+        System.out.print("" + valeur);
+    }
+
+    @Override
     public Component interpret(){
-        return new Leaf(this.value);
+        return new Leaf(this.valeur);
     }
 
     @Override

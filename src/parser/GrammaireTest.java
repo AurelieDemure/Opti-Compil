@@ -2,7 +2,10 @@ package parser;
 
 import java.util.Arrays;
 
+import abstractTree.Component;
+import abstractTree.Leaf;
 import lexer.*;
+import parse_tree.Noeud;
 
 public class GrammaireTest extends Grammaire{
     private static int[] tableTag = {Tag.AND,Tag.BEGIN,(int)'(',(int)')',(int)';',(int)'$'};
@@ -30,6 +33,8 @@ public class GrammaireTest extends Grammaire{
         createRegle(U,Arrays.asList());
     }  
 
-    
+    public Component fonctionSemantique(int regle, Noeud noeud){
+        return new Leaf("coucou");
+    }
     
 }

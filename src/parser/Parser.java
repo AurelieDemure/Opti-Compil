@@ -3,6 +3,7 @@ package parser;
 import java.io.IOException;
 import java.util.*;
 import lexer.*;
+import parse_tree.*;
 import parser.NonTerminal;
 import parser.Symbole;
 import parser.TableAnalyse;
@@ -37,7 +38,8 @@ public class Parser {
         Terminal dollar=new Terminal(d);
         this.Pile.push(dollar);
         this.Pile.push(axiome);
-        pileNoeuds.push(new NoeudNonTerminal());
+        NoeudNonTerminal racine = new NoeudNonTerminal(0);
+        pileNoeuds.push(racine);
         int statut=-1;
         Terminal a=new Terminal(lexer.scan());
         while (statut==-1) {
@@ -56,28 +58,27 @@ public class Parser {
             Noeud noeudActuel = pileNoeuds.peek();
             Noeud noeudFils = null;
             if (X instanceof NonTerminal) {
-                List<Symbole> mDroit=table.RenvoieSortiePile(((NonTerminal)X).getId(),getId((a.getValue()).tag));
-                if (mDroit.isEmpty() || mDroit.get(0) instanceof NonTerminal || ((Terminal)mDroit.get(0)).getValue().tag!=-1){
+                RegleGrammaire regle=table.RenvoieSortiePile(((NonTerminal)X).getId(),getId((a.getValue()).tag));
+                if (regle.getMembreDroit().isEmpty() || regle.getMembreDroit().get(0) instanceof NonTerminal || ((Terminal)regle.getMembreDroit().get(0)).getValue().tag!=-1){
                     Pile.pop();
                     pileNoeuds.pop();   // on synchronise la pile avec celle des symboles
-                    for (int i=mDroit.size()-1;i>=0;i--){
-                        Pile.push(mDroit.get(i));
-
-                        if(mDroit.get(i) instanceof Terminal){
-                            noeudFils = new NoeudTerminal(mDroit.get(i).toString());
-                            System.out.println(noeudFils.getValeur());
+                    for (int i=regle.getMembreDroit().size()-1;i>=0;i--){
+                        Pile.push(regle.getMembreDroit().get(i));
+                    }
+                    for (int i=0; i<regle.getMembreDroit().size(); i++){
+                        if(regle.getMembreDroit().get(i) instanceof Terminal){
+                            noeudFils = new NoeudTerminal(((Terminal)regle.getMembreDroit().get(i)).getValue().tag + "");
                         }
                         else{
-                            noeudFils = new NoeudNonTerminal(1); //dépend de fonction sémantique à voir !
-                            System.out.println(noeudFils.getFonctionSemantique());
+                            noeudFils = new NoeudNonTerminal(regle.getNumero()); //dépend de fonction sémantique à voir !
                         }
                         noeudActuel.ajouterFils(noeudFils);
-                        pileNoeuds.push(noeudFils); //correspond au Pile.push(mDroit.get(i));
+                        pileNoeuds.push(noeudFils); //correspond au Pile.push(regle.getMembreDroit().get(i));
                     }
                 }
                 else {
                     statut=1;
-                    this.lexer.saveNewError("Le programme n'est pas reconnue par la grammaire, le token précédent ne donne aucune règle dans ce contexte");
+                    this.lexer.saveNewError("Le programme n'est pas reconnu par la grammaire, le token précédent ne donne aucune règle dans ce contexte");
                 }
             }
             else {
@@ -104,9 +105,7 @@ public class Parser {
                 }
             }  
         }
-        if(!pileNoeuds.isEmpty()){
-            arbreSyntaxique.setRacine(pileNoeuds.pop());
-        }
+        arbreSyntaxique.setRacine(racine);
         exitParser();
         return arbreSyntaxique;
         

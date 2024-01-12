@@ -40,7 +40,7 @@ public class TestTableAnalyse {
             System.out.println(("Test getRegle faux :\n mbG trouvé :"+mbG+"mbG souhaité : T\n" + "mbD trouve : "+mbD+"mbD souhaite : SU" ));
         }
         else {System.out.println("Test getRegle ok");}
-        List<Symbole> sortiePile=TableA.RenvoieSortiePile(S.getId(),a.getValue().tag);
+        RegleGrammaire sortiePile=TableA.RenvoieSortiePile(S.getId(),a.getValue().tag);
         List<Symbole> sortiePileVoulue=Arrays.asList(a);
         if(!sortiePile.equals(sortiePileVoulue)){
             System.out.println("Test RenvoieSortiePile faux : \n SortiePile trouvée"+ sortiePile +"\nsortie pile voulue : a");
