@@ -16,6 +16,11 @@ public class NoeudNonTerminal implements Noeud{
     }
 
     @Override
+    public void show() {
+        System.out.print("" + fonctionSemantique);
+    }
+
+    @Override
     public void ajouterFils(Noeud fils){
         this.listFils.add(fils);
     }
@@ -35,6 +40,10 @@ public class NoeudNonTerminal implements Noeud{
     }
     public String getValeur(){
         return "test";
+    }
+
+    public List<Noeud> getListFils() {
+        return this.listFils;
     }
 
 }

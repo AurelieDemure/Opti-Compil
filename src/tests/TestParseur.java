@@ -10,7 +10,8 @@ public class TestParseur {
     public static void main(String[] arg) throws IOException{
         Grammaire g=new GrammaireLL1Test();
         ArbreSyntaxique arbreSyntaxique=g.analyse();
-        Component abstractTree = arbreSyntaxique.getRacine().interpret();    
-        AbstractTree.showAsAbstractTree(abstractTree,"",true);
+        arbreSyntaxique.showAsAbstractTree(arbreSyntaxique.getRacine(), "",true);
+        //Component abstractTree = arbreSyntaxique.getRacine().interpret();    
+        //AbstractTree.showAsAbstractTree(abstractTree,"",true);
     }
 }

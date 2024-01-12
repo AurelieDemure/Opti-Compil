@@ -38,7 +38,8 @@ public class Parser {
         Terminal dollar=new Terminal(d);
         this.Pile.push(dollar);
         this.Pile.push(axiome);
-        pileNoeuds.push(new NoeudNonTerminal(1));
+        NoeudNonTerminal racine = new NoeudNonTerminal(0);
+        pileNoeuds.push(racine);
         int statut=-1;
         Terminal a=new Terminal(lexer.scan());
         while (statut==-1) {
@@ -63,7 +64,8 @@ public class Parser {
                     pileNoeuds.pop();   // on synchronise la pile avec celle des symboles
                     for (int i=regle.getMembreDroit().size()-1;i>=0;i--){
                         Pile.push(regle.getMembreDroit().get(i));
-
+                    }
+                    for (int i=0; i<regle.getMembreDroit().size(); i++){
                         if(regle.getMembreDroit().get(i) instanceof Terminal){
                             noeudFils = new NoeudTerminal(((Terminal)regle.getMembreDroit().get(i)).getValue().tag + "");
                         }
@@ -103,9 +105,7 @@ public class Parser {
                 }
             }  
         }
-        if(!pileNoeuds.isEmpty()){
-            arbreSyntaxique.setRacine(pileNoeuds.pop());
-        }
+        arbreSyntaxique.setRacine(racine);
         exitParser();
         return arbreSyntaxique;
         

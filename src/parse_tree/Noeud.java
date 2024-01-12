@@ -8,4 +8,5 @@ public interface Noeud {
     public Noeud getFils(int index);
     public String getValeur();
     public int getFonctionSemantique();
+    void show();
 }
