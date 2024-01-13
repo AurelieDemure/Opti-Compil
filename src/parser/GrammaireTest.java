@@ -5,7 +5,7 @@ import java.util.Arrays;
 import abstractTree.Component;
 import abstractTree.Leaf;
 import lexer.*;
-import parse_tree.Noeud;
+import parse_tree.AbstractExpression;
 
 public class GrammaireTest extends Grammaire{
     private static int[] tableTag = {Tag.AND,Tag.BEGIN,(int)'(',(int)')',(int)';',(int)'$'};
@@ -33,7 +33,39 @@ public class GrammaireTest extends Grammaire{
         createRegle(U,Arrays.asList());
     }  
 
-    public Component fonctionSemantique(int regle, Noeud noeud){
+    public String getNonTerminal(int idRegle) {
+        switch (this.parser.table.getRegle(idRegle).getMembreGauche().getId()) {
+            case 0:
+                return "S";     
+            case 1:
+                return "T";  
+            case 2:
+                return "U";     
+            default:
+                return "Unknown Terminal";
+        }
+    }
+
+    public String getTerminal(int tag) {
+        switch (tag) {
+            case Tag.AND:
+                return "a";     
+            case Tag.BEGIN:
+                return "b";  
+            case (int)'(':
+                return "(";  
+            case (int)')':
+                return ")";     
+            case (int)';':
+                return ";";  
+            case (int)'$':
+                return "$";     
+            default:
+                return "Unknown NonTerminal";
+        }
+    }
+
+    public Component fonctionSemantique(int regle, AbstractExpression abstractExpression){
         return new Leaf("coucou");
     }
     

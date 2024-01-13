@@ -1,33 +1,28 @@
 package parse_tree;
 
-import parser.*;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import abstractTree.*;
 public class ArbreSyntaxique {
-    private Noeud racine;
+    private AbstractExpression racine;
 
-    public void setRacine(Noeud racine){
+    public void setRacine(AbstractExpression racine){
         this.racine=racine;
     }
 
-    public Noeud getRacine() {
+    public AbstractExpression getRacine() {
         return this.racine;
     }
 
-    public void showAsAbstractTree(Noeud noeud, String indentation, boolean dernier) {
+    public void showAsAbstractTree(AbstractExpression abstractExpression, String indentation, boolean dernier) {
         System.out.print(indentation);
         if (dernier) {
             System.out.print("|__ ");
         } else {
             System.out.print("|__ ");
-        } noeud.show();
+        } abstractExpression.show();
 
 
-        if (noeud instanceof NoeudNonTerminal) {
-            List<Noeud> children = ((NoeudNonTerminal) noeud).getListFils();
+        if (abstractExpression instanceof NonTerminalExpression) {
+            List<AbstractExpression> children = ((NonTerminalExpression) abstractExpression).getListFils();
             if (children.size() > 0) {
                 System.out.println();
             }
