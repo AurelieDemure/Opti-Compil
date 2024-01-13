@@ -4,18 +4,16 @@ import java.io.IOException;
 import java.util.*;
 import lexer.*;
 import parse_tree.*;
-import parser.NonTerminal;
-import parser.Symbole;
-import parser.TableAnalyse;
-import parser.Terminal;
 
 public class Parser {
+    public Grammaire grammar;
     public Stack<Symbole> Pile=new Stack<Symbole>();
     private int[] tableTag; 
     public TableAnalyse table;
     Lexer lexer=new Lexer();
 
-    public Parser(int[] tableTag, int[][] tab){
+    public Parser(Grammaire grammar, int[] tableTag, int[][] tab){
+        this.grammar = grammar;
         this.table=new TableAnalyse(tab);
         this.tableTag = tableTag;
     }
@@ -30,7 +28,8 @@ public class Parser {
     }
 
     public ArbreSyntaxique Analyseur() throws IOException{
-        Stack<Noeud> pileNoeuds = new Stack<>();   //pile pour gérer les noeuds de l'arbre
+        Stack<AbstractExpression> pileNoeuds = new Stack<>();   //pile pour gérer les noeuds de l'arbre
+        Stack<AbstractExpression> pileNoeudsTmp = new Stack<>(); 
         ArbreSyntaxique arbreSyntaxique = new ArbreSyntaxique();
 
         NonTerminal axiome=table.getAxiome();
@@ -38,7 +37,8 @@ public class Parser {
         Terminal dollar=new Terminal(d);
         this.Pile.push(dollar);
         this.Pile.push(axiome);
-        NoeudNonTerminal racine = new NoeudNonTerminal(0);
+        NonTerminalExpression racine = new NonTerminalExpression(0, this.grammar.getNonTerminal(0));
+        pileNoeuds.push(new TerminalExpression("$"));
         pileNoeuds.push(racine);
         int statut=-1;
         Terminal a=new Terminal(lexer.scan());
@@ -54,26 +54,27 @@ public class Parser {
                 }
             }
 
-            Symbole X=Pile.peek();
-            Noeud noeudActuel = pileNoeuds.peek();
-            Noeud noeudFils = null;
+            Symbole X=Pile.pop();
+            AbstractExpression noeudActuel = pileNoeuds.pop();
+            AbstractExpression noeudFils = null;
             if (X instanceof NonTerminal) {
                 RegleGrammaire regle=table.RenvoieSortiePile(((NonTerminal)X).getId(),getId((a.getValue()).tag));
                 if (regle.getMembreDroit().isEmpty() || regle.getMembreDroit().get(0) instanceof NonTerminal || ((Terminal)regle.getMembreDroit().get(0)).getValue().tag!=-1){
-                    Pile.pop();
-                    pileNoeuds.pop();   // on synchronise la pile avec celle des symboles
-                    for (int i=regle.getMembreDroit().size()-1;i>=0;i--){
-                        Pile.push(regle.getMembreDroit().get(i));
-                    }
                     for (int i=0; i<regle.getMembreDroit().size(); i++){
                         if(regle.getMembreDroit().get(i) instanceof Terminal){
-                            noeudFils = new NoeudTerminal(((Terminal)regle.getMembreDroit().get(i)).getValue().tag + "");
+                            //noeudFils = new TerminalExpression(this.grammar.getTerminal(((Terminal)regle.getMembreDroit().get(i)).getValue().tag) + "");
+                            noeudFils = new TerminalExpression(((Terminal)regle.getMembreDroit().get(i)).getValue().tag + "");
                         }
                         else{
-                            noeudFils = new NoeudNonTerminal(regle.getNumero()); //dépend de fonction sémantique à voir !
+                            //noeudFils = new NonTerminalExpression(regle.getNumero(), this.grammar.getNonTerminal(regle.getNumero()));
+                            noeudFils = new NonTerminalExpression(regle.getNumero(), regle.getNumero() + "");
                         }
-                        noeudActuel.ajouterFils(noeudFils);
-                        pileNoeuds.push(noeudFils); //correspond au Pile.push(regle.getMembreDroit().get(i));
+                        ((NonTerminalExpression) noeudActuel).ajouterFils(noeudFils);
+                        pileNoeudsTmp.push(noeudFils);
+                    }
+                    for (int i=regle.getMembreDroit().size()-1;i>=0;i--){
+                        Pile.push(regle.getMembreDroit().get(i));
+                        pileNoeuds.push(pileNoeudsTmp.pop());
                     }
                 }
                 else {
@@ -94,7 +95,6 @@ public class Parser {
                 }
                 else{
                     if ((((Terminal)X).getValue().tag)==(a.getValue().tag)){
-                        Pile.pop();
                         a=new Terminal(lexer.scan());
                     }
                     else {

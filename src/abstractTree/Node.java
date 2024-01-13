@@ -2,8 +2,6 @@ package abstractTree;
 
 import java.util.ArrayList;
 
-import parse_tree.Noeud;
-
 public class Node implements Component {
     private String value;
     private ArrayList<Component> children;

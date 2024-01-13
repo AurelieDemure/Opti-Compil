@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.util.List;
 
 import lexer.Token;
+import parse_tree.AbstractExpression;
 import parse_tree.ArbreSyntaxique;
 
 public abstract class Grammaire {
-    private Parser parser;
+    public Parser parser;
     public Grammaire(int[] tableTag,int[][] table){
-        parser=new Parser(tableTag, table);
+        parser=new Parser(this, tableTag, table);
     }
     public ArbreSyntaxique analyse() throws IOException{
         return parser.Analyseur();
@@ -23,5 +24,9 @@ public abstract class Grammaire {
     public NonTerminal createNonTerminal(){
         return new NonTerminal();
     }
+
+    public abstract String getNonTerminal(int idRegle);
+
+    public abstract String getTerminal(int tag);
 
 }

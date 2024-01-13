@@ -3,7 +3,7 @@ package parser;
 import java.util.HashMap;
 import java.util.Map;
 import lexer.*;
-import parse_tree.Noeud;
+import parse_tree.*;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
@@ -253,7 +253,17 @@ public class GrammaireLL1Test extends Grammaire{
         return terminaux.get(tag);
     }
 
-    public Component fonctionSemantique(int regle, Noeud noeud){
+    public String getNonTerminal(int idRegle) {
+        //TODO
+        return("");
+    }
+
+    public String getTerminal(int tag) {
+        //TODO
+        return("");
+    }
+
+    public Component fonctionSemantique(int regle, NonTerminalExpression noeud){
         System.out.println(regle);
         switch(regle){
             case 0:
