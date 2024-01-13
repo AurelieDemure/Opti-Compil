@@ -18,8 +18,9 @@ public class GrammaireLL1Test extends Grammaire{
     public Component fonctionSemantique(int regle, Noeud noeud){
         switch(regle){
             case 0:
+            //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 Node node=new Node("Entete");
-                node.addChild(noeud.getFils(7));
+                node.addChild(noeud.getFils(7).interpret());
                 node.addChild(noeud.getFils(9).interpret());
                 Node nodeFils1=new Node("block");
                 nodeFils1.addChild(noeud.getFils(11).interpret());
@@ -32,6 +33,7 @@ public class GrammaireLL1Test extends Grammaire{
                 return null;
                 
             case 2:
+            //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Declaration");
                 node.addChild(noeud.getFils(0).interpret());
                 node.addChild(noeud.getFils(1).interpret());
@@ -41,6 +43,7 @@ public class GrammaireLL1Test extends Grammaire{
                 return null;
 
             case 4:
+            //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Instanciation");
                 node.addChild(noeud.getFils(0).interpret());
                 node.addChild(noeud.getFils(1).interpret());
@@ -54,20 +57,22 @@ public class GrammaireLL1Test extends Grammaire{
                 return null;
 
             case 7:
-                this.pile.add(noeud.getFils(1));
+                this.pile.add(noeud.getFils(1).interpret());
                 return noeud.getFils(2).interpret();
                 
             case 8:
+            //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Declaration");
-                node.addChild(noeud.getFils(0));
+                node.addChild(noeud.getFils(0).interpret());
                 node.addChild(noeud.getFils(1).interpret());
                 node.addChild(noeud.getFils(3).interpret());
                 node.addChild(noeud.getFils(4).interpret());
                 return node;
                 
             case 9:
+            //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Procedure");
-                node.addChild(noeud.getFils(1));
+                node.addChild(noeud.getFils(1).interpret());
                 node.addChild(noeud.getFils(2).interpret());
                 node.addChild(noeud.getFils(4).interpret());
                 nodeFils1=new Node("Block");
@@ -78,8 +83,9 @@ public class GrammaireLL1Test extends Grammaire{
                 return node;
 
             case 10:
+            //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Fonction");
-                node.addChild(noeud.getFils(1));
+                node.addChild(noeud.getFils(1).interpret());
                 node.addChild(noeud.getFils(2).interpret());
                 node.addChild(noeud.getFils(4).interpret());
                 node.addChild(noeud.getFils(6).interpret());
@@ -97,10 +103,11 @@ public class GrammaireLL1Test extends Grammaire{
                 return noeud.getFils(1).interpret();
                 
             case 13:
-                this.pile.add(noeud.getFils(1));
+                this.pile.add(noeud.getFils(1).interpret());
                 return this.pile.remove();
                 
             case 14:
+            //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Record");
                 node.addChild(noeud.getFils(1).interpret());
                 node.addChild(noeud.getFils(2).interpret());
@@ -110,16 +117,18 @@ public class GrammaireLL1Test extends Grammaire{
                 return this.pile.remove();
                 
             case 16:
+            //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Champ");
                 node.addChild(noeud.getFils(0).interpret());
                 node.addChild(noeud.getFils(1).interpret());
                 return node;
 
             case 17:
+            //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Suite d'ident");
                 node.addChild(this.pile.remove());
                 node.addChild(noeud.getFils(2).interpret());
-                this.pile.add(noeud.getFils(1));
+                this.pile.add(noeud.getFils(1).interpret());
                 return node;
 
             case 18:
@@ -141,21 +150,23 @@ public class GrammaireLL1Test extends Grammaire{
                 return null;
                 
             case 23:
+            //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Champ");
-                node.addChild(noeud.getFils(0));
+                node.addChild(noeud.getFils(0).interpret());
                 node.addChild(noeud.getFils(1).interpret());
                 node.addChild(noeud.getFils(3).interpret());
                 return node;
                 
             case 24:
-                this.pile.add(noeud.getFils(0));
+                this.pile.add(noeud.getFils(0).interpret());
                 return this.pile.remove();
                 
             case 25:
-                this.pile.add(noeud.getFils(1));
+                this.pile.add(noeud.getFils(1).interpret());
                 return this.pile.remove();
 
             case 26:
+            //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Parametres");
                 node.addChild(noeud.getFils(1).interpret());
                 if (noeud.getFils(2).interpret()!=null){
@@ -175,11 +186,12 @@ public class GrammaireLL1Test extends Grammaire{
                 return node;
 
             case 29:
+            //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("parametres");
                 node.addChild(noeud.getFils(1).interpret());
                 node.addChild(noeud.getFils(3).interpret());
                 node.addChild(noeud.getFils(4).interpret());
-                this.pile.add(noeud.getFils(0));
+                this.pile.add(noeud.getFils(0).interpret());
                 return node;
                 
             case 30:
@@ -233,7 +245,6 @@ public class GrammaireLL1Test extends Grammaire{
                 node = new Node("And");
                 node.addChild(pile.remove());
                 node.addChild(noeud.getFils(1).interpret());
-                this.pile.add(noeud.getFils(0).interpret());
                 return node;
 
             case 43:
@@ -405,23 +416,23 @@ public class GrammaireLL1Test extends Grammaire{
                 return node;
 
             case 71:
-                this.pile.add(noeud.getFils(0));//pour empiler
+                this.pile.add(noeud.getFils(0).interpret());//pour empiler
                 return noeud.getFils(1).interpret();//on interprete la suite
 
             case 72:
-                this.pile.add(noeud.getFils(0));//pour empiler
+                this.pile.add(noeud.getFils(0).interpret());//pour empiler
                 return noeud.getFils(1).interpret();//on interprete la suite
 
             case 73:
-                this.pile.add(noeud.getFils(0));//pour empiler
+                this.pile.add(noeud.getFils(0).interpret());//pour empiler
                 return noeud.getFils(1).interpret();//on interprete la suite
 
             case 74:
-                this.pile.add(noeud.getFils(0));//pour empiler
+                this.pile.add(noeud.getFils(0).interpret());//pour empiler
                 return noeud.getFils(1).interpret();//on interprete la suite
 
             case 75:
-                this.pile.add(noeud.getFils(0));//pour empiler
+                this.pile.add(noeud.getFils(0).interpret());//pour empiler
                 return noeud.getFils(1).interpret();//on interprete la suite
 
             case 76:
@@ -429,12 +440,12 @@ public class GrammaireLL1Test extends Grammaire{
                 return noeud.getFils(3).interpret();//on interprete la suite
 
             case 77:
-                this.pile.add(noeud.getFils(0));//pour empiler
+                this.pile.add(noeud.getFils(0).interpret());//pour empiler
                 return noeud.getFils(1).interpret();//on interprete la suite
 
             case 78:
                 node=new Node("new");
-                node.addChild(noeud.getFils(1));
+                node.addChild(noeud.getFils(1).interpret());
                 this.pile.add(node);
                 return noeud.getFils(2).interpret();
 
@@ -445,23 +456,23 @@ public class GrammaireLL1Test extends Grammaire{
                 return noeud.getFils(4).interpret();
 
             case 80:
-                this.pile.add(noeud.getFils(0));//pour empiler
+                this.pile.add(noeud.getFils(0).interpret());//pour empiler
                 return noeud.getFils(1).interpret();//on interprete la suite
 
             case 81:
-                this.pile.add(noeud.getFils(0));//pour empiler
+                this.pile.add(noeud.getFils(0).interpret());//pour empiler
                 return noeud.getFils(1).interpret();//on interprete la suite
 
             case 82:
-                this.pile.add(noeud.getFils(0));//pour empiler
+                this.pile.add(noeud.getFils(0).interpret());//pour empiler
                 return noeud.getFils(1).interpret();//on interprete la suite
 
             case 83:
-                this.pile.add(noeud.getFils(0));//pour empiler
+                this.pile.add(noeud.getFils(0).interpret());//pour empiler
                 return noeud.getFils(1).interpret();//on interprete la suite
 
             case 84:
-                this.pile.add(noeud.getFils(0));//pour empiler
+                this.pile.add(noeud.getFils(0).interpret());//pour empiler
                 return noeud.getFils(1).interpret();//on interprete la suite
 
             case 85:
@@ -470,7 +481,7 @@ public class GrammaireLL1Test extends Grammaire{
 
             case 86:
                 node=new Node("new");
-                node.addChild(noeud.getFils(1));
+                node.addChild(noeud.getFils(1).interpret());
                 this.pile.add(node);
                 return noeud.getFils(2).interpret();
 
@@ -503,7 +514,7 @@ public class GrammaireLL1Test extends Grammaire{
                 node=new Node("acces");
                 node.addChild(this.pile.remove());
                 node.addChild(noeud.getFils(2).interpret());
-                this.pile.add(noeud.getFils(1));
+                this.pile.add(noeud.getFils(1).interpret());
                 return node;
 
             case 91:
@@ -513,7 +524,7 @@ public class GrammaireLL1Test extends Grammaire{
                 node=new Node("acces");
                 node.addChild(this.pile.remove());
                 node.addChild((noeud.getFils(2).interpret()));
-                this.pile.add(noeud.getFils(1));
+                this.pile.add(noeud.getFils(1).interpret());
                 return node; 
 
             case 93:
@@ -526,7 +537,7 @@ public class GrammaireLL1Test extends Grammaire{
                 return node;
 
             case 95:
-                this.pile.add(noeud.getFils(0));
+                this.pile.add(noeud.getFils(0).interpret());
                 return noeud.getFils(1).interpret();
 
             case 96:
@@ -552,7 +563,7 @@ public class GrammaireLL1Test extends Grammaire{
 
             case 99:
                 node=new Node("If");
-                Node nodeFils1=new Node("Cond");
+                nodeFils1=new Node("Cond");
                 nodeFils1.add(noeud.getFils(1).interpret());
                 node.addChild(nodeFils1);
                 Node nodeFils2=new Node("Block");
@@ -567,7 +578,7 @@ public class GrammaireLL1Test extends Grammaire{
             //a verifier avec pierre
                 node=new Node("For");
                 nodeFils1=new Node("Variable");
-                nodeFils1.addChild(noeud.getFils(1));
+                nodeFils1.addChild(noeud.getFils(1).interpret());
                 node.addChild(nodeFils1);
                 nodeFils2=new Node("Intervalle");
                 Node nodeFilsFils=new Node(noeud.getFils(3).interpret());
@@ -672,7 +683,7 @@ public class GrammaireLL1Test extends Grammaire{
                 return null;
 
             case 115:
-                return noeud.getFils(0);
+                return noeud.getFils(0).interpret();
 
             default:
                 return null;
