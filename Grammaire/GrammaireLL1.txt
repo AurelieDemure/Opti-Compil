@@ -22,8 +22,8 @@ r15 : CHAMPS* ::= ''
 r16 : CHAMPS* ::= champs CHAMPS*
 r17 : IDENT,* ::= , ident IDENT,*
 r18 : IDENT,* ::= ''
-r19 : EXPR?:= ::= ''
-r20 : EXPR?:= ::= := expr
+r19 : EXPR?:= ::= ;
+r20 : EXPR?:= ::= := expr ;
 r21 : PARAMS? ::= params
 r22 : PARAMS? ::= ''
 
@@ -109,7 +109,7 @@ r75 : exprTerm1 ::= null EXPRTERM
 r76 : exprTerm1 ::= (expr) EXPRTERM
 r77 : exprTerm2 ::= ident G1
 r78 : exprTerm1 ::= new ident EXPRTERM
-r79 : exprTerm1 ::= character' val ( expr ) EXPRTERM
+r79 : exprTerm1 ::= character'val ( expr ) EXPRTERM
 
 r80 : exprTerm3 ::= entier EXPRTERM2
 r81 : exprTerm3 ::= caractère EXPRTERM2
@@ -118,7 +118,7 @@ r83 : exprTerm3 ::= false EXPRTERM2
 r84 : exprTerm3 ::= null EXPRTERM2
 r85 : exprTerm3 ::= (expr) EXPRTERM2
 r86 : exprTerm3 ::= new ident EXPRTERM2
-r87 : exprTerm3 ::= character' val ( expr ) EXPRTERM2
+r87 : exprTerm3 ::= character'val ( expr ) EXPRTERM2
 
 r88 : G1 ::= EXPRTERM
 r89 : G1 ::= ( expr EXPR,* ) EXPRTERM
@@ -135,7 +135,7 @@ r94 : EXPR,* ::= , expr EXPR,*
 r95 : instr ::= ident H1
 r96 : instr ::= exprTerm3 := expr ;
 r97 : instr ::= return EXPR? ;
-r98 : instr ::= begin instr INSTR* end
+r98 : instr ::= begin instr INSTR* end ;
 r99 : instr ::= if expr then instr INSTR* ELSIF ELSE end if ;
 r100 : instr ::= for ident in reverse? expr .. expr loop instr INSTR* end loop ;
 r101 : instr ::= while expr loop instr INSTR* end loop ;
