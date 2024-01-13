@@ -35,7 +35,6 @@ public class Tag {
     public final static int USE=286;
     public final static int WHILE=287;
     public final static int WITH=288;
-    public final static int PUT=289;
     public final static int POINTV=59;// ;
     public final static int PO=40;// (
     public final static int PF=41;// )

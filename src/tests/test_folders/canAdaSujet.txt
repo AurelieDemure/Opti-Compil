@@ -10,10 +10,10 @@ procedure unDebut is
     end aireRectangle ;
 
     function perimetreRectangle(larg : integer; long : integer) return integer is
-    p : integer
+    aire2 : integer;
     begin
-        p := larg*2 + long*2 ;
-    return p;
+        aire2 := larg*2 + long*2 ;
+    return aire2;
     end perimetreRectangle;
 
         -- VARIABLES

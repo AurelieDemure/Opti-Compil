@@ -59,9 +59,8 @@ public class Lexer {
         reserve(new Mots(Tag.WHILE,"while"));
         reserve(new Mots(Tag.WITH,"with"));
         reserve(new Mots(Tag.CARACTEREVAL,"character'val"));
-        reserve(new Mots(Tag.ADAINTEGERIO,"ada.text_io"));
-        reserve(new Mots(Tag.ADATEXTIO,"ada.integer_io"));
-        reserve(new Mots(Tag.PUT,"put"));
+        reserve(new Mots(Tag.ADAINTEGERIO,"ada.integer_io"));
+        reserve(new Mots(Tag.ADATEXTIO,"ada.text_io"));
     }
 
     public int getLine(){
