@@ -26,7 +26,7 @@ public class ArbreSyntaxique {
         } noeud.show();
 
 
-        if (noeud instanceof Node) {
+        if (noeud instanceof NoeudNonTerminal) {
             List<Noeud> children = ((NoeudNonTerminal) noeud).getListFils();
             if (children.size() > 0) {
                 System.out.println();
