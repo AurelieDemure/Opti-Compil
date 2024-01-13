@@ -201,7 +201,6 @@ public class GrammaireLL1Test extends Grammaire{
                 return noeud.getFils(0).interpret();
 
             case 36:
-                //a voir
                 this.pile.add(noeud.getFils(0).interpret());
                 return noeud.getFils(1).interpret();
 
@@ -230,9 +229,11 @@ public class GrammaireLL1Test extends Grammaire{
                 return noeud.getFils(1).interpret();
 
             case 42:
-                node=new Node("And");
-                node.addChild(this.pile.remove());
+                //modifiee
+                node = new Node("And");
+                node.addChild(pile.remove());
                 node.addChild(noeud.getFils(1).interpret());
+                this.pile.add(noeud.getFils(0).interpret());
                 return node;
 
             case 43:
@@ -254,11 +255,13 @@ public class GrammaireLL1Test extends Grammaire{
                 return noeud.getFils(1).interpret();
 
             case 47:
-                node=new Node("Negation");
-                node.addChild(this.pile.remove());
-                node.addChild(noeud.getFils(1).interpret());
+                //modifiee
+                node = new Node("Negation");
+                node.addChild(pile.remove());
                 node.addChild(noeud.getFils(2).interpret());
+                this.pile.add(noeud.getFils(1).interpret());
                 return node;
+                
 
             case 48:
                 return this.pile.remove();
@@ -269,17 +272,19 @@ public class GrammaireLL1Test extends Grammaire{
                 return noeud.getFils(1).interpret();
    
             case 50:
-                node=new Node("Egalite");
-                node.addChild(this.pile.remove());
-                node.addChild(noeud.getFils(1).interpret());
+                //modifiee
+                node = new Node("Egalite");
+                node.addChild(pile.remove());
                 node.addChild(noeud.getFils(2).interpret());
+                this.pile.add(noeud.getFils(1).interpret());
                 return node;
 
             case 51:
-                node=new Node("Inegalite");
-                node.addChild(this.pile.remove());
-                node.addChild(noeud.getFils(1).interpret());
+                //modifiee
+                node = new Node("Inegalite");
+                node.addChild(pile.remove());
                 node.addChild(noeud.getFils(2).interpret());
+                this.pile.add(noeud.getFils(1).interpret());
                 return node;
 
             case 52:
@@ -291,31 +296,35 @@ public class GrammaireLL1Test extends Grammaire{
                 return noeud.getFils(1).interpret();
 
             case 54:
-                node=new Node("Sup");
-                node.addChild(this.pile.remove());
-                node.addChild(noeud.getFils(1).interpret());
+                //modifiee
+                node = new Node("Sup");
+                node.addChild(pile.remove());
                 node.addChild(noeud.getFils(2).interpret());
+                this.pile.add(noeud.getFils(1).interpret());
                 return node;
 
             case 55:
-                node=new Node("SupEgal");
-                node.addChild(this.pile.remove());
-                node.addChild(noeud.getFils(1).interpret());
+                //modifiee
+                node = new Node("SupEgal");
+                node.addChild(pile.remove());
                 node.addChild(noeud.getFils(2).interpret());
+                this.pile.add(noeud.getFils(1).interpret());
                 return node;
 
             case 56:
-                node=new Node("Inf");
-                node.addChild(this.pile.remove());
-                node.addChild(noeud.getFils(1).interpret());
+                //modifiee
+                node = new Node("Inf");
+                node.addChild(pile.remove());
                 node.addChild(noeud.getFils(2).interpret());
+                this.pile.add(noeud.getFils(1).interpret());
                 return node;
 
             case 57:
-                node=new Node("InfEgal");
-                node.addChild(this.pile.remove());
-                node.addChild(noeud.getFils(1).interpret());
+                //modifiee
+                node = new Node("InfEgal");
+                node.addChild(pile.remove());
                 node.addChild(noeud.getFils(2).interpret());
+                this.pile.add(noeud.getFils(1).interpret());
                 return node;
 
             case 58:
