@@ -3,12 +3,11 @@ package parser;
 import java.util.HashMap;
 import java.util.Map;
 import lexer.*;
-import parse_tree.*;
-
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
 
+import parse_tree.*;
 import abstractTree.*;
 
 public class GrammaireLL1Test extends Grammaire{
