@@ -33,7 +33,7 @@ testParserTree :
 	java -classpath .run tests.TestParseurTree < tests/test_folders/canAdaTest1.txt
 
 testFonctionsSemantiques :
-	java -classpath .run tests.testFonctionsSemantiques < tests/test_folders/canAdaTest1.txt
+	java -classpath .run tests.TestFonctionsSemantiques < tests/test_folders/canAdaTest1.txt
 
 testLexer :
 	java -classpath .run tests.TestLexer < tests/test_folders/test_lexer.txt

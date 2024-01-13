@@ -6,13 +6,13 @@ import abstractTree.*;
 import java.util.*;
 
 public class NonTerminalExpression implements AbstractExpression{
-    private int Id;
+    private int id;
     private String valeur;
     private List<AbstractExpression> listFils;
     private GrammaireLL1Test grammar = new GrammaireLL1Test();
 
-    public NonTerminalExpression(int Id, String valeur){   
-        this.Id = Id;
+    public NonTerminalExpression(int id, String valeur){   
+        this.id = id;
         this.valeur = valeur;
         this.listFils = new ArrayList<>();
     }
@@ -27,7 +27,7 @@ public class NonTerminalExpression implements AbstractExpression{
     }
 
     public Component interpret(){
-        return this.grammar.fonctionSemantique(Id,this);
+        return this.grammar.fonctionSemantique(id,this);
     }
 
     public AbstractExpression getFils(int index){
@@ -35,7 +35,7 @@ public class NonTerminalExpression implements AbstractExpression{
     }
 
     public int getId(){
-        return this.Id;
+        return this.id;
     }
 
     public List<AbstractExpression> getListFils() {
@@ -44,6 +44,14 @@ public class NonTerminalExpression implements AbstractExpression{
 
     public String getValeur(){
         return this.valeur;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setValeur (String valeur) {
+        this.valeur = valeur;
     }
 
 }

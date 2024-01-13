@@ -16,6 +16,7 @@ public class TerminalExpression implements AbstractExpression {
 
     @Override
     public Component interpret(){
+        System.out.println("interpret terminal");
         return new Leaf(this.valeur);
     }
 
