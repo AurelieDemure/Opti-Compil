@@ -1,0 +1,10 @@
+with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Calculer_Carre is
+   Nombre, Carre : Integer;
+begin
+   -- Lecture du nombre depuis l'entrée standard
+   Get(Nombre);
+   Carre := Nombre * Nombre;
+   -- Le résultat 'Carre' n'est pas affiché
+end Calculer_Carre;
