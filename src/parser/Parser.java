@@ -37,7 +37,8 @@ public class Parser {
         Terminal dollar=new Terminal(d);
         this.Pile.push(dollar);
         this.Pile.push(axiome);
-        NonTerminalExpression racine = new NonTerminalExpression(0, this.grammar.getNonTerminal(0));
+        //NonTerminalExpression racine = new NonTerminalExpression(0, this.grammar.getNonTerminal(0));
+        NonTerminalExpression racine = new NonTerminalExpression(0, "0");
         pileNoeuds.push(new TerminalExpression("$"));
         pileNoeuds.push(racine);
         int statut=-1;
@@ -60,14 +61,16 @@ public class Parser {
             if (X instanceof NonTerminal) {
                 RegleGrammaire regle=table.RenvoieSortiePile(((NonTerminal)X).getId(),getId((a.getValue()).tag));
                 if (regle.getMembreDroit().isEmpty() || regle.getMembreDroit().get(0) instanceof NonTerminal || ((Terminal)regle.getMembreDroit().get(0)).getValue().tag!=-1){
+                    ((NonTerminalExpression) noeudActuel).setId(regle.getNumero());
+                    //((NonTerminalExpression) noeudActuel).setValeur(this.grammar.getNonTerminal(regle.getNumero()));
+                    ((NonTerminalExpression) noeudActuel).setValeur(regle.getNumero() + "");
                     for (int i=0; i<regle.getMembreDroit().size(); i++){
                         if(regle.getMembreDroit().get(i) instanceof Terminal){
                             //noeudFils = new TerminalExpression(this.grammar.getTerminal(((Terminal)regle.getMembreDroit().get(i)).getValue().tag) + "");
                             noeudFils = new TerminalExpression(((Terminal)regle.getMembreDroit().get(i)).getValue().tag + "");
                         }
                         else{
-                            //noeudFils = new NonTerminalExpression(regle.getNumero(), this.grammar.getNonTerminal(regle.getNumero()));
-                            noeudFils = new NonTerminalExpression(regle.getNumero(), regle.getNumero() + "");
+                            noeudFils = new NonTerminalExpression(-1, "");
                         }
                         ((NonTerminalExpression) noeudActuel).ajouterFils(noeudFils);
                         pileNoeudsTmp.push(noeudFils);
