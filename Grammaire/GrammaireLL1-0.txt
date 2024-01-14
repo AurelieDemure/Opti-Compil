@@ -22,8 +22,8 @@ CHAMPS* ::= ''
 CHAMPS* ::= champs CHAMPS*
 IDENT,* ::= , ident IDENT,*
 IDENT,* ::= ''
-EXPR?:= ::= ''
-EXPR?:= ::= := expr
+EXPR?:= ::= ;
+EXPR?:= ::= := expr ;
 PARAMS? ::= params
 PARAMS? ::= ''
 
@@ -135,7 +135,7 @@ EXPR,* ::= , expr EXPR,*
 instr ::= ident H1
 instr ::= exprTerm3 := expr ;
 instr ::= return EXPR? ;
-instr ::= begin instr INSTR* end
+instr ::= begin instr INSTR* end ;
 instr ::= if expr then instr INSTR* ELSIF ELSE end if ;
 instr ::= for ident in reverse? expr .. expr loop instr INSTR* end loop ;
 instr ::= while expr loop instr INSTR* end loop ;
