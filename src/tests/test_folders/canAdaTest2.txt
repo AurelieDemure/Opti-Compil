@@ -1,0 +1,11 @@
+with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Main is
+   A, B, Somme : Integer;
+begin
+   Put_Line ;
+   Get (A);
+   Get (B);
+   Somme := A + B;
+   Put_Line ;
+end Main;

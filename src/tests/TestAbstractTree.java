@@ -1,9 +1,8 @@
 package tests;
 
-import abstractTree.Leaf;
-import abstractTree.Node;
+import compilateur.abstractTree.*;
 
-import static abstractTree.AbstractTree.showAsAbstractTree;
+import static compilateur.abstractTree.AbstractTree.showAsAbstractTree;
 
 public class TestAbstractTree {
     public static void main(String[] args) {
