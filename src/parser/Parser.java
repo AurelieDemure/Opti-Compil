@@ -38,7 +38,7 @@ public class Parser {
         this.Pile.push(dollar);
         this.Pile.push(axiome);
         //NonTerminalExpression racine = new NonTerminalExpression(0, this.grammar.getNonTerminal(0));
-        NonTerminalExpression racine = new NonTerminalExpression(0, "0");
+        NonTerminalExpression racine = new NonTerminalExpression(0, "0", this.grammar);
         pileNoeuds.push(new TerminalExpression("$"));
         pileNoeuds.push(racine);
         int statut=-1;
@@ -70,7 +70,7 @@ public class Parser {
                             noeudFils = new TerminalExpression(((Terminal)regle.getMembreDroit().get(i)).getValue().tag + "");
                         }
                         else{
-                            noeudFils = new NonTerminalExpression(-1, "");
+                            noeudFils = new NonTerminalExpression(-1, "", this.grammar);
                         }
                         ((NonTerminalExpression) noeudActuel).ajouterFils(noeudFils);
                         pileNoeudsTmp.push(noeudFils);

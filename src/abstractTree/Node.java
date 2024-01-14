@@ -18,7 +18,9 @@ public class Node implements Component {
     }
 
     public void addChild(Component child) {
-        this.children.add(child);
+        if (child != null) {
+            this.children.add(child);
+        }
     }
 
     public void removeChild(Component child) {

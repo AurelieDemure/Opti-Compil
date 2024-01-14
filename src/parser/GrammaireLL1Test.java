@@ -263,7 +263,6 @@ public class GrammaireLL1Test extends Grammaire{
     }
 
     public Component fonctionSemantique(int regle, NonTerminalExpression noeud){
-        System.out.println(regle);
         switch(regle){
             case 0:
                 Node node=new Node("Entete");
@@ -298,8 +297,7 @@ public class GrammaireLL1Test extends Grammaire{
                 return null;
 
             case 6:
-                this.pile.add(noeud.getFils(0).interpret());
-                return null;
+                return noeud.getFils(0).interpret();
 
             case 7:
                 this.pile.add(noeud.getFils(1).interpret());
@@ -342,11 +340,15 @@ public class GrammaireLL1Test extends Grammaire{
                 return this.pile.remove();
 
             case 12:
-                return noeud.getFils(1).interpret();
+                node=new Node("Is");
+                node.addChild(this.pile.remove());
+                node.addChild(noeud.getFils(1).interpret());
+                return node;
                 
             case 13:
-                this.pile.add(noeud.getFils(1).interpret());
-                return this.pile.remove();
+                node=new Node("Access");
+                node.addChild(noeud.getFils(1).interpret());
+                return node;
                 
             case 14:
                 node=new Node("Record");
@@ -371,7 +373,7 @@ public class GrammaireLL1Test extends Grammaire{
                 return node;
 
             case 18:
-                return null;
+                return this.pile.remove();
                 
             case 19:
                 return this.pile.remove();
@@ -396,12 +398,12 @@ public class GrammaireLL1Test extends Grammaire{
                 return node;
                 
             case 24:
-                this.pile.add(noeud.getFils(0).interpret());
-                return this.pile.remove();
+                return noeud.getFils(0).interpret();
                 
             case 25:
-                this.pile.add(noeud.getFils(1).interpret());
-                return this.pile.remove();
+                node=new Node("Access");
+                node.addChild(noeud.getFils(1).interpret());
+                return node;
 
             case 26:
                 node=new Node("Parametres");

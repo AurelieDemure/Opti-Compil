@@ -6,6 +6,7 @@ import abstractTree.Component;
 import abstractTree.Leaf;
 import lexer.*;
 import parse_tree.AbstractExpression;
+import parse_tree.NonTerminalExpression;
 
 public class GrammaireTest extends Grammaire{
     private static int[] tableTag = {Tag.AND,Tag.BEGIN,(int)'(',(int)')',(int)';',(int)'$'};
@@ -65,8 +66,8 @@ public class GrammaireTest extends Grammaire{
         }
     }
 
-    public Component fonctionSemantique(int regle, AbstractExpression abstractExpression){
+    public Component fonctionSemantique(int regle, NonTerminalExpression noeud){
         return new Leaf("coucou");
     }
-    
+
 }

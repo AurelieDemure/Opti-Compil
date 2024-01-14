@@ -3,9 +3,11 @@ package parser;
 import java.io.IOException;
 import java.util.List;
 
+import abstractTree.Component;
 import lexer.Token;
 import parse_tree.AbstractExpression;
 import parse_tree.ArbreSyntaxique;
+import parse_tree.NonTerminalExpression;
 
 public abstract class Grammaire {
     public Parser parser;
@@ -24,6 +26,8 @@ public abstract class Grammaire {
     public NonTerminal createNonTerminal(){
         return new NonTerminal();
     }
+
+    public abstract Component fonctionSemantique(int regle, NonTerminalExpression noeud);
 
     public abstract String getNonTerminal(int idRegle);
 

@@ -23,9 +23,7 @@ public class ArbreSyntaxique {
 
         if (abstractExpression instanceof NonTerminalExpression) {
             List<AbstractExpression> children = ((NonTerminalExpression) abstractExpression).getListFils();
-            if (children.size() > 0) {
-                System.out.println();
-            }
+            System.out.println();
             for (int i=0; i<children.size(); i++) {
                 String indentationBis = indentation + (dernier? "    " : "|    ");
                 showAsAbstractTree(children.get(i), indentationBis, i == (children.size()-1));
