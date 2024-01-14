@@ -9,12 +9,13 @@ public class NonTerminalExpression implements AbstractExpression{
     private int id;
     private String valeur;
     private List<AbstractExpression> listFils;
-    private GrammaireLL1Test grammar = new GrammaireLL1Test();
+    private GrammaireLL1Test grammar;
 
-    public NonTerminalExpression(int id, String valeur){   
+    public NonTerminalExpression(int id, String valeur, GrammaireLL1Test grammar){
         this.id = id;
         this.valeur = valeur;
         this.listFils = new ArrayList<>();
+        this.grammar = grammar;
     }
 
     @Override

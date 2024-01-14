@@ -1,5 +1,5 @@
 with Ada.Text_IO ; use Ada.Text_IO ;
-
+5
 procedure unDebut is
 
     function aireRectangle (larg : integer; long : integer) return integer is
@@ -12,7 +12,7 @@ procedure unDebut is
     function perimetreRectangle (larg : integer; long : integer) return integer is
     p : integer;
     begin
-        p := larg*2 + long*2 ;
+        p := larg * long ;
     return p;
     end perimetreRectangle;
 
@@ -22,9 +22,8 @@ choix : integer ;
         -- PROCEDURE PRINCIPALE
 
 begin
-    choix := 2;
 
-    if choix = 1
+    if choix = a
         then valeur := perimetreRectangle(2, 3) ;
             put(valeur) ;
         else valeur := aireRectangale(2, 3) ;

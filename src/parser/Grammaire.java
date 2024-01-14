@@ -10,7 +10,7 @@ import parse_tree.ArbreSyntaxique;
 public abstract class Grammaire {
     public Parser parser;
     public Grammaire(int[] tableTag,int[][] table){
-        parser=new Parser(this, tableTag, table);
+        parser=new Parser((GrammaireLL1Test) this, tableTag, table);
     }
     public ArbreSyntaxique analyse() throws IOException{
         return parser.Analyseur();

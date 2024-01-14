@@ -6,13 +6,13 @@ import lexer.*;
 import parse_tree.*;
 
 public class Parser {
-    public Grammaire grammar;
+    public GrammaireLL1Test grammar;
     public Stack<Symbole> Pile=new Stack<Symbole>();
     private int[] tableTag; 
     public TableAnalyse table;
     Lexer lexer=new Lexer();
 
-    public Parser(Grammaire grammar, int[] tableTag, int[][] tab){
+    public Parser(GrammaireLL1Test grammar, int[] tableTag, int[][] tab){
         this.grammar = grammar;
         this.table=new TableAnalyse(tab);
         this.tableTag = tableTag;
@@ -38,7 +38,7 @@ public class Parser {
         this.Pile.push(dollar);
         this.Pile.push(axiome);
         //NonTerminalExpression racine = new NonTerminalExpression(0, this.grammar.getNonTerminal(0));
-        NonTerminalExpression racine = new NonTerminalExpression(0, "0");
+        NonTerminalExpression racine = new NonTerminalExpression(0, "0",grammar);
         pileNoeuds.push(new TerminalExpression("$"));
         pileNoeuds.push(racine);
         int statut=-1;
@@ -70,7 +70,7 @@ public class Parser {
                             noeudFils = new TerminalExpression(((Terminal)regle.getMembreDroit().get(i)).getValue().tag + "");
                         }
                         else{
-                            noeudFils = new NonTerminalExpression(-1, "");
+                            noeudFils = new NonTerminalExpression(-1, "",grammar);
                         }
                         ((NonTerminalExpression) noeudActuel).ajouterFils(noeudFils);
                         pileNoeudsTmp.push(noeudFils);

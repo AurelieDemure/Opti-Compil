@@ -61,7 +61,6 @@ public class Lexer {
         reserve(new Mots(Tag.CARACTEREVAL,"character'val"));
         reserve(new Mots(Tag.ADAINTEGERIO,"ada.integer_io"));
         reserve(new Mots(Tag.ADATEXTIO,"ada.text_io"));
-        reserve(new Mots(Tag.PUT,"put"));
     }
 
     public int getLine(){
