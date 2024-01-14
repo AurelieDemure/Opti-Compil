@@ -1,10 +1,8 @@
 package tests;
 
-import java.util.Arrays;
-import java.util.List;
-
-import lexer.*;
-import parser.*;
+import java.util.*;
+import compilateur.lexer.*;
+import compilateur.parser.*;
 
 public class TestTableAnalyse {
     

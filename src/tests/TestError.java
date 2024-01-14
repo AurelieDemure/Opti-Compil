@@ -1,7 +1,7 @@
 package tests;
 
-import error.Error;
-import error.ErrorManager;
+import compilateur.error.*;
+import compilateur.error.Error;
 
 public class TestError {
 

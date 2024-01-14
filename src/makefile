@@ -1,6 +1,9 @@
 all :
 	find . -name *.java | xargs javac -d .run
 
+opticompil :
+	java -classpath .run compilateur.OptiCompil
+
 test :
 	java -classpath .run tests.TestLexer < tests/test_folders/test_lexer.txt
 	java -classpath .run tests.TestLexer < tests/test_folders/test_identificateur.txt
@@ -28,7 +31,7 @@ testParser :
 	java -classpath .run tests.TestParseur < tests/test_folders/test_parser4.txt
 
 testParserTree :
-	java-Xmx256m -classpath .run tests.TestParseurTree < tests/test_folders/canAdaSujet.txt
+	java -classpath .run tests.TestParseurTree < tests/test_folders/canAdaSujet.txt
 	java -classpath .run tests.TestParseurTree < tests/test_folders/canAdaErreur.txt
 	java -classpath .run tests.TestParseurTree < tests/test_folders/canAdaTest1.txt
 

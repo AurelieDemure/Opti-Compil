@@ -1,12 +1,11 @@
-package tests;
+package compilateur;
 
-import java.io.IOException;
-
+import java.io.*;
 import compilateur.abstractTree.*;
-import compilateur.parser.*;
 import compilateur.parse_tree.*;
+import compilateur.parser.*;
 
-public class TestFonctionsSemantiques {
+public class OptiCompil {
     public static void main(String[] arg) throws IOException{
         Grammaire g=new GrammaireLL1Test();
         ArbreSyntaxique arbreSyntaxique=g.analyse();

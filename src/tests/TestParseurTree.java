@@ -1,9 +1,8 @@
 package tests;
 
-import java.io.IOException;
-
-import parser.*;
-import parse_tree.ArbreSyntaxique;
+import java.io.*;
+import compilateur.parser.*;
+import compilateur.parse_tree.*;
 
 public class TestParseurTree {
     public static void main(String[] arg) throws IOException{
