@@ -1,6 +1,4 @@
-fichier ::= with Ada.Text_I0; use Ada.Text_I0;
-procedure ident is DECL*
-begin instr INSTR* end IDENT? ; EOF
+fichier ::= with Ada.Text_I0; use Ada.Text_I0; procedure ident is DECL* begin instr INSTR* end IDENT? ; EOF
 
 DECL* ::= ''
 DECL* ::= decl DECL*
@@ -130,7 +128,7 @@ instr ::= for ident in reverse? expr .. expr loop instr INSTR* end loop ;
 instr ::= while expr loop instr INSTR* end loop ;
 
 F1 ::= := expr ;
-F1 ::= ''
+F1 ::= ;
 F1 ::= ( expr EXPR,* ) ;
 
 EXPR? ::= ''

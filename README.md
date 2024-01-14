@@ -1,3 +1,14 @@
+#OptiCompil
+
+##Execution du compilateur :
+
+Exécutez les commandes suivante dans votre shell :
+```bash
+cd src
+make all
+make opticompil < path/fichier.txt
+```
+
 Accéder au Makefile :
 ```bash
 cd src

@@ -694,9 +694,7 @@ F = := **\<expr>**; | ^ | (**\<expr>** **\<EXPR,*>**);
 
 # Mofif adaptation site pour génération de la table
 
-fichier ::= with Ada.Text_I0; use Ada.Text_I0;
-procedure ident is DECL*
-begin instr INSTR* end IDENT? ; EOF
+fichier ::= with Ada.Text_IO; use Ada.Text_IO; procedure ident is DECL* begin instr INSTR* end IDENT? ; EOF
 
 DECL* ::= ^ 
 DECL* ::= decl DECL*
@@ -831,13 +829,18 @@ instr ::= for ident in reverse? expr .. expr loop instr INSTR* end loop ;
 instr ::= while expr loop instr INSTR* end loop ;
 
 F11 ::= := expr ; 
-F11 ::= ^ 
-F12 ::= ( expr EXPR,* ) ;
 
 H1 ::= F11
-H1 ::= F12
-H1 ::= G11 . ident := expr ;
-H1 ::= G12 . ident := expr ;
+H1 ::= ^ J1
+H1 ::= ( expr EXPR,* ) I1
+H1 ::= . ident EXPRTERM . ident := expr ;
+
+I1 ::= ;
+I1 ::= EXPRTERM . ident := expr ;
+
+J1 ::= ^
+J1 ::= . ident := expr ;
+
 
 EXPR? ::= ^ 
 EXPR? ::= expr
