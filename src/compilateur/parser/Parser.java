@@ -14,7 +14,7 @@ public class Parser {
 
     public Parser(Grammaire grammar, int[] tableTag, int[][] tab){
         this.grammar = grammar;
-        this.table=new TableAnalyse(tab);
+        this.table=new TableAnalyse(tab, grammar);
         this.tableTag = tableTag;
     }
 
@@ -34,7 +34,7 @@ public class Parser {
 
         NonTerminal axiome=table.getAxiome();
         Token d=new Token((int) '$');
-        Terminal dollar=new Terminal(d);
+        Terminal dollar=new Terminal(d, this.grammar);
         this.Pile.push(dollar);
         this.Pile.push(axiome);
         //NonTerminalExpression racine = new NonTerminalExpression(0, this.grammar.getNonTerminal(0));
@@ -42,10 +42,10 @@ public class Parser {
         pileNoeuds.push(new TerminalExpression("$"));
         pileNoeuds.push(racine);
         int statut=-1;
-        Terminal a=new Terminal(lexer.scan());
+        Terminal a=new Terminal(lexer.scan(), this.grammar);
         while (statut==-1) {
             //System.out.println("##### New Etape #####");
-            Token token = a.getValue();
+            Token token = a.getToken();
             if(token.tag!=0){
                 if(token instanceof Mots){
                     //System.out.println("Its value : "+((Mots)token).lexeme);
@@ -59,15 +59,14 @@ public class Parser {
             AbstractExpression noeudActuel = pileNoeuds.pop();
             AbstractExpression noeudFils = null;
             if (X instanceof NonTerminal) {
-                RegleGrammaire regle=table.RenvoieSortiePile(((NonTerminal)X).getId(),getId((a.getValue()).tag));
-                if (regle.getMembreDroit().isEmpty() || regle.getMembreDroit().get(0) instanceof NonTerminal || ((Terminal)regle.getMembreDroit().get(0)).getValue().tag!=-1){
+                RegleGrammaire regle=table.RenvoieSortiePile(((NonTerminal)X).getId(),getId((a.getToken()).tag));
+                if (regle.getMembreDroit().isEmpty() || regle.getMembreDroit().get(0) instanceof NonTerminal || ((Terminal)regle.getMembreDroit().get(0)).getTag()!=-1){
                     ((NonTerminalExpression) noeudActuel).setId(regle.getNumero());
                     //((NonTerminalExpression) noeudActuel).setValeur(this.grammar.getNonTerminal(regle.getNumero()));
                     ((NonTerminalExpression) noeudActuel).setValeur(regle.getNumero() + "");
                     for (int i=0; i<regle.getMembreDroit().size(); i++){
                         if(regle.getMembreDroit().get(i) instanceof Terminal){
-                            //noeudFils = new TerminalExpression(this.grammar.getTerminal(((Terminal)regle.getMembreDroit().get(i)).getValue().tag) + "");
-                            noeudFils = new TerminalExpression(((Terminal)regle.getMembreDroit().get(i)).getValue().tag + "");
+                            noeudFils = new TerminalExpression(((Terminal)regle.getMembreDroit().get(i)).getValue());
                         }
                         else{
                             noeudFils = new NonTerminalExpression(-1, "", this.grammar);
@@ -86,8 +85,9 @@ public class Parser {
                 }
             }
             else {
-                if (((Terminal)X).getValue().tag==((int)'$')){
-                    if ((((Terminal)X).getValue().tag)==(a.getValue().tag)){
+                ((TerminalExpression)noeudActuel).setValeur(a.getValue());
+                if (((Terminal)X).getTag()==((int)'$')){
+                    if ((((Terminal)X).getTag())==(a.getTag())){
                         statut=0;
                     }
                     else{
@@ -97,13 +97,13 @@ public class Parser {
                     }
                 }
                 else{
-                    if ((((Terminal)X).getValue().tag)==(a.getValue().tag)){
-                        a=new Terminal(lexer.scan());
+                    if ((((Terminal)X).getTag())==(a.getTag())){
+                        a=new Terminal(lexer.scan(), this.grammar);
                     }
                     else {
                         //System.out.println("Le terminal n'est pas le même");
                         statut=1;
-                        this.lexer.saveNewError("Le tag " + ((Terminal)X).getValue().tag + " est attendu, le tag " + a.getValue().tag + " à été trouvée");
+                        this.lexer.saveNewError("Le tag " + ((Terminal)X).getTag() + " est attendu, le tag " + a.getTag() + " à été trouvée");
                     }
                 }
             }  

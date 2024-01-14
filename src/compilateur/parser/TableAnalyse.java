@@ -26,10 +26,10 @@ public class TableAnalyse {
     }
 
 
-    public TableAnalyse(int[][] table){
+    public TableAnalyse(int[][] table, Grammaire grammar){
         /*ajout d'une regle d'erreur dans la liste des regles*/
         Mots erreur=new Mots(Tag.ERREUR,"Le programme n'est pas reconnu par la grammaire");
-        Terminal symbMembreDroit=new Terminal(erreur);
+        Terminal symbMembreDroit=new Terminal(erreur, grammar);
         List<Symbole> membreDroit=Arrays.asList(symbMembreDroit);
         RegleGrammaire regleErreur=new RegleGrammaire(new NonTerminal(),membreDroit);
         this.regles.add(regleErreur);

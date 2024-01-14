@@ -23,4 +23,8 @@ public class TerminalExpression implements AbstractExpression {
         return this.valeur;
     }
 
+    public void setValeur(String valeur) {
+        this.valeur = valeur;
+    }
+
 }

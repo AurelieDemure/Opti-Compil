@@ -20,7 +20,7 @@ public abstract class Grammaire {
         parser.table.addRegle(new RegleGrammaire(mGauche,mDroit));
     }
     public Terminal createTerminal(int tag){
-        return new Terminal(new Token(tag));
+        return new Terminal(new Token(tag), this);
     }
     public NonTerminal createNonTerminal(){
         return new NonTerminal();

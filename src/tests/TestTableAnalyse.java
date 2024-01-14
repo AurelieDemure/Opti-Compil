@@ -7,26 +7,27 @@ import compilateur.parser.*;
 public class TestTableAnalyse {
     
     public static void main(String[] args){
+        Grammaire grammar = new GrammaireTest();
         int[][] table = {{0,1,2,-1,-1,-1},
                          {3,3,3,-1,-1,-1},
                          {-1,-1,-1,5,6,-1}};
-        TableAnalyse TableA = new TableAnalyse(table);
+        TableAnalyse TableA = new TableAnalyse(table, grammar);
         NonTerminal S = new NonTerminal();
         NonTerminal T = new NonTerminal();
         NonTerminal U = new NonTerminal();
-        Terminal a = new Terminal(new Token(0));
-        Terminal b = new Terminal(new Token(1));
-        Terminal c = new Terminal(new Token(2));
-        Terminal d = new Terminal(new Token(3));
-        Terminal e = new Terminal(new Token(4));
-        Terminal f = new Terminal(new Token(5));
+        Terminal a = new Terminal(new Token(0), grammar);
+        Terminal b = new Terminal(new Token(1), grammar);
+        Terminal c = new Terminal(new Token(2), grammar);
+        Terminal d = new Terminal(new Token(3), grammar);
+        Terminal e = new Terminal(new Token(4), grammar);
+        Terminal f = new Terminal(new Token(5), grammar);
         TableA.addRegle(new RegleGrammaire(S,Arrays.asList(a)));
         TableA.addRegle(new RegleGrammaire(S,Arrays.asList(b)));
         TableA.addRegle(new RegleGrammaire(S,Arrays.asList(c,T,d)));
         TableA.addRegle(new RegleGrammaire(T,Arrays.asList(S,U)));
         TableA.addRegle(new RegleGrammaire(T,Arrays.asList(S,U)));
         TableA.addRegle(new RegleGrammaire(U,Arrays.asList()));
-        int valTNR=TableA.TrouveNumRegle(0,c.getValue().tag);
+        int valTNR=TableA.TrouveNumRegle(0,c.getTag());
         if (valTNR!=2){
             System.out.println("Test TrouveNumRegle faux :\n valeur trouvee :"+valTNR+" valeur souhaitee : 2");
         }
@@ -38,7 +39,7 @@ public class TestTableAnalyse {
             System.out.println(("Test getRegle faux :\n mbG trouvé :"+mbG+"mbG souhaité : T\n" + "mbD trouve : "+mbD+"mbD souhaite : SU" ));
         }
         else {System.out.println("Test getRegle ok");}
-        RegleGrammaire sortiePile=TableA.RenvoieSortiePile(S.getId(),a.getValue().tag);
+        RegleGrammaire sortiePile=TableA.RenvoieSortiePile(S.getId(),a.getTag());
         List<Symbole> sortiePileVoulue=Arrays.asList(a);
         if(!sortiePile.equals(sortiePileVoulue)){
             System.out.println("Test RenvoieSortiePile faux : \n SortiePile trouvée"+ sortiePile +"\nsortie pile voulue : a");

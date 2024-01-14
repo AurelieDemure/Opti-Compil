@@ -15,6 +15,12 @@ test :
 	java -classpath .run tests.TestError
 	java -classpath .run tests.TestTableAnalyse
 
+testOptiCompil :
+	java -classpath .run compilateur.OptiCompil < tests/test_folders/canAdaTest1.txt
+	java -classpath .run compilateur.OptiCompil < tests/test_folders/canAdaTest2.txt
+	java -classpath .run compilateur.OptiCompil < tests/test_folders/canAdaTest3.txt
+	java -classpath .run compilateur.OptiCompil < tests/test_folders/canAdaTest4.txt
+
 testError :
 	java -classpath .run tests.TestError
 
