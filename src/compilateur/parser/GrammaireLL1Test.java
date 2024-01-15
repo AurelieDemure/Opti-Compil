@@ -224,9 +224,9 @@ public class GrammaireLL1Test extends Grammaire{
         createRegle(instr, Arrays.asList(exprTerm3, t(Tag.AFFECT), expr, t(Tag.POINTV))); //r96
         createRegle(instr, Arrays.asList(t(Tag.RETURN), EXPROPT, t(Tag.POINTV)));//r97
         createRegle(instr, Arrays.asList(t(Tag.BEGIN), instr, instrEtoile, t(Tag.END),t(Tag.POINTV))); //r98
-        createRegle(instr, Arrays.asList(t(Tag.IF), expr, t(Tag.THEN), instr, instrEtoile, ELSIF, ELSE, t(Tag.END), t(Tag.IF))); //r99
-        createRegle(instr, Arrays.asList(t(Tag.FOR), t(Tag.IDENT), t(Tag.IN), reverseOpt, expr, t(Tag.POINTPOINT), expr, t(Tag.LOOP), instr, instrEtoile, t(Tag.END), t(Tag.LOOP))); // r100
-        createRegle(instr, Arrays.asList(t(Tag.WHILE), expr, t(Tag.LOOP), instr, instrEtoile, t(Tag.END), t(Tag.LOOP)));//r101
+        createRegle(instr, Arrays.asList(t(Tag.IF), expr, t(Tag.THEN), instr, instrEtoile, ELSIF, ELSE, t(Tag.END), t(Tag.IF), t(Tag.POINTV))); //r99
+        createRegle(instr, Arrays.asList(t(Tag.FOR), t(Tag.IDENT), t(Tag.IN), reverseOpt, expr, t(Tag.POINTPOINT), expr, t(Tag.LOOP), instr, instrEtoile, t(Tag.END), t(Tag.LOOP), t(Tag.POINTV))); // r100
+        createRegle(instr, Arrays.asList(t(Tag.WHILE), expr, t(Tag.LOOP), instr, instrEtoile, t(Tag.END), t(Tag.LOOP), t(Tag.POINTV)));//r101
         createRegle(H1, Arrays.asList(t(Tag.AFFECT), expr, t(Tag.POINTV))); // r102
         createRegle(H1, Arrays.asList(t(Tag.POINTV))); // r103
         createRegle(H1, Arrays.asList(t(Tag.PO), expr, EXPRVE, t(Tag.PF), I1)); // r104
@@ -279,13 +279,7 @@ public class GrammaireLL1Test extends Grammaire{
                 node.addChild(noeud.getFils(9).interpret());
                 Node nodeFils1=new Node("block");
                 addPile(noeud.getFils(11).interpret());
-                if (noeud.getFils(12).interpret() instanceof Node){
-                    nodeFils1.addChild(noeud.getFils(12).interpret().getFils(0));
-                    nodeFils1.addChild(noeud.getFils(12).interpret().getFils(1));
-                }
-                else {
-                    nodeFils1.addChild(noeud.getFils(12).interpret());
-                }
+                nodeFils1.addChild(noeud.getFils(12).interpret());
                 node.addChild(nodeFils1);
                 node.addChild(noeud.getFils(14).interpret());
                 if (!this.pile.isEmpty()) {
@@ -300,13 +294,7 @@ public class GrammaireLL1Test extends Grammaire{
             //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Declarations");
                 node.addChild(noeud.getFils(0).interpret());
-                if (noeud.getFils(1).interpret()!=null){
-                    node.addChild(noeud.getFils(1).interpret().getFils(0));
-                    node.addChild(noeud.getFils(1).interpret().getFils(1));
-                }
-                else {
-                    node.addChild(noeud.getFils(1).interpret());
-                }
+                node.addChild(noeud.getFils(1).interpret());
                 return node;
                 
             case 3:
@@ -317,15 +305,8 @@ public class GrammaireLL1Test extends Grammaire{
                 node=new Node("Instanciation");
                 node.addChild(removePile());
                 addPile(noeud.getFils(0).interpret());
-                if (noeud.getFils(1).interpret() instanceof Node){
-                    node.addChild(noeud.getFils(1).interpret().getFils(0));
-                    node.addChild(noeud.getFils(1).interpret().getFils(1));
-                }
-                else {
-                    node.addChild(noeud.getFils(1).interpret());
-                }
+                node.addChild(noeud.getFils(1).interpret());
                 return node;
-                
 
             case 5:
                 return null;
@@ -341,13 +322,7 @@ public class GrammaireLL1Test extends Grammaire{
             //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Declaration");
                 addPile(noeud.getFils(0).interpret());
-                if (noeud.getFils(1).interpret() instanceof Node){
-                    node.addChild(noeud.getFils(1).interpret().getFils(0));
-                    node.addChild(noeud.getFils(1).interpret().getFils(1));
-                }
-                else {
-                    node.addChild(noeud.getFils(1).interpret());
-                }
+                node.addChild(noeud.getFils(1).interpret());
                 node.addChild(noeud.getFils(3).interpret());
                 addPile(node);
                 return noeud.getFils(4).interpret();
@@ -360,13 +335,7 @@ public class GrammaireLL1Test extends Grammaire{
                 node.addChild(noeud.getFils(4).interpret());
                 nodeFils1=new Node("Block");
                 addPile(noeud.getFils(6).interpret());
-                if (noeud.getFils(1).interpret() instanceof Node){
-                    nodeFils1.addChild(noeud.getFils(7).interpret().getFils(0));
-                    nodeFils1.addChild(noeud.getFils(7).interpret().getFils(1));
-                }
-                else {
-                    nodeFils1.addChild(noeud.getFils(7).interpret());
-                }
+                nodeFils1.addChild(noeud.getFils(7).interpret());
                 node.addChild(nodeFils1);
                 node.addChild(noeud.getFils(9).interpret());
                 return node;
@@ -380,13 +349,7 @@ public class GrammaireLL1Test extends Grammaire{
                 node.addChild(noeud.getFils(6).interpret());
                 nodeFils1=new Node("Block");
                 addPile(noeud.getFils(8).interpret());
-                if (noeud.getFils(9).interpret() instanceof Node){
-                    nodeFils1.addChild(noeud.getFils(9).interpret().getFils(0));
-                    nodeFils1.addChild(noeud.getFils(9).interpret().getFils(1));
-                }
-                else {
-                    nodeFils1.addChild(noeud.getFils(9).interpret());
-                }
+                nodeFils1.addChild(noeud.getFils(9).interpret());
                 node.addChild(nodeFils1);
                 node.addChild(noeud.getFils(11).interpret());
                 return node;
@@ -409,13 +372,7 @@ public class GrammaireLL1Test extends Grammaire{
             //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Record");
                 node.addChild(noeud.getFils(1).interpret());
-                if (noeud.getFils(2).interpret() instanceof Node){
-                    node.addChild(noeud.getFils(2).interpret().getFils(0));
-                    node.addChild(noeud.getFils(2).interpret().getFils(1));
-                }
-                else {
-                    node.addChild(noeud.getFils(2).interpret());
-                }
+                node.addChild(noeud.getFils(2).interpret());
                 return node;
                 
             case 15:
@@ -425,13 +382,7 @@ public class GrammaireLL1Test extends Grammaire{
             //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Champ");
                 node.addChild(noeud.getFils(0).interpret());
-                if (noeud.getFils(1).interpret() instanceof Node){
-                    node.addChild(noeud.getFils(1).interpret().getFils(0));
-                    node.addChild(noeud.getFils(1).interpret().getFils(1));
-                }
-                else {
-                    node.addChild(noeud.getFils(1).interpret());
-                }
+                node.addChild(noeud.getFils(1).interpret());
                 return node;
 
             case 17:
@@ -439,13 +390,7 @@ public class GrammaireLL1Test extends Grammaire{
                 node=new Node("Suite d'ident");
                 node.addChild(removePile());
                 addPile(noeud.getFils(1).interpret());
-                if (noeud.getFils(2).interpret() instanceof Node){
-                    node.addChild(noeud.getFils(2).interpret().getFils(0));
-                    node.addChild(noeud.getFils(2).interpret().getFils(1));
-                }
-                else {
-                    node.addChild(noeud.getFils(2).interpret());
-                }
+                node.addChild(noeud.getFils(2).interpret());
                 return node;
 
             case 18:
@@ -470,13 +415,7 @@ public class GrammaireLL1Test extends Grammaire{
             //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Champ");
                 addPile(noeud.getFils(0).interpret());
-                if (noeud.getFils(1).interpret() instanceof Node){
-                    node.addChild(noeud.getFils(1).interpret().getFils(0));
-                    node.addChild(noeud.getFils(1).interpret().getFils(1));
-                }
-                else {
-                    node.addChild(noeud.getFils(1).interpret());
-                }
+                node.addChild(noeud.getFils(1).interpret());
                 node.addChild(noeud.getFils(3).interpret());
                 return node;
                 
@@ -492,13 +431,11 @@ public class GrammaireLL1Test extends Grammaire{
             //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("Parametres");
                 node.addChild(noeud.getFils(1).interpret());
-                if (noeud.getFils(2).interpret() instanceof Node){
+                if (noeud.getFils(2).interpret()!=null){
                     node.addChild(noeud.getFils(2).interpret().getFils(0));
                     node.addChild(noeud.getFils(2).interpret().getFils(1));
                 }
-                else {
-                    node.addChild(noeud.getFils(2).interpret());
-                }
+                node.addChild(noeud.getFils(2).interpret());
                 return node;
 
             case 27:
@@ -507,26 +444,14 @@ public class GrammaireLL1Test extends Grammaire{
             case 28:
                 node=new Node("tmp");
                 node.addChild(noeud.getFils(1).interpret());
-                if (noeud.getFils(2).interpret() instanceof Node){
-                    node.addChild(noeud.getFils(2).interpret().getFils(0));
-                    node.addChild(noeud.getFils(2).interpret().getFils(1));
-                }
-                else {
-                    node.addChild(noeud.getFils(2).interpret());
-                }
+                node.addChild(noeud.getFils(2).interpret());
                 return node;
 
             case 29:
             //peut etre modifie pour les mettre a la suite (voir 28 et 94)
                 node=new Node("parametres");
                 addPile(noeud.getFils(0).interpret());
-                if (noeud.getFils(1).interpret() instanceof Node){
-                    node.addChild(noeud.getFils(1).interpret().getFils(0));
-                    node.addChild(noeud.getFils(1).interpret().getFils(1));
-                }
-                else {
-                    node.addChild(noeud.getFils(1).interpret());
-                }
+                node.addChild(noeud.getFils(1).interpret());
                 node.addChild(noeud.getFils(3).interpret());
                 node.addChild(noeud.getFils(4).interpret());
                 return node;
