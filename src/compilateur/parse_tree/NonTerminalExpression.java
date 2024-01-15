@@ -16,6 +16,7 @@ public class NonTerminalExpression implements AbstractExpression{
         this.valeur = valeur;
         this.grammar = grammar;
         this.listFils = new ArrayList<>();
+        this.grammar = grammar;
     }
 
     @Override

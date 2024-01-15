@@ -6,13 +6,13 @@ import compilateur.lexer.*;
 import compilateur.parse_tree.*;
 
 public class Parser {
-    public Grammaire grammar;
+    public GrammaireLL1Test grammar;
     public Stack<Symbole> Pile=new Stack<Symbole>();
     private int[] tableTag; 
     public TableAnalyse table;
     Lexer lexer=new Lexer();
 
-    public Parser(Grammaire grammar, int[] tableTag, int[][] tab){
+    public Parser(GrammaireLL1Test grammar, int[] tableTag, int[][] tab){
         this.grammar = grammar;
         this.table=new TableAnalyse(tab, grammar);
         this.tableTag = tableTag;
