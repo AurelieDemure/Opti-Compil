@@ -2,5 +2,5 @@ with Ada.Text_IO; use Ada.Text_IO;
 
 procedure Afficher_Caractere is
 begin
-   Put(valeur);
+   Put(valeur+2);
 end Afficher_Caractere;
