@@ -247,14 +247,198 @@ public class GrammaireLL1Test extends Grammaire{
         return terminaux.get(tag);
     }
 
-    public String getNonTerminal(int idRegle) {
-        //TODO
-        return("" + idRegle);
+    public String getNonTerminalValue(int idRegle) {
+        switch (this.parser.table.getRegle(idRegle).getMembreGauche().getId()) {
+            case 0:
+                return "Fichier";     
+            case 1:
+                return "DECL*";  
+            case 2:
+                return "INSTR*";   
+            case 3:
+                return "IDENT?";
+            case 4:
+                return "Decl";    
+            case 5:
+                return "A1";
+            case 6:
+                return "B1";
+            case 7:
+                return "CHAMPS*";
+            case 8:
+                return "IDENT,*";
+            case 9:
+                return "EXPR?:=";
+            case 10:
+                return "PARAMS?";
+            case 11:
+                return "Champs";
+            case 12:
+                return "TYPE";
+            case 13:
+                return "Params";
+            case 14:
+                return "PARAM;*";
+            case 15:
+                return "Param";
+            case 16:
+                return "MODE?";
+            case 17:
+                return "Mode";
+            case 18:
+                return "C1";
+            case 19:
+                return "Expr";
+            case 20:
+                return "ExprOperateur";
+            case 21:
+                return "EXPROPERATEUR";
+            case 22:
+                return "D1";
+            case 23:
+                return "ExprAnd";
+            case 24:
+                return "EXPRAND";
+            case 25:
+                return "E1";
+            case 26:
+                return "ExprNot";
+            case 27:
+                return "EXPRNOT";
+            case 28:
+                return "ExprEgal";
+            case 29:
+                return "EXPREGAL";
+            case 30:
+                return "ExprComparaison";
+            case 31:
+                return "EXPRCOMPARAISON";
+            case 32:
+                return "ExprSomme";
+            case 33:
+                return "EXPRSOMME";
+            case 34:
+                return "ExprMult";
+            case 35:
+                return "EXPRMULT";
+            case 36:
+                return "ExprUnaire";
+            case 37:
+                return "ExprTerm1";
+            case 38:
+                return "ExprTerm2";
+            case 39:
+                return "ExprTerm3";
+            case 40:
+                return "G1";
+            case 41:
+                return "EXPRTERM";
+            case 42:
+                return "EXPRTERM2";
+            case 43:
+                return "EXPR,*";
+            case 44:
+                return "Instr";
+            case 45:
+                return "H1";
+            case 46:
+                return "I1";
+            case 47:
+                return "EXPR?";
+            case 48:
+                return "ELSIF";
+            case 49:
+                return "ELSE";
+            case 50:
+                return "Reverse?";
+            default:
+                return "" + idRegle;
+        }
     }
 
-    public String getTerminal(int tag) {
-        //TODO
-        return("" + tag);
+    public String getTerminalValue(Terminal terminal) {
+        int tag = terminal.getTag();
+        if (tag<=255) {
+            return "" + (char)tag;
+        }
+        switch (tag) {
+            case Tag.TRUE:
+                return "true";
+            case Tag.FALSE:
+                return "false";
+            case Tag.ACCESS:
+                return "access";
+            case Tag.AND:
+                return "and";
+            case Tag.BEGIN:
+                return "begin";
+            case Tag.ELSE:
+                return "else";
+            case Tag.ELSIF:
+                return "elsif";
+            case Tag.END:
+                return "end";
+            case Tag.FOR:
+                return "for";
+            case Tag.FUNCTION:
+                return "function";
+            case Tag.IF:
+                return "if";
+            case Tag.IN:
+                return "in";
+            case Tag.IS:
+                return "is";
+            case Tag.LOOP:
+                return "loop";
+            case Tag.NEW:
+                return "new";
+            case Tag.NOT:
+                return "not";
+            case Tag.NULL:
+                return "null";
+            case Tag.OR:
+                return "or";
+            case Tag.OUT:
+                return "out";
+            case Tag.PROCEDURE:
+                return "procedure";
+            case Tag.RECORD:
+                return "record";
+            case Tag.REM:
+                return "rem";
+            case Tag.RETURN:
+                return "return";
+            case Tag.REVERSE:
+                return "reverse";
+            case Tag.THEN:
+                return "then";
+            case Tag.TYPE:
+                return "type";
+            case Tag.USE:
+                return "use";
+            case Tag.WHILE:
+                return "while";
+            case Tag.WITH:
+                return "with";
+            case Tag.CARACTEREVAL:
+                return "character'val";
+            case Tag.ADAINTEGERIO:
+                return "ada.integer_io";
+            case Tag.ADATEXTIO:
+                return "ada.text_io";
+            case Tag.SUPEG:
+                return ">=";     
+            case Tag.INFEG:
+                return "<="; 
+            case Tag.AFFECT:
+                return ":="; 
+            case Tag.NEGALE:
+                return "/="; 
+            case Tag.POINTPOINT:
+                return ".."; 
+            default:
+                return terminal.getValue();
+        }
     }
 
     public void addPile(Component component) {

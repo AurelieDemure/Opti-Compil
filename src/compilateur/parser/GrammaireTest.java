@@ -31,7 +31,7 @@ public class GrammaireTest extends Grammaire{
         createRegle(U,Arrays.asList());
     }  
 
-    public String getNonTerminal(int idRegle) {
+    public String getNonTerminalValue(int idRegle) {
         switch (this.parser.table.getRegle(idRegle).getMembreGauche().getId()) {
             case 0:
                 return "S";     
@@ -40,12 +40,12 @@ public class GrammaireTest extends Grammaire{
             case 2:
                 return "U";     
             default:
-                return "Unknown Terminal";
+                return "" + idRegle;
         }
     }
 
-    public String getTerminal(int tag) {
-        switch (tag) {
+    public String getTerminalValue(Terminal terminal) {
+        switch (terminal.getTag()) {
             case Tag.AND:
                 return "a";     
             case Tag.BEGIN:
@@ -59,7 +59,7 @@ public class GrammaireTest extends Grammaire{
             case (int)'$':
                 return "$";     
             default:
-                return "Unknown NonTerminal";
+                return terminal.getValue();
         }
     }
 

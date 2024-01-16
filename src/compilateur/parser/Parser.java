@@ -11,6 +11,7 @@ public class Parser {
     private int[] tableTag; 
     public TableAnalyse table;
     Lexer lexer=new Lexer();
+    private Terminal lastTerminal;
 
     public Parser(GrammaireLL1Test grammar, int[] tableTag, int[][] tab){
         this.grammar = grammar;
@@ -43,6 +44,7 @@ public class Parser {
         pileNoeuds.push(racine);
         int statut=-1;
         Terminal a=new Terminal(lexer.scan(), this.grammar);
+        this.lastTerminal = a;
         while (statut==-1) {
             //System.out.println("##### New Etape #####");
             Token token = a.getToken();
@@ -62,11 +64,10 @@ public class Parser {
                 RegleGrammaire regle=table.RenvoieSortiePile(((NonTerminal)X).getId(),getId((a.getToken()).tag));
                 if (regle.getMembreDroit().isEmpty() || regle.getMembreDroit().get(0) instanceof NonTerminal || ((Terminal)regle.getMembreDroit().get(0)).getTag()!=-1){
                     ((NonTerminalExpression) noeudActuel).setId(regle.getNumero());
-                    //((NonTerminalExpression) noeudActuel).setValeur(this.grammar.getNonTerminal(regle.getNumero()));
-                    ((NonTerminalExpression) noeudActuel).setValeur(regle.getNumero() + "");
+                    ((NonTerminalExpression) noeudActuel).setValeur(this.grammar.getNonTerminalValue(regle.getNumero()));
                     for (int i=0; i<regle.getMembreDroit().size(); i++){
                         if(regle.getMembreDroit().get(i) instanceof Terminal){
-                            noeudFils = new TerminalExpression(((Terminal)regle.getMembreDroit().get(i)).getValue());
+                            noeudFils = new TerminalExpression(this.grammar.getTerminalValue((Terminal)regle.getMembreDroit().get(i)));
                         }
                         else{
                             noeudFils = new NonTerminalExpression(-1, "", this.grammar);
@@ -81,11 +82,11 @@ public class Parser {
                 }
                 else {
                     statut=1;
-                    this.lexer.saveNewError("Le programme n'est pas reconnu par la grammaire, le token précédent ne donne aucune règle dans ce contexte");
+                    this.lexer.saveNewError("Le programme n'est pas reconnu par la grammaire, le token '" + this.grammar.getTerminalValue(a) + "' ne donne aucune règle dans ce contexte");
                 }
             }
             else {
-                ((TerminalExpression)noeudActuel).setValeur(a.getValue());
+                ((TerminalExpression)noeudActuel).setValeur(this.grammar.getTerminalValue(a));
                 if (((Terminal)X).getTag()==((int)'$')){
                     if ((((Terminal)X).getTag())==(a.getTag())){
                         statut=0;
@@ -93,23 +94,25 @@ public class Parser {
                     else{
                         //System.out.println("Le terminal n'est pas $");
                         statut=1;
-                        this.lexer.saveNewError("Le programme est sensé s'arrêter ici");
+                        this.lexer.saveNewError("Le programme est sensé s'arrêter avant le token '" + this.lastTerminal.getValue() + "'");
                     }
                 }
                 else{
                     if ((((Terminal)X).getTag())==(a.getTag())){
                         a=new Terminal(lexer.scan(), this.grammar);
+                        this.lastTerminal = a;
                     }
                     else {
                         //System.out.println("Le terminal n'est pas le même");
                         statut=1;
-                        this.lexer.saveNewError("Le tag " + ((Terminal)X).getTag() + " est attendu, le tag " + a.getTag() + " à été trouvée");
+                        this.lexer.saveNewError("Le tag '" + this.grammar.getTerminalValue((Terminal)X) + "' est attendu, le tag '" + this.grammar.getTerminalValue(a) + "' à été trouvée");
                     }
                 }
             }  
         }
         arbreSyntaxique.setRacine(racine);
         exitParser();
+        
         return arbreSyntaxique;
         
     }

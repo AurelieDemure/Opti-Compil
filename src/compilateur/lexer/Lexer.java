@@ -101,11 +101,10 @@ public class Lexer {
         
         //suppression des espaces, tabulations et commentaires
         while(this.caractere<=32 || this.caractere =='-' && this.prochain=='-'){
-
             //on gere les commentaires
             if(this.caractere=='-' && this.prochain=='-'){
                 //detection du debut du commentaire
-                while(this.caractere!='\n'){
+                while(this.caractere!='\n' && (int)this.caractere!=65535){
                     //on continue a skip
                     this.read();
                 }
