@@ -24,7 +24,7 @@ public class Terminal extends Symbole{
         if (this.token instanceof Mots) {
             return ((Mots)this.token).lexeme;
         } else {
-            return this.grammar.getTerminal(this.getTag());
+            return "" + this.getTag();
         }
     }
 }

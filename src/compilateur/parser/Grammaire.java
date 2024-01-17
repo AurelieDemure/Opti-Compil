@@ -28,8 +28,8 @@ public abstract class Grammaire {
 
     public abstract Component fonctionSemantique(int regle, NonTerminalExpression noeud);
 
-    public abstract String getNonTerminal(int idRegle);
+    public abstract String getNonTerminalValue(int idRegle);
 
-    public abstract String getTerminal(int tag);
+    public abstract String getTerminalValue(Terminal terminal);
 
 }
