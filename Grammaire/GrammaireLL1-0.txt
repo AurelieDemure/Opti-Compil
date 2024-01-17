@@ -65,10 +65,8 @@ EXPRAND ::= ''
 E1 ::= exprNot EXPRAND
 E1 ::= then exprNot EXPRAND
 
-exprNot ::= exprEgal EXPRNOT
-
-EXPRNOT ::= not exprEgal EXPRNOT
-EXPRNOT ::= ''
+exprNot ::= exprEgal
+exprNot ::= not exprNot
 
 exprEgal ::= exprComparaison EXPREGAL
 

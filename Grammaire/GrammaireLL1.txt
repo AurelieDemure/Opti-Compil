@@ -65,96 +65,94 @@ r43 : EXPRAND ::= ''
 r44 : E1 ::= exprNot EXPRAND
 r45 : E1 ::= then exprNot EXPRAND
 
-r46 : exprNot ::= exprEgal EXPRNOT
+r46 : exprNot ::= exprEgal
+r47 : exprNot ::= not exprNot
 
-r47 : EXPRNOT ::= not exprEgal EXPRNOT
-r48 : EXPRNOT ::= ''
+r48 : exprEgal ::= exprComparaison EXPREGAL
 
-r49 : exprEgal ::= exprComparaison EXPREGAL
+r49 : EXPREGAL ::= = exprComparaison EXPREGAL
+r50 : EXPREGAL ::= /= exprComparaison EXPREGAL
+r51 : EXPREGAL ::= ''
 
-r50 : EXPREGAL ::= = exprComparaison EXPREGAL
-r51 : EXPREGAL ::= /= exprComparaison EXPREGAL
-r52 : EXPREGAL ::= ''
+r52 : exprComparaison ::= exprSomme EXPRCOMPARAISON
 
-r53 : exprComparaison ::= exprSomme EXPRCOMPARAISON
+r53 : EXPRCOMPARAISON ::= > exprSomme EXPRCOMPARAISON
+r54 : EXPRCOMPARAISON ::= >= exprSomme EXPRCOMPARAISON
+r55 : EXPRCOMPARAISON ::= < exprSomme EXPRCOMPARAISON
+r56 : EXPRCOMPARAISON ::= <= exprSomme EXPRCOMPARAISON
+r57 : EXPRCOMPARAISON ::= ''
 
-r54 : EXPRCOMPARAISON ::= > exprSomme EXPRCOMPARAISON
-r55 : EXPRCOMPARAISON ::= >= exprSomme EXPRCOMPARAISON
-r56 : EXPRCOMPARAISON ::= < exprSomme EXPRCOMPARAISON
-r57 : EXPRCOMPARAISON ::= <= exprSomme EXPRCOMPARAISON
-r58 : EXPRCOMPARAISON ::= ''
+r58 : exprSomme ::= exprMult EXPRSOMME
 
-r59 : exprSomme ::= exprMult EXPRSOMME
+r59 : EXPRSOMME ::= + exprMult EXPRSOMME
+r60 : EXPRSOMME ::= - exprMult EXPRSOMME
+r61 : EXPRSOMME ::= ''
 
-r60 : EXPRSOMME ::= + exprMult EXPRSOMME
-r61 : EXPRSOMME ::= - exprMult EXPRSOMME
-r62 : EXPRSOMME ::= ''
+r62 : exprMult ::= exprUnaire EXPRMULT
 
-r63 : exprMult ::= exprUnaire EXPRMULT
+r63 : EXPRMULT ::= * exprUnaire EXPRMULT
+r64 : EXPRMULT ::= / exprUnaire EXPRMULT
+r65 : EXPRMULT ::= rem exprUnaire EXPRMULT
+r66 : EXPRMULT ::= ''
 
-r64 : EXPRMULT ::= * exprUnaire EXPRMULT
-r65 : EXPRMULT ::= / exprUnaire EXPRMULT
-r66 : EXPRMULT ::= rem exprUnaire EXPRMULT
-r67 : EXPRMULT ::= ''
+r67 : exprUnaire ::= exprTerm1
+r68 : exprUnaire ::= exprTerm2
+r69 : exprUnaire ::= - exprUnaire
 
-r68 : exprUnaire ::= exprTerm1
-r69 : exprUnaire ::= exprTerm2
-r70 : exprUnaire ::= - exprUnaire
+r70 : exprTerm1 ::= entier EXPRTERM
+r71 : exprTerm1 ::= caractère EXPRTERM
+r72 : exprTerm1 ::= true EXPRTERM
+r73 : exprTerm1 ::= false EXPRTERM
+r74 : exprTerm1 ::= null EXPRTERM
+r75 : exprTerm1 ::= (expr) EXPRTERM
+r76 : exprTerm2 ::= ident G1
+r77 : exprTerm1 ::= new ident EXPRTERM
+r78 : exprTerm1 ::= character'val ( expr ) EXPRTERM
 
-r71 : exprTerm1 ::= entier EXPRTERM
-r72 : exprTerm1 ::= caractère EXPRTERM
-r73 : exprTerm1 ::= true EXPRTERM
-r74 : exprTerm1 ::= false EXPRTERM
-r75 : exprTerm1 ::= null EXPRTERM
-r76 : exprTerm1 ::= (expr) EXPRTERM
-r77 : exprTerm2 ::= ident G1
-r78 : exprTerm1 ::= new ident EXPRTERM
-r79 : exprTerm1 ::= character'val ( expr ) EXPRTERM
+r79 : exprTerm3 ::= entier EXPRTERM2
+r80 : exprTerm3 ::= caractère EXPRTERM2
+r81 : exprTerm3 ::= true EXPRTERM2
+r82 : exprTerm3 ::= false EXPRTERM2
+r83 : exprTerm3 ::= null EXPRTERM2
+r84 : exprTerm3 ::= (expr) EXPRTERM2
+r85 : exprTerm3 ::= new ident EXPRTERM2
+r86 : exprTerm3 ::= character'val ( expr ) EXPRTERM2
 
-r80 : exprTerm3 ::= entier EXPRTERM2
-r81 : exprTerm3 ::= caractère EXPRTERM2
-r82 : exprTerm3 ::= true EXPRTERM2
-r83 : exprTerm3 ::= false EXPRTERM2
-r84 : exprTerm3 ::= null EXPRTERM2
-r85 : exprTerm3 ::= (expr) EXPRTERM2
-r86 : exprTerm3 ::= new ident EXPRTERM2
-r87 : exprTerm3 ::= character'val ( expr ) EXPRTERM2
-
-r88 : G1 ::= EXPRTERM
-r89 : G1 ::= ( expr EXPR,* ) EXPRTERM
+r87 : G1 ::= EXPRTERM
+r88 : G1 ::= ( expr EXPR,* ) EXPRTERM
 
 
-r90 : EXPRTERM ::= . ident EXPRTERM
-r91 : EXPRTERM ::= ''
+r89 : EXPRTERM ::= . ident EXPRTERM
+r90 : EXPRTERM ::= ''
 
-r92 : EXPRTERM2 ::= . ident EXPRTERM
+r91 : EXPRTERM2 ::= . ident EXPRTERM
 
-r93 : EXPR,* ::= ''
-r94 : EXPR,* ::= , expr EXPR,*
+r92 : EXPR,* ::= ''
+r93 : EXPR,* ::= , expr EXPR,*
 
-r95 : instr ::= ident H1
-r96 : instr ::= exprTerm3 := expr ;
-r97 : instr ::= return EXPR? ;
-r98 : instr ::= begin instr INSTR* end ;
-r99 : instr ::= if expr then instr INSTR* ELSIF ELSE end if ;
-r100 : instr ::= for ident in reverse? expr .. expr loop instr INSTR* end loop ;
-r101 : instr ::= while expr loop instr INSTR* end loop ;
+r94 : instr ::= ident H1
+r95 : instr ::= exprTerm3 := expr ;
+r96 : instr ::= return EXPR? ;
+r97 : instr ::= begin instr INSTR* end ;
+r98 : instr ::= if expr then instr INSTR* ELSIF ELSE end if ;
+r99 : instr ::= for ident in reverse? expr .. expr loop instr INSTR* end loop ;
+r100 : instr ::= while expr loop instr INSTR* end loop ;
 
-r102 : H1 ::= := expr ;
-r103 : H1 ::= ;
-r104 : H1 ::= ( expr EXPR,* ) I1
-r105 : H1 ::= EXPRTERM2 := expr ; 
+r101 : H1 ::= := expr ;
+r102 : H1 ::= ;
+r103 : H1 ::= ( expr EXPR,* ) I1
+r104 : H1 ::= EXPRTERM2 := expr ; 
 
-r106 : I1 ::= ;
-r107 : I1 ::= EXPRTERM2 := expr ;
+r105 : I1 ::= ;
+r106 : I1 ::= EXPRTERM2 := expr ;
 
-r108 : EXPR? ::= ''
-r109 : EXPR? ::= expr
-r110 : ELSIF ::= ''
-r111 : ELSIF ::= elsif expr then instr INSTR* ELSIF
-r112 : ELSE ::= ''
-r113 : ELSE ::= else instr INSTR*
-r114 : reverse? ::= ''
-r115 : reverse? ::= reverse
+r107 : EXPR? ::= ''
+r108 : EXPR? ::= expr
+r109 : ELSIF ::= ''
+r110 : ELSIF ::= elsif expr then instr INSTR* ELSIF
+r111 : ELSE ::= ''
+r112 : ELSE ::= else instr INSTR*
+r113 : reverse? ::= ''
+r114 : reverse? ::= reverse
 
 

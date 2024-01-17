@@ -1,0 +1,77 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "OptiCompil",
+            "request": "launch",
+            "mainClass": "compilateur.OptiCompil",
+            "projectName": "pcl_d338714"
+        },
+        {
+            "type": "java",
+            "name": "TestAbstractTree",
+            "request": "launch",
+            "mainClass": "tests.TestAbstractTree",
+            "projectName": "pcl_d338714"
+        },
+        {
+            "type": "java",
+            "name": "TestError",
+            "request": "launch",
+            "mainClass": "tests.TestError",
+            "projectName": "pcl_d338714"
+        },
+        {
+            "type": "java",
+            "name": "TestFonctionsSemantiques",
+            "request": "launch",
+            "mainClass": "tests.TestFonctionsSemantiques",
+            "projectName": "pcl_d338714"
+        },
+        {
+            "type": "java",
+            "name": "TestGrammaire",
+            "request": "launch",
+            "mainClass": "tests.TestGrammaire",
+            "projectName": "pcl_d338714"
+        },
+        {
+            "type": "java",
+            "name": "TestLexer",
+            "request": "launch",
+            "mainClass": "tests.TestLexer",
+            "projectName": "pcl_d338714"
+        },
+        {
+            "type": "java",
+            "name": "TestParseur",
+            "request": "launch",
+            "mainClass": "tests.TestParseur",
+            "projectName": "pcl_d338714"
+        },
+        {
+            "type": "java",
+            "name": "TestParseurTree",
+            "request": "launch",
+            "mainClass": "tests.TestParseurTree",
+            "projectName": "pcl_d338714"
+        },
+        {
+            "type": "java",
+            "name": "TestTableAnalyse",
+            "request": "launch",
+            "mainClass": "tests.TestTableAnalyse",
+            "projectName": "pcl_d338714"
+        }
+    ]
+}
