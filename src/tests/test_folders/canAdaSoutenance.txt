@@ -1,0 +1,54 @@
+with Ada.Text_IO ; use Ada.Text_IO ;
+
+procedure UnProgramme is
+
+a, b, valeur : integer ;
+
+function uneFonction (x : integer; y : integer) return integer is
+
+        z : integer := 2;
+
+        begin
+
+            return z;
+
+        end uneFonction ;
+
+begin
+
+    uneFonction(1, 2, a);
+
+    a := 12;
+
+    b := 1 + 2;
+
+    a := 1 + 2 * -b;
+
+    for i in 1..b loop
+        a := a + 1;
+    end loop ;
+
+    for i in reverse 1..b loop
+        a := a - 1;
+    end loop ;
+
+    while a /= b loop
+        b := b *2;
+    end loop ;
+
+    if a = b
+        then valeur := 2 ;
+            put(valeur) ;
+        else valeur := 3 ;
+            put(valeur) ;
+    end if;
+
+        --Ceci est un commentaire
+
+
+--Ceci est un autre commentaire
+
+
+end UnProgramme ;
+
+--Le programme est fini
