@@ -1,0 +1,2 @@
+with Ada.Text_IO; use Ada.Text_IO;  Hello is begin Put_Line; end Hello;
+-- On a enlevé 'procedure' entre ';' et 'Hello'

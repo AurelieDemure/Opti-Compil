@@ -1,5 +1,5 @@
 with Ada.Text_IO ; use Ada.Text_IO ;
-5
+
 procedure unDebut is
 
     function aireRectangle (larg : integer; long : integer) return integer is
