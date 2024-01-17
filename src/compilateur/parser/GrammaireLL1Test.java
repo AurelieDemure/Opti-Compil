@@ -596,21 +596,14 @@ public class GrammaireLL1Test extends Grammaire{
 
             case 46:
                 //a voir
-                addPile(noeud.getFils(0).interpret());
-                return noeud.getFils(1).interpret();
+                return noeud.getFils(0).interpret();
 
             case 47:
                 //modifiee
                 node = new Node("Negation");
-                node.addChild(pile.remove());
-                addPile(noeud.getFils(1).interpret());
-                node.addChild(noeud.getFils(2).interpret());
+                node.addChild(noeud.getFils(1).interpret());
                 return node;
-                
 
-            case 48:
-                return removePile();
-                
             case 49:
                 //a voir
                 addPile(noeud.getFils(0).interpret());
