@@ -301,52 +301,50 @@ public class GrammaireLL1Test extends Grammaire{
             case 26:
                 return "ExprNot";
             case 27:
-                return "EXPRNOT";
-            case 28:
                 return "ExprEgal";
-            case 29:
+            case 28:
                 return "EXPREGAL";
-            case 30:
+            case 29:
                 return "ExprComparaison";
-            case 31:
+            case 30:
                 return "EXPRCOMPARAISON";
-            case 32:
+            case 31:
                 return "ExprSomme";
-            case 33:
+            case 32:
                 return "EXPRSOMME";
-            case 34:
+            case 33:
                 return "ExprMult";
-            case 35:
+            case 34:
                 return "EXPRMULT";
-            case 36:
+            case 35:
                 return "ExprUnaire";
-            case 37:
+            case 36:
                 return "ExprTerm1";
-            case 38:
+            case 37:
                 return "ExprTerm2";
-            case 39:
+            case 38:
                 return "ExprTerm3";
-            case 40:
+            case 39:
                 return "G1";
-            case 41:
+            case 40:
                 return "EXPRTERM";
-            case 42:
+            case 41:
                 return "EXPRTERM2";
-            case 43:
+            case 42:
                 return "EXPR,*";
-            case 44:
+            case 43:
                 return "Instr";
-            case 45:
+            case 44:
                 return "H1";
-            case 46:
+            case 45:
                 return "I1";
-            case 47:
+            case 46:
                 return "EXPR?";
-            case 48:
+            case 47:
                 return "ELSIF";
-            case 49:
+            case 48:
                 return "ELSE";
-            case 50:
+            case 49:
                 return "Reverse?";
             default:
                 return "" + idRegle;
